@@ -1,0 +1,15 @@
+{
+	"config": {
+		"WP_DEBUG": true,
+		"SCRIPT_DEBUG": true,
+		"WP_DEBUG_LOG": "/tmp/wp-errors.log",
+		"FS_METHOD": "direct",
+		"WP_ENVIRONMENT_TYPE": "local"
+	},
+	"core": "WordPress/WordPress#master",
+	"plugins": [
+		"./source/wp-content/plugins/gutenberg",
+		"./source/wp-content/plugins/wordpress-importer"
+	],
+	"themes": [ "./source/wp-content/themes/wporg-parent-2021" ]
+}
