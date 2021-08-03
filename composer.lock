@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7618d3f1b0cd2b3fbe7e05988c654720",
+    "content-hash": "e6bc8d7b076f1c1fb5b570439d7fb9ba",
     "packages": [],
     "packages-dev": [
         {
@@ -2287,13 +2287,13 @@
             "version": "dev-trunk",
             "source": {
                 "type": "git",
-                "url": "https://github.com/coreymckrill/wporg-repo-tools.git",
-                "reference": "6e84e6d802b12eaa15ed91be44eed08bdabd1d30"
+                "url": "https://github.com/WordPress/wporg-repo-tools.git",
+                "reference": "1ef2d863d5fd86922a115c96447cd3db47de3792"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/coreymckrill/wporg-repo-tools/zipball/6e84e6d802b12eaa15ed91be44eed08bdabd1d30",
-                "reference": "6e84e6d802b12eaa15ed91be44eed08bdabd1d30",
+                "url": "https://api.github.com/repos/WordPress/wporg-repo-tools/zipball/1ef2d863d5fd86922a115c96447cd3db47de3792",
+                "reference": "1ef2d863d5fd86922a115c96447cd3db47de3792",
                 "shasum": ""
             },
             "default-branch": true,
@@ -2308,9 +2308,9 @@
             "homepage": "https://wordpress.org",
             "support": {
                 "issues": "https://github.com/WordPress/wporg-repo-tools/issues",
-                "source": "https://github.com/coreymckrill/wporg-repo-tools/tree/trunk"
+                "source": "https://github.com/WordPress/wporg-repo-tools/tree/trunk"
             },
-            "time": "2021-07-30T23:29:02+00:00"
+            "time": "2021-08-03T20:19:22+00:00"
         }
     ],
     "aliases": [],

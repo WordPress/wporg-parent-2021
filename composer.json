@@ -26,7 +26,7 @@
 		},
 		{
 			"type": "vcs",
-			"url": "https://github.com/coreymckrill/wporg-repo-tools"
+			"url": "https://github.com/WordPress/wporg-repo-tools"
 		}
 	],
 	"require": {},
