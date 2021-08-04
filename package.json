@@ -10,7 +10,7 @@
 		"@wordpress/env": "^4.1.0"
 	},
 	"scripts": {
-		"initial-setup": "npm install && composer install && update-configs",
+		"initial-setup": "yarn && composer install && update-configs",
 		"update-configs": "TEXTDOMAIN=wporg composer exec update-configs",
 		"wp-env": "wp-env"
 	},
