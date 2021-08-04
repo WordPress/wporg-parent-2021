@@ -1,5 +1,5 @@
 {
-	"name": "wporg-parent-2021",
+	"name": "wporg-parent-2021-project",
 	"version": "1.0.0",
 	"description": "",
 	"author": "WordPress.org",
@@ -7,18 +7,14 @@
 	"private": true,
 	"dependencies": {},
 	"devDependencies": {
-		"@wordpress/browserslist-config": "^4.1.0",
-		"@wordpress/env": "^4.1.0",
-		"@wordpress/scripts": "^17.0.0"
+		"@wordpress/env": "^4.1.0"
 	},
 	"scripts": {
 		"initial-setup": "npm install && composer install && update-configs",
 		"update-configs": "TEXTDOMAIN=wporg composer exec update-configs",
-		"wp-env": "wp-env",
-		"build": "wp-scripts build",
-		"start": "wp-scripts start"
+		"wp-env": "wp-env"
 	},
-	"browserslist": [
-		"extends @wordpress/browserslist-config"
+	"workspaces": [
+		"source/wp-content/themes/wporg-parent-2021"
 	]
 }
