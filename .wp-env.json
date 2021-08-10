@@ -8,7 +8,6 @@
 	},
 	"core": "WordPress/WordPress#master",
 	"plugins": [
-		"./source/wp-content/plugins/gutenberg",
 		"./source/wp-content/plugins/wordpress-importer"
 	],
 	"themes": [ "./source/wp-content/themes/wporg-parent-2021" ]

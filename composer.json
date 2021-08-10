@@ -1,6 +1,5 @@
 {
 	"name": "wporg/wporg-parent-2021",
-	"type": "wordpress-theme",
 	"description": "",
 	"homepage": "https://wordpress.org",
 	"license": "GPL-2.0-or-later",
@@ -26,13 +25,12 @@
 		},
 		{
 			"type": "vcs",
-			"url": "https://github.com/WordPress/wporg-repo-tools"
+			"url": "git@github.com:WordPress/wporg-repo-tools.git"
 		}
 	],
 	"require": {},
 	"require-dev": {
 		"composer/installers": "~1.0",
-		"wpackagist-plugin/gutenberg": "*",
 		"wpackagist-plugin/wordpress-importer": "*",
 		"wporg/wporg-repo-tools": "dev-trunk",
 		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",

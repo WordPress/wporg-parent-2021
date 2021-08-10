@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e6bc8d7b076f1c1fb5b570439d7fb9ba",
+    "content-hash": "cbff6d9dfab4a7d656861934299cb7ea",
     "packages": [],
     "packages-dev": [
         {
@@ -2245,24 +2245,6 @@
                 "source": "https://github.com/wp-phpunit/wp-phpunit"
             },
             "time": "2021-07-27T09:32:49+00:00"
-        },
-        {
-            "name": "wpackagist-plugin/gutenberg",
-            "version": "11.1.0",
-            "source": {
-                "type": "svn",
-                "url": "https://plugins.svn.wordpress.org/gutenberg/",
-                "reference": "tags/11.1.0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/gutenberg.11.1.0.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-plugin",
-            "homepage": "https://wordpress.org/plugins/gutenberg/"
         },
         {
             "name": "wpackagist-plugin/wordpress-importer",
