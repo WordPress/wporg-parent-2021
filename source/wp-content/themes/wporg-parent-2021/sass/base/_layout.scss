@@ -1,23 +1,23 @@
-:root {
-	--wpadmin-bar--height: 46px;
-}
-
+// Setup the main container to use a flex box-model
+// allowing us to simplify the layout and "sticky" bar.
 .wp-site-blocks {
-	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
-}
+	min-height: calc(100vh - var(--wp-global-header-offset) - var(--local-header-height));
 
-.site-footer-container {
-	margin-top: auto;
-}
-
-body.admin-bar {
-	@include break-small() {
-		--wpadmin-bar--height: 32px;
+	> .site-content-container {
+		// Make the content area grow to fill any remaining space on the screen, so that the footer is pushed to
+		// the bottom.
+		margin-bottom: auto;
 	}
+}
 
-	.wp-site-blocks {
-		min-height: calc( 100vh - var(--wpadmin-bar--height) );
+@include break-mobile {
+	// limit size of any element that is aligned left/right
+	.wp-block[data-align="left"], // This is for the editor
+	.wp-block[data-align="right"], // This is for the editor
+	.wp-site-blocks .alignleft,
+	.wp-site-blocks .alignright {
+		max-width: var(--wp--custom--alignment--aligned-max-width);
 	}
 }

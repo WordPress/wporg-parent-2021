@@ -1,8 +1,22 @@
-@import '~@wordpress/base-styles/breakpoints';
-@import '~@wordpress/base-styles/mixins';
+@import "~@wordpress/base-styles/breakpoints";
+@import "~@wordpress/base-styles/mixins";
 
+/*
+ * Custom breakpoints
+ *
+ * Try to use the standard ones from `base-styles` when possible.
+ */
 @mixin break-small-only() {
+
 	@media (max-width: #{ ($break-small - 1) }) {
+		@content;
+	}
+}
+
+// "giant" is an exaggeration, but it's named this way to stay consistent with Gutenberg.
+@mixin break-giant() {
+
+	@media (min-width: 2000px) {
 		@content;
 	}
 }

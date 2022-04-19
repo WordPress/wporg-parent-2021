@@ -1,106 +1,83 @@
 <?php
-if ( ! function_exists( 'blockbase_support' ) ) :
-	function blockbase_support() {
 
-		// Alignwide and alignfull classes in the block editor.
-		add_theme_support( 'align-wide' );
+namespace WordPressdotorg\Theme\Parent_2021;
 
-		// Add support for experimental link color control.
-		add_theme_support( 'experimental-link-color' );
+use function WordPressdotorg\MU_Plugins\Global_Fonts\get_font_stylesheet_url;
 
-		// Add support for responsive embedded content.
-		// https://github.com/WordPress/gutenberg/issues/26901
-		add_theme_support( 'responsive-embeds' );
+defined( 'WPINC' ) || die();
 
-		// Add support for editor styles.
-		add_theme_support( 'editor-styles' );
-
-		// Add support for post thumbnails.
-		add_theme_support( 'post-thumbnails' );
-
-		// Declare that there are no <title> tags and allow WordPress to provide them
-		add_theme_support( 'title-tag' );
-
-		// Experimental support for adding blocks inside nav menus
-		add_theme_support( 'block-nav-menus' );
-
-		// Enqueue editor styles.
-		add_editor_style(
-			array(
-				'/assets/ponyfill.css',
-			)
-		);
-
-		// This theme has one menu location.
-		register_nav_menus(
-			array(
-				'primary' => __( 'Primary Navigation', 'blockbase' ),
-			)
-		);
-
-	}
-	add_action( 'after_setup_theme', 'blockbase_support' );
-endif;
+require_once __DIR__ . '/inc/gutenberg-tweaks.php';
 
 /**
- *
- * Enqueue scripts and styles.
+ * Actions and filters.
  */
-function blockbase_editor_styles() {
-	// Enqueue editor styles.
-	add_editor_style(
+add_action( 'after_setup_theme', __NAMESPACE__ . '\theme_support', 9 );
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\enqueue_assets' );
+add_filter( 'author_link', __NAMESPACE__ . '\use_wporg_profile_for_author_link', 10, 3 );
+
+/**
+ * Register theme support.
+ */
+function theme_support() {
+	// Alignwide and alignfull classes in the block editor.
+	add_theme_support( 'align-wide' );
+
+	// Add support for experimental link color control.
+	add_theme_support( 'experimental-link-color' );
+
+	// Add support for responsive embedded content.
+	// https://github.com/WordPress/gutenberg/issues/26901
+	add_theme_support( 'responsive-embeds' );
+
+	// Add support for editor styles.
+	add_theme_support( 'editor-styles' );
+	add_editor_style( get_font_stylesheet_url() );
+
+	// Add support for post thumbnails.
+	add_theme_support( 'post-thumbnails' );
+
+	// Declare that there are no <title> tags and allow WordPress to provide them
+	add_theme_support( 'title-tag' );
+
+	// Experimental support for adding blocks inside nav menus
+	add_theme_support( 'block-nav-menus' );
+
+	// Remove the default margin-top added when the admin bar is used, this is
+	// handled by the theme, in `_site-header.scss`.
+	add_theme_support( 'admin-bar', array( 'callback' => '__return_false' ) );
+
+	// This theme has one menu location.
+	register_nav_menus(
 		array(
-			blockbase_fonts_url(),
+			'primary' => __( 'Primary Navigation', 'wporg' ),
 		)
 	);
 }
-add_action( 'admin_init', 'blockbase_editor_styles' );
 
 /**
- *
  * Enqueue scripts and styles.
  */
-function blockbase_scripts() {
-	// Enqueue Google fonts
-	wp_enqueue_style( 'blockbase-fonts', blockbase_fonts_url(), array(), null );
-	wp_enqueue_style( 'blockbase-ponyfill', get_template_directory_uri() . '/assets/ponyfill.css', array(), wp_get_theme()->get( 'Version' ) );
+function enqueue_assets() {
+	wp_enqueue_style(
+		'wporg-parent-2021-style',
+		get_template_directory_uri() . '/style.css',
+		array( 'wporg-global-fonts' ),
+		filemtime( __DIR__ . '/style.css' )
+	);
 }
-add_action( 'wp_enqueue_scripts', 'blockbase_scripts' );
 
 /**
- * Add Google webfonts
+ * Swap out the normal author archive link for the author's wp.org profile link.
  *
- * @return $fonts_url
+ * @param string $link            Overwritten.
+ * @param int    $author_id       Unused.
+ * @param string $author_nicename Used as the slug in the profiles URL.
+ *
+ * @return string
  */
-
-function blockbase_fonts_url() {
-	if ( ! class_exists( 'WP_Theme_JSON_Resolver_Gutenberg' ) ) {
-		return '';
-	}
-
-	$theme_data = WP_Theme_JSON_Resolver_Gutenberg::get_merged_data()->get_settings();
-	if ( empty( $theme_data ) || empty( $theme_data['custom'] ) ) {
-		return '';
-	}
-
-	$custom_data = $theme_data['custom'];
-	if ( ! array_key_exists( 'fontsToLoadFromGoogle', $custom_data ) ) {
-		return '';
-	}
-
-	$font_families   = $theme_data['custom']['fontsToLoadFromGoogle'];
-	$font_families[] = 'display=swap';
-
-	// Make a single request for the theme fonts.
-	return esc_url_raw( 'https://fonts.googleapis.com/css2?' . implode( '&', $font_families ) );
+function use_wporg_profile_for_author_link( $link, $author_id, $author_nicename ) {
+	return sprintf(
+		'https://profiles.wordpress.org/%s/',
+		$author_nicename
+	);
 }
-
-/**
- * Customize Global Styles
- */
-require get_template_directory() . '/inc/customizer/wp-customize-colors.php';
-require get_template_directory() . '/inc/customizer/wp-customize-color-palettes.php';
-require get_template_directory() . '/inc/customizer/wp-customize-fonts.php';
-
-/** Add a checkbox to hide the Site Editor */
-require get_template_directory() . '/inc/disable-site-editor.php';

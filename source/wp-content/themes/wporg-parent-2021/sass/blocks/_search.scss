@@ -1,30 +1,41 @@
-@import 'button-mixins';
+@import "button-mixins";
 
 .wp-block-search {
+	margin-top: var(--wp--custom--margin--baseline);
 
 	&.wp-block-search__button-inside {
-		.wp-block-search__inside-wrapper{
-			padding: var(--wp--custom--form--padding);
+		.wp-block-search__inside-wrapper {
+			padding: var(--wp--custom--form--border--width);
 			border: var(--wp--custom--form--border--width) var(--wp--custom--form--border--style) var(--wp--custom--form--border--color);
 			border-radius: var(--wp--custom--form--border--radius);
+
 			.wp-block-search__input {
-				padding: 0;
+				padding: 0 var(--wp--custom--form--padding);
 			}
 		}
 	}
 
 	.wp-block-search__input {
+		line-height: var(--wp--custom--button--typography--line-height);
 		padding: var(--wp--custom--form--padding);
 		border: var(--wp--custom--form--border--width) var(--wp--custom--form--border--style) var(--wp--custom--form--border--color);
 	}
 
 	&.wp-block-search__button-inside .wp-block-search__inside-wrapper .wp-block-search__button,
 	.wp-block-search__button {
+
 		@include button-main-styles;
-		@include button-hover-styles;
+		@include button-color-styles;
+
 		&.has-icon {
 			line-height: 0;
+
+			// The user needs some kind of indication that the search icon is a button that can be clicked to
+			// submit the form, because these buttons don't have the normal indicators. For background, see:
+			// https://ux.stackexchange.com/questions/105024/why-dont-button-html-elements-have-a-css-cursor-pointer-by-default
+			&:hover {
+				cursor: pointer;
+			}
 		}
 	}
-
 }

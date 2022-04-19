@@ -1,0 +1,18 @@
+.wp-block-post-title {
+	--post-title-hover-color: var(--wp--custom--link--color--text);
+
+	a {
+		color: inherit;
+
+		&:hover,
+		&:focus {
+			color: var(--post-title-hover-color);
+		}
+	}
+
+	// Titles inside query loops should use `h2` font size.
+	.wp-block-query & {
+		font-size: var(--wp--custom--h-2--typography--font-size);
+		line-height: var(--wp--custom--h-2--typography--line-height);
+	}
+}

@@ -1,9 +1,38 @@
-.wp-block-pullquote.is-style-solid-color,
+// Both selectors for increased specificity.
 .wp-block-pullquote {
+	min-height: var(--wp--custom--pullquote--spacing--min-height);
+	padding: calc(var(--wp--custom--margin--vertical) * 1.333) 0 0;
+	background-image: url(./images/quotemark.svg);
+	background-repeat: no-repeat;
+	background-position: top left;
+	background-size: 200px auto;
+	font-size: var(--wp--custom--pullquote--typography--font-size);
 	text-align: var(--wp--custom--pullquote--typography--text-align);
+	margin-top: calc(var(--wp--custom--margin--vertical) * 1.333);
+	margin-bottom: calc(var(--wp--custom--margin--vertical) * 3);
+
+	@include break-small {
+		background-size: contain;
+	}
+
+	&.alignfull {
+		background-position: -45px 0;
+		padding-left: var(--wp--custom--margin--horizontal);
+		padding-right: var(--wp--custom--margin--horizontal);
+	}
+
+	@include break-medium {
+		padding: 115px 0 0 185px;
+
+		&.alignfull {
+			padding: 115px var(--wp--custom--margin--horizontal) 0 185px;
+		}
+	}
+
 	blockquote {
 		padding: 0;
 		margin: 0;
+
 		p {
 			font-size: 1em;
 			padding: 0;
@@ -11,20 +40,23 @@
 			line-height: inherit;
 		}
 
-		.wp-block-pullquote__citation, // For the editor
 		cite {
 			display: block;
 			font-size: var(--wp--custom--pullquote--citation--typography--font-size);
-			font-family: var(--wp--custom--pullquote--citation--typography--font-family);
 			font-style: var(--wp--custom--pullquote--citation--typography--font-style);
-			font-weight: var(--wp--custom--pullquote--citation--typography--font-weight);
+			font-family: var(--wp--custom--pullquote--citation--typography--font-family);
 			margin-top: var(--wp--custom--pullquote--citation--spacing--margin--top);
+			color: var(--wp--preset--color--blue-1);
+
+			&::before {
+				content: "—";
+			}
 		}
 	}
 
-	&.is-style-solid-color {
-		background-color: var(--wp--custom--color--foreground);
-		color: var(--wp--custom--color--background);
+	b,
+	strong {
+		// Quotes should never have bold text.
+		font-weight: 400;
 	}
 }
-

@@ -1,0 +1,16 @@
+// Hide an element accessibly instead of using display: none;
+// Collect all the classes that need this feature here, rather than repeating styles throughout CSS.
+
+// Source: https://github.com/WordPress/gutenberg/blob/3da717b8d0ac7d7821fc6d0475695ccf3ae2829f/packages/block-editor/src/components/responsive-block-control/style.scss#L1
+.local-header__categories-toggle {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	word-wrap: normal !important;
+}
