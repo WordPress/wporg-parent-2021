@@ -9,6 +9,10 @@
 	"config": {
 		"platform": {
 			"php": "7.4"
+		},
+		"allow-plugins": {
+			"composer/installers": true,
+			"dealerdirect/phpcodesniffer-composer-installer": true
 		}
 	},
 	"extra": {
@@ -26,13 +30,20 @@
 		{
 			"type": "vcs",
 			"url": "git@github.com:WordPress/wporg-repo-tools.git"
+		},
+		{
+			"type": "vcs",
+			"url": "git@github.com:WordPress/wporg-mu-plugins.git"
 		}
 	],
 	"require": {},
 	"require-dev": {
 		"composer/installers": "~1.0",
+		"wpackagist-plugin/gutenberg": "*",
+		"wpackagist-plugin/jetpack": "*",
 		"wpackagist-plugin/wordpress-importer": "*",
 		"wporg/wporg-repo-tools": "dev-trunk",
+		"wporg/wporg-mu-plugins": "dev-build",
 		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
 		"wp-coding-standards/wpcs": "2.*",
 		"phpcompatibility/phpcompatibility-wp": "*",

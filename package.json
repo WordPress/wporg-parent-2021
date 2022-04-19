@@ -1,17 +1,17 @@
 {
 	"name": "wporg-parent-2021-project",
 	"version": "1.0.0",
-	"description": "",
+	"description": "The codebase and development environment for the WordPress.org parent theme.",
 	"author": "WordPress.org",
 	"license": "GPL-2.0-or-later",
 	"private": true,
 	"dependencies": {},
 	"devDependencies": {
-		"@wordpress/env": "^4.1.0"
+		"@wordpress/env": "^4.5.0"
 	},
 	"scripts": {
-		"initial-setup": "yarn && composer install && yarn run update-configs",
-		"update-configs": "TEXTDOMAIN=wporg composer exec update-configs",
+		"initial-setup": "yarn && composer install && TEXTDOMAIN=wporg composer exec update-configs",
+		"update-configs": "composer update && TEXTDOMAIN=wporg composer exec update-configs",
 		"wp-env": "wp-env"
 	},
 	"workspaces": [
