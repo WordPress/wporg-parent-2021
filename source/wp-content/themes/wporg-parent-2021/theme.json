@@ -1,14 +1,9 @@
 {
 	"//README": "Comments should be added to document important things. Use the `//{property}` format. See https://github.com/WordPress/gutenberg/issues/35099.",
-	"$schema": "https://json.schemastore.org/theme-v1.json",
-	"version": 1,
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 2,
 	"settings": {
-		"border": {
-			"customColor": true,
-			"customRadius": true,
-			"customStyle": true,
-			"customWidth": true
-		},
+		"appearanceTools": true,
 		"color": {
 			"gradients": [],
 			"palette": [
@@ -232,7 +227,7 @@
 					"mobile": {
 						"typography": {
 							"fontSize": "70px",
-							"lineHeight": "1.1"
+							"lineHeight": 1.1
 						}
 					}
 				},
@@ -259,7 +254,7 @@
 					"mobile": {
 						"typography": {
 							"fontSize": "clamp(26px, 4vw, 36px)",
-							"lineHeight": "1.3"
+							"lineHeight": 1.3
 						}
 					}
 				},
@@ -286,7 +281,7 @@
 					"mobile": {
 						"typography": {
 							"fontSize": "26px",
-							"lineHeight": "1.35"
+							"lineHeight": 1.35
 						}
 					}
 				},
@@ -328,7 +323,7 @@
 					"margin": ".1em .1em 0 0",
 					"typography": {
 						"fontSize": "110px",
-						"fontWeight": "400"
+						"fontWeight": 400
 					}
 				},
 				"padding": {
@@ -374,7 +369,7 @@
 				},
 				"typography": {
 					"fontSize": "40px",
-					"lineHeight": "1.4",
+					"lineHeight": 1.4,
 					"textAlign": "left"
 				}
 			},
@@ -410,7 +405,6 @@
 		"spacing": {
 			"//blockGap": "The design calls for a 24px gap. Coincidentally, that's the default value that Gutenberg defines. The default could change in the future, though, so this should be explicitly set.",
 			"blockGap": "24px",
-			"customPadding": true,
 			"units": [
 				"%",
 				"px",
@@ -421,10 +415,6 @@
 			]
 		},
 		"typography": {
-			"customFontSize": true,
-			"customFontWeight": false,
-			"customLineHeight": false,
-			"customTextDecorations": false,
 			"dropCap": false,
 			"fontFamilies": [
 				{
