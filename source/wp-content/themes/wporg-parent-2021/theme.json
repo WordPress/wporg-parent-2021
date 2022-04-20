@@ -524,8 +524,7 @@
 			},
 			"core/site-title": {
 				"typography": {
-					"fontSize": "var(--wp--preset--font-size--normal)",
-					"fontWeight": 700
+					"fontSize": "clamp(20px, calc(100vw / 12), 120px)"
 				}
 			},
 			"core/query-title": {
