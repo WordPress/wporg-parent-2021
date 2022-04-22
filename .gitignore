@@ -24,6 +24,7 @@ phpcs.xml.dist
 # ...except the actual source of this project.
 !/source/wp-content/themes
 !/source/wp-content/themes/wporg-parent-2021
+!/source/wp-content/themes/wporg-child-2021
 
 # Ignore built files in source directories.
 /source/wp-content/themes/wporg-parent-2021/style.css
