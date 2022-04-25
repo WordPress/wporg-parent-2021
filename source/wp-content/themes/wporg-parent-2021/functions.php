@@ -57,9 +57,9 @@ function theme_support() {
 function enqueue_assets() {
 	wp_enqueue_style(
 		'wporg-parent-2021-style',
-		get_template_directory_uri() . '/style.css',
+		get_template_directory_uri() . '/build/style.css',
 		array( 'wporg-global-fonts' ),
-		filemtime( __DIR__ . '/style.css' )
+		filemtime( __DIR__ . '/build/style.css' )
 	);
 }
 

@@ -56,30 +56,45 @@ function writePostCSSResult( outputFile ) {
 /**
  * Build the CSS for the theme. First run sass to compile down to plain CSS, then run PostCSS to apply
  * autoprefixer. If the `--no-rtl` flag is passed, that's all. If not, another PostCSS process is run to
- * apply rtlcss and autoprefixer to the Sass output, and save that to the `style-rtl.css` file.
+ * apply rtlcss and autoprefixer to the Sass output, and save that to the `[file]-rtl.css` file.
+ *
+ * This assumes your main sass file will be `sass/style.scss`, and should be built into `build/style.css`.
+ * It will also build any other top-level Sass files (unless they start with `_`) into `build`.
  */
 try {
-	const inputFile = resolve( 'sass/style.scss' );
-	const outputFile = resolve( './style.css' );
+	const inputDir = resolve( 'sass' );
+	const outputDir = resolve( 'build' );
 	const skipRTL = process.argv.slice( 2 ).includes( '--no-rtl' );
 
-	const result = sass.compile( inputFile, {
-		outFile: outputFile,
-		outputStyle: 'expanded',
-		sourceMap: true,
-		importers: [ nodePackageImporter ],
-	} );
+	if ( ! fs.existsSync( outputDir ) ) {
+		fs.mkdirSync( outputDir );
+	}
 
-	const css = result.css;
+	const sassRe = /^[^_].*\.scss$/i;
+	const files = fs.readdirSync( inputDir ).filter( ( name ) => sassRe.test( name ) );
 
-	// Build LTR file.
-	postcss( [ autoprefixer ] ).process( css, { from: outputFile } ).then( writePostCSSResult( outputFile ) );
+	for ( let i = 0; i < files.length; i++ ) {
+		const inputFile = resolve( inputDir, files[ i ] );
+		const outputFile = resolve( outputDir, files[ i ].replace( '.scss', '.css' ) );
 
-	// Build RTL file if needed.
-	if ( ! skipRTL ) {
-		postcss( [ rtlcss, autoprefixer ] )
-			.process( css, { from: outputFile } )
-			.then( writePostCSSResult( outputFile.replace( '.css', '-rtl.css' ) ) );
+		const result = sass.compile( inputFile, {
+			outFile: outputFile,
+			outputStyle: 'expanded',
+			sourceMap: true,
+			importers: [ nodePackageImporter ],
+		} );
+
+		const css = result.css;
+
+		// Build LTR file.
+		postcss( [ autoprefixer ] ).process( css, { from: outputFile } ).then( writePostCSSResult( outputFile ) );
+
+		// Build RTL file if needed.
+		if ( ! skipRTL ) {
+			postcss( [ rtlcss, autoprefixer ] )
+				.process( css, { from: outputFile } )
+				.then( writePostCSSResult( outputFile.replace( '.css', '-rtl.css' ) ) );
+		}
 	}
 } catch ( error ) {
 	console.log( error.message );
