@@ -4,36 +4,41 @@
 <div style="height:30px" aria-hidden="true" class="wp-block-spacer"></div>
 <!-- /wp:spacer -->
 
-<!-- wp:query {"tagName":"main","className":"two-column-grid-container has-dynamic-rows"} -->
-<main class="wp-block-query two-column-grid-container has-dynamic-rows">
-	<!-- wp:post-template -->
-		<!-- wp:group {"tagName":"header","className":"entry-header"} -->
-		<header class="wp-block-group entry-header">
-			<!-- wp:post-title {"level":2,"isLink":true} /-->
+<!-- wp:group {"className":"is-style-two-column-display"} -->
+<div class="wp-block-group is-style-two-column-display">
+	<!-- wp:query {"tagName":"main","className":"is-right-column"} -->
+	<main class="wp-block-query is-right-column">
+		<!-- wp:post-template -->
+			<!-- wp:group {"tagName":"header","className":"entry-header"} -->
+			<header class="wp-block-group entry-header">
+				<!-- wp:post-title {"level":2,"isLink":true} /-->
 
-			<!-- wp:group {"className":"entry-meta"} -->
-			<div class="wp-block-group entry-meta">
-				<!-- wp:post-date /-->
-			</div>
+				<!-- wp:group {"className":"entry-meta"} -->
+				<div class="wp-block-group entry-meta">
+					<!-- wp:post-date /-->
+				</div>
+				<!-- /wp:group -->
+			</header>
 			<!-- /wp:group -->
-		</header>
-		<!-- /wp:group -->
 
-		<!-- wp:group {"tagName":"section"} -->
-		<section class="wp-block-group">
-			<!-- wp:post-excerpt {"moreText":"Read Post","showMoreOnNewLine":true,"layout":{"inherit":true}} /-->
-		</section>
-		<!-- /wp:group -->
-	<!-- /wp:post-template -->
+			<!-- wp:group {"tagName":"section"} -->
+			<section class="wp-block-group">
+				<!-- wp:post-excerpt {"moreText":"Read Post","showMoreOnNewLine":true,"layout":{"inherit":true}} /-->
+			</section>
+			<!-- /wp:group -->
+		<!-- /wp:post-template -->
 
-	<!-- wp:query-pagination -->
-		<!-- wp:query-pagination-previous {"label":"Newer Posts"} /-->
-		<!-- wp:query-pagination-numbers /-->
-		<!-- wp:query-pagination-next {"label":"Older Posts"} /-->
-	<!-- /wp:query-pagination -->
+		<!-- wp:query-pagination -->
+			<!-- wp:query-pagination-previous {"label":"Newer Posts"} /-->
+			<!-- wp:query-pagination-numbers /-->
+			<!-- wp:query-pagination-next {"label":"Older Posts"} /-->
+		<!-- /wp:query-pagination -->
 
-</main>
-<!-- /wp:query -->
+	</main>
+	<!-- /wp:query -->
+
+</div>
+<!-- /wp:group -->
 
 <!-- wp:spacer -->
 <div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>

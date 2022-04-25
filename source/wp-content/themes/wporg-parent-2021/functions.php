@@ -7,6 +7,7 @@ use function WordPressdotorg\MU_Plugins\Global_Fonts\get_font_stylesheet_url;
 defined( 'WPINC' ) || die();
 
 require_once __DIR__ . '/inc/gutenberg-tweaks.php';
+require_once __DIR__ . '/inc/block-styles.php';
 
 /**
  * Actions and filters.
