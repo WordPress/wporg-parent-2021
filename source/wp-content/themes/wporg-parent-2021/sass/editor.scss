@@ -1,0 +1,18 @@
+/*
+ * Fixes for the editor, to better match the frontend.
+ */
+@import "base/breakpoints";
+
+.wp-block-post-template {
+	width: 100%;
+
+	.edit-site-block-editor__block-list & {
+		display: block;
+	}
+}
+
+.is-style-two-column-display,
+.wp-block-columns.is-style-two-column-display {
+	display: grid;
+	justify-content: stretch;
+}
