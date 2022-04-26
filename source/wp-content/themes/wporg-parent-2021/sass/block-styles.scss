@@ -5,6 +5,11 @@
 	padding-left: var(--wp--custom--alignment--edge-spacing);
 	padding-right: var(--wp--custom--alignment--edge-spacing);
 
+	// Clear the columns styling on smaller screens
+	&.wp-block-columns {
+		display: block;
+	}
+
 	> .alignfull {
 		width: auto;
 		max-width: none;
@@ -45,6 +50,12 @@
 				width: 100%;
 				max-width: 100%;
 			}
+		}
+
+		> .is-left-column {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
 		}
 
 		// If this variation is used on a group or post content, it should put all
