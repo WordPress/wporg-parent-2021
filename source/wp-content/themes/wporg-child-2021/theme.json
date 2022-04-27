@@ -1,13 +1,5 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/theme.json",
 	"version": 2,
-	"settings": {
-		"custom": {
-			"link": {
-				"color": {
-					"text": "var(--wp--preset--color--coral-red)"
-				}
-			}
-		}
-	}
+	"settings": {}
 }
