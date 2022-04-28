@@ -616,6 +616,11 @@
 			"name": "template-center-column",
 			"title": "Centered Column",
 			"postTypes": [ "page", "post" ]
+		},
+		{
+			"name": "template-page-simple-footer",
+			"title": "No Secondary Content",
+			"postTypes": [ "page", "post" ]
 		}
 	],
 	"templateParts": [
@@ -623,6 +628,23 @@
 			"name": "header",
 			"title": "Header",
 			"area": "header"
+		},
+		{
+			"name": "cover",
+			"title": "Cover"
+		},
+		{
+			"name": "entry-header",
+			"title": "Post Header"
+		},
+		{
+			"name": "entry-header-no-meta",
+			"title": "Page Header"
+		},
+		{
+			"name": "footer-simple",
+			"title": "Footer without Secondary Content",
+			"area": "footer"
 		},
 		{
 			"name": "footer",
