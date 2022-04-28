@@ -10,6 +10,10 @@
 		// so that the footer is pushed to the bottom.
 		margin-bottom: auto;
 	}
+
+	> * + * {
+		margin-block-start: 0;
+	}
 }
 
 @include break-mobile {
