@@ -16,3 +16,8 @@
 	display: grid;
 	justify-content: stretch;
 }
+
+// Overwrite a style from wp4.css.
+h3 a {
+	font-weight: revert; // stylelint-disable-line font-weight-notation
+}
