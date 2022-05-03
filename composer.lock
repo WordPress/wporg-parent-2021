@@ -2279,15 +2279,15 @@
         },
         {
             "name": "wpackagist-plugin/jetpack",
-            "version": "10.8",
+            "version": "10.9",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/jetpack/",
-                "reference": "tags/10.8"
+                "reference": "tags/10.9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/jetpack.10.8.zip"
+                "url": "https://downloads.wordpress.org/plugin/jetpack.10.9.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -2358,12 +2358,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WordPress/wporg-repo-tools.git",
-                "reference": "1ed98a17f26d733477e9ed02d367db404b396e68"
+                "reference": "325447b539639664a0867d233631e3af84e2d548"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/wporg-repo-tools/zipball/1ed98a17f26d733477e9ed02d367db404b396e68",
-                "reference": "1ed98a17f26d733477e9ed02d367db404b396e68",
+                "url": "https://api.github.com/repos/WordPress/wporg-repo-tools/zipball/325447b539639664a0867d233631e3af84e2d548",
+                "reference": "325447b539639664a0867d233631e3af84e2d548",
                 "shasum": ""
             },
             "default-branch": true,
@@ -2380,7 +2380,7 @@
                 "issues": "https://github.com/WordPress/wporg-repo-tools/issues",
                 "source": "https://github.com/WordPress/wporg-repo-tools/tree/trunk"
             },
-            "time": "2022-04-26T16:41:20+00:00"
+            "time": "2022-04-28T23:06:09+00:00"
         }
     ],
     "aliases": [],
