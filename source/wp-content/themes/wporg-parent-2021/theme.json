@@ -618,7 +618,7 @@
 			"postTypes": [ "page", "post" ]
 		},
 		{
-			"name": "template-page-simple-footer",
+			"name": "template-simple-footer",
 			"title": "No Secondary Content",
 			"postTypes": [ "page", "post" ]
 		}
