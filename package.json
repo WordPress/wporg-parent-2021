@@ -11,7 +11,7 @@
 	},
 	"scripts": {
 		"setup:tools": "yarn && composer install && TEXTDOMAIN=wporg composer exec update-configs",
-		"setup:wp": "wp-env run cli \"bash env/setup.sh\"",
+		"setup:wp": "wp-env start && wp-env run cli \"bash env/setup.sh\"",
 		"update:tools": "composer update && TEXTDOMAIN=wporg composer exec update-configs",
 		"wp-env": "wp-env"
 	},
