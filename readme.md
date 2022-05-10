@@ -23,6 +23,12 @@
     yarn workspaces run build
     ```
 
+1. Start the local environment.
+
+    ```bash
+    yarn wp-env start
+    ```
+
 1. Run the setup script.
 
     ```bash
