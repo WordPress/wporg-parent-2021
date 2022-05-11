@@ -26,15 +26,26 @@ jobs:
             - name: Build
               run: yarn workspaces run build
 
-            - name: Ignore .gitignore
+            - name: Trim the repo down to just the theme
               run: |
-                  git add source/wp-content/themes/wporg-parent-2021/build/* --force
+                  cp -R source/wp-content/themes/wporg-parent-2021 theme
+                  git rm -r .
+                  mv theme/ .
+                  rm -r theme
+
+            # Add a composer.json so we can set the type to `wordpress-theme`.
+            - name: Create the composer.json
+              run: |
+                  echo "{\n\t\"name\": \"wporg/wporg-parent-2021\",\n\t\"type\": \"wordpress-theme\"\n}" > composer.json
+
+            - name: Add all the theme files
+              run: |
+                  git add * --force
 
             - name: Commit and push
               uses: actions-js/push@a52398fac807b0c1e5f1492c969b477c8560a0ba # 1.3
               with:
                   github_token: ${{ secrets.GITHUB_TOKEN }}
                   branch: build
-                  directory: ./source/wp-content/themes/wporg-parent-2021
                   force: true
                   message: 'Build: ${{ github.sha }}'
