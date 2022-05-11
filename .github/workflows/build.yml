@@ -37,7 +37,7 @@ jobs:
             # Add a composer.json so we can set the type to `wordpress-theme`.
             - name: Create the composer.json
               run: |
-                  echo "{\n\t\"name\": \"wporg/wporg-parent-2021\",\n\t\"type\": \"wordpress-theme\"\n}" > composer.json
+                  echo "{\"name\": \"wporg/wporg-parent-2021\",\"type\": \"wordpress-theme\"}" > composer.json
 
             - name: Add all the theme files
               run: |
