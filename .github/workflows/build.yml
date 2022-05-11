@@ -29,6 +29,7 @@ jobs:
             - name: Trim the repo down to just the theme
               run: |
                   cp -R source/wp-content/themes/wporg-parent-2021 theme
+                  rm -rf theme/node_modules
                   git rm -r .
                   mv theme/* .
                   rm -r theme
