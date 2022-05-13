@@ -28,11 +28,11 @@ jobs:
 
             - name: Trim the repo down to just the theme
               run: |
-                  cp -R source/wp-content/themes/wporg-parent-2021 theme
-                  rm -rf theme/node_modules
-                  git rm -r .
-                  mv theme/* .
-                  rm -r theme
+                  rm -rf source/wp-content/themes/wporg-parent-2021/node_modules
+                  mv source/wp-content/themes/wporg-parent-2021 $RUNNER_TEMP
+                  git rm -rfq .
+                  rm -rf *
+                  mv $RUNNER_TEMP/wporg-parent-2021/* .
 
             # Add a composer.json so we can set the type to `wordpress-theme`.
             - name: Create the composer.json
