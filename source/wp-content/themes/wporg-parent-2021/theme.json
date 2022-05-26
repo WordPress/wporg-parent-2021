@@ -520,11 +520,6 @@
 					"fontSize": "clamp(20px, calc(100vw / 12), 120px)"
 				}
 			},
-			"core/query-title": {
-				"typography": {
-					"fontSize": "clamp(20px, calc(100vw / 12), 120px)"
-				}
-			},
 			"core/quote": {
 				"border": {
 					"color": "var(--wp--preset--color--blue-2)",
