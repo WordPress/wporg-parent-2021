@@ -64,7 +64,8 @@ function setup_block_styles() {
 }
 
 /**
- * Add our custom block style assets — CSS for the layout, and JS to register block variations.
+ * Add our custom block style assets — CSS for the layout, and JS to register
+ * block variations & add custom styles.
  */
 function register_assets() {
 	wp_register_style(
@@ -76,9 +77,9 @@ function register_assets() {
 
 	if ( is_admin() ) {
 		wp_enqueue_script(
-			'wporg-parent-block-variations',
+			'wporg-parent-block-tweaks',
 			get_template_directory_uri() . '/js/blocks.js',
-			array( 'wp-blocks', 'wp-i18n' ),
+			array( 'wp-blocks', 'wp-hooks', 'wp-i18n' ),
 			filemtime( dirname( __DIR__ ) . '/js/blocks.js' )
 		);
 	}

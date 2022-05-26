@@ -45,3 +45,23 @@ wp.blocks.registerBlockVariation( 'core/columns', {
 	],
 	isActive: ( blockAttributes ) => blockAttributes.className?.includes( 'is-style-two-column-display' ),
 } );
+
+/**
+ * Add wide alignment support to the code block.
+ */
+wp.hooks.addFilter(
+	'blocks.registerBlockType',
+	'wporg/add-alignwide-support',
+	( settings, name ) => {
+		if ( name !== 'core/code' ) {
+			return settings;
+		}
+
+		settings.supports = {
+			...settings.supports,
+			align: [ 'wide' ]
+		};
+
+		return settings;
+	}
+);
