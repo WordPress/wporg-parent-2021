@@ -22,6 +22,7 @@ wp.blocks.registerBlockVariation( 'core/columns', {
 		},
 		[
 			wp.element.createElement( 'path', {
+				key: '1',
 				fillRule: 'evenodd',
 				clipRule: 'evenodd',
 				// eslint-disable-next-line id-length
@@ -29,6 +30,7 @@ wp.blocks.registerBlockVariation( 'core/columns', {
 					'M39 12C40.1046 12 41 12.8954 41 14V34C41 35.1046 40.1046 36 39 36H9C7.89543 36 7 35.1046 7 34V14C7 12.8954 7.89543 12 9 12H39ZM39 34V14H20V34H39ZM18 34H9V14H18V34Z',
 			} ),
 			wp.element.createElement( 'path', {
+				key: '2',
 				stroke: 'currentColor',
 				strokeWidth: '2px',
 				strokeLinecap: 'round',
@@ -49,19 +51,15 @@ wp.blocks.registerBlockVariation( 'core/columns', {
 /**
  * Add wide alignment support to the code block.
  */
-wp.hooks.addFilter(
-	'blocks.registerBlockType',
-	'wporg/add-alignwide-support',
-	( settings, name ) => {
-		if ( name !== 'core/code' ) {
-			return settings;
-		}
-
-		settings.supports = {
-			...settings.supports,
-			align: [ 'wide' ]
-		};
-
+wp.hooks.addFilter( 'blocks.registerBlockType', 'wporg/add-alignwide-support', ( settings, name ) => {
+	if ( name !== 'core/code' ) {
 		return settings;
 	}
-);
+
+	settings.supports = {
+		...settings.supports,
+		align: [ 'wide' ],
+	};
+
+	return settings;
+} );
