@@ -626,15 +626,18 @@
 		},
 		{
 			"name": "cover",
-			"title": "Cover"
+			"title": "Cover",
+			"area": "uncategorized"
 		},
 		{
 			"name": "entry-header",
-			"title": "Post Header"
+			"title": "Post Header",
+			"area": "uncategorized"
 		},
 		{
 			"name": "entry-header-no-meta",
-			"title": "Page Header"
+			"title": "Page Header",
+			"area": "uncategorized"
 		},
 		{
 			"name": "footer-simple",
