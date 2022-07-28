@@ -333,19 +333,6 @@
 				"horizontal": "30px",
 				"vertical": "30px"
 			},
-			"paragraph": {
-				"dropcap": {
-					"margin": ".1em .1em 0 0",
-					"typography": {
-						"fontSize": "110px",
-						"fontWeight": 400
-					}
-				},
-				"padding": {
-					"horizontal": "var(--wp--custom--alignment--edge-spacing)",
-					"vertical": "var(--wp--custom--alignment--edge-spacing)"
-				}
-			},
 			"post-comment": {
 				"typography": {
 					"fontSize": "var(--wp--preset--font-size--normal)",
