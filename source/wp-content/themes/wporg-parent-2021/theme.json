@@ -177,11 +177,6 @@
 					"lineHeight": 2
 				}
 			},
-			"code": {
-				"typography": {
-					"fontFamily": "monospace"
-				}
-			},
 			"form": {
 				"padding": "calc( 0.5 * var(--wp--custom--margin--horizontal) )",
 				"border": {
@@ -439,6 +434,11 @@
 					"fontFamily": "'Inter', sans-serif",
 					"slug": "inter",
 					"name": "Inter"
+				},
+				{
+					"fontFamily": "monospace",
+					"slug": "monospace",
+					"name": "Monospace"
 				}
 			],
 			"fontSizes": [
@@ -494,7 +494,7 @@
 			},
 			"core/code": {
 				"typography": {
-					"fontFamily": "var(--wp--custom--code--typography--font-family)"
+					"fontFamily": "var(--wp--preset--font-family--monospace)"
 				}
 			},
 			"core/navigation": {
