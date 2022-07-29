@@ -121,9 +121,7 @@
 		},
 		"custom": {
 			"alignment": {
-				"alignedMaxWidth": "50%",
-				"//edge-spacing": "The min and max values represent the mobile and desktop spacing; the calc() value is for tablets.",
-				"edge-spacing": "clamp( 24px, calc( 100vw / 18 ), 80px )"
+				"alignedMaxWidth": "50%"
 			},
 			"button": {
 				"color": {
@@ -407,7 +405,55 @@
 		"spacing": {
 			"//blockGap": "The design calls for a 24px gap. Coincidentally, that's the default value that Gutenberg defines. The default could change in the future, though, so this should be explicitly set.",
 			"blockGap": "24px",
-			"units": [ "%", "px", "em", "rem", "vh", "vw" ]
+			"units": [ "%", "px", "em", "rem", "vh", "vw" ],
+			"customSpacingSize": false,
+			"spacingSizes": [
+				{
+					"name": "3X-Small",
+					"slug": 10,
+					"size": "10px"
+				},
+				{
+					"name": "2X-Small",
+					"slug": 20,
+					"size": "20px"
+				},
+				{
+					"name": "X-Small",
+					"slug": 30,
+					"size": "30px"
+				},
+				{
+					"name": "Small",
+					"slug": 40,
+					"size": "40px"
+				},
+				{
+					"name": "Medium",
+					"slug": 50,
+					"size": "60px"
+				},
+				{
+					"name": "Large",
+					"slug": 60,
+					"size": "clamp( 24px, calc( 100vw / 18 ), 80px )"
+				},
+				{
+					"name": "X-Large",
+					"slug": 70,
+					"size": "100px"
+				},
+				{
+					"name": "2X-Large",
+					"slug": 80,
+					"size": "120px"
+				},
+				{
+					"name": "3X-Large",
+					"slug": 90,
+					"size": "160px"
+				}
+			]
 		},
 		"typography": {
 			"dropCap": false,
