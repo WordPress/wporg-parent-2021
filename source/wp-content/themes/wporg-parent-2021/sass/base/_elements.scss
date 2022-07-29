@@ -94,3 +94,56 @@ input[type="checkbox"] + label {
 	margin-left: 0.5em;
 	line-height: 1em; // stylelint-disable-line declaration-property-unit-allowed-list
 }
+
+// Line heights for custom sizes.
+.has-extra-small-font-size {
+	line-height: var(--wp--custom--body--extra-small--typography--line-height);
+}
+
+.has-small-font-size {
+	line-height: var(--wp--custom--body--small--typography--line-height);
+}
+
+.has-normal-font-size {
+	line-height: var(--wp--custom--body--typography--line-height);
+}
+
+.has-large-font-size {
+	line-height: var(--wp--custom--body--large--typography--line-height);
+}
+
+.has-extra-large-font-size {
+	line-height: var(--wp--custom--body--extra-large--typography--line-height);
+}
+
+.has-huge-font-size {
+	line-height: var(--wp--custom--body--huge--typography--line-height);
+}
+
+.has-heading-6-font-size {
+	line-height: var(--wp--custom--heading--level-6--typography--line-height);
+}
+
+.has-heading-5-font-size {
+	line-height: var(--wp--custom--heading--level-5--typography--line-height);
+}
+
+.has-heading-4-font-size {
+	line-height: var(--wp--custom--heading--level-4--typography--line-height);
+}
+
+.has-heading-3-font-size {
+	line-height: var(--wp--custom--heading--level-3--typography--line-height);
+}
+
+.has-heading-2-font-size {
+	line-height: var(--wp--custom--heading--level-2--typography--line-height);
+}
+
+.has-heading-1-font-size {
+	line-height: var(--wp--custom--heading--level-1--typography--line-height);
+}
+
+.has-heading-cta-font-size {
+	line-height: var(--wp--custom--heading--cta--typography--line-height);
+}
