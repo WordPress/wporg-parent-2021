@@ -44,4 +44,12 @@ body[class] {
 		--wp--custom--pullquote--typography--font-size: var(--wp--custom--pullquote--breakpoint--medium--typography--font-size);
 		--wp--custom--pullquote--citation--typography--font-size: var(--wp--custom--pullquote--citation--breakpoint--medium--typography--font-size);
 	}
+
+	// Adjust button padding on small screens.
+	@include break-small-only() {
+		--wp--custom--button--spacing--padding--top: 24px;
+		--wp--custom--button--spacing--padding--bottom: 24px;
+		--wp--custom--button--spacing--padding--left: 30px;
+		--wp--custom--button--spacing--padding--right: 30px;
+	}
 }
