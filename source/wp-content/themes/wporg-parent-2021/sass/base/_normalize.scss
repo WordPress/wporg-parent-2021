@@ -9,11 +9,11 @@ body {
 
 	// Text selection background color
 	::selection {
-		background-color: var(--wp--preset--color--pomegrade);
+		background-color: var(--wp--preset--color--pomegrade-1);
 	}
 
 	::-moz-selection {
-		background-color: var(--wp--preset--color--pomegrade);
+		background-color: var(--wp--preset--color--pomegrade-1);
 	}
 }
 
