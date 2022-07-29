@@ -61,6 +61,22 @@ function setup_block_styles() {
 			'style_handle' => STYLE_HANDLE,
 		)
 	);
+
+	register_block_style(
+		'core/button',
+		array(
+			'name'         => 'fill-on-dark',
+			'label'        => __( 'Fill on dark', 'wporg' ),
+		)
+	);
+
+	register_block_style(
+		'core/button',
+		array(
+			'name'         => 'outline-on-dark',
+			'label'        => __( 'Outline on dark', 'wporg' ),
+		)
+	);
 }
 
 /**
