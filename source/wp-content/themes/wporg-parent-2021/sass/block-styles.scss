@@ -129,6 +129,12 @@
 	figure {
 		transition: all 0.15s linear;
 	}
+
+	a {
+		color: var(--wp--preset--color--white) !important;
+		text-underline-offset: 2px;
+		cursor: pointer;
+	}
 	
 	&:hover,
     &:focus-within {
@@ -156,7 +162,6 @@
 
 		> li {
 			padding: 6px 0 5px 15px;
-			width: 35.5%;
 			
 			&:not(:last-child) {
 				border-bottom: 1px solid rgba(225,225,225,0.5);
