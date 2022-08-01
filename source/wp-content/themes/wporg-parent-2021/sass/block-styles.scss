@@ -121,3 +121,46 @@
 		}
 	}
 }
+
+// A heading with an arrow and other content.
+.heading-with-arrow {
+	transition: background-color 0.15s linear;
+
+	figure {
+		transition: all 0.15s linear;
+	}
+	
+	&:hover,
+    &:focus-within {
+		transition: background-color 0.15s linear;
+		background-color: rgba(0,0,0,0.1);
+
+        figure {
+            transform: translateX(10px);
+			transition: all 0.15s linear;
+        }
+
+		.heading-with-arrow__row > div > p {
+			text-decoration: underline;
+			text-decoration-thickness: 3px;
+			text-underline-offset: 15px;
+		}
+    }
+	
+	.heading-with-arrow__row {
+		cursor: pointer;
+	}
+
+	.heading-with-arrow__list {
+		padding-left: 25px;
+
+		> li {
+			padding: 6px 0 5px 15px;
+			width: 35.5%;
+			
+			&:not(:last-child) {
+				border-bottom: 1px solid rgba(225,225,225,0.5);
+			}
+		}
+	}
+}
