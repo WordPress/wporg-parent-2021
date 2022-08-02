@@ -121,3 +121,15 @@
 		}
 	}
 }
+
+.hero__title {
+	font-family: var(--wp--preset--font-family--eb-garamond);
+	font-size: var(--wp--preset--font-size--normal);
+	font-weight: 400;
+}
+
+.hero__subtitle {
+	font-family: var(--wp--preset--font-family--inter);
+	font-size: var(--wp--preset--font-size--normal);
+	font-weight: 400;
+}
