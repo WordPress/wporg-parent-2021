@@ -77,6 +77,15 @@ function setup_block_styles() {
 			'label'        => __( 'Outline on dark', 'wporg' ),
 		)
 	);
+
+	register_block_style(
+		'core/paragraph',
+		array(
+			'name'         => 'serif',
+			'label'        => __( 'Serif', 'wporg' ),
+			'style_handle' => STYLE_HANDLE,
+		)
+	);
 }
 
 /**
