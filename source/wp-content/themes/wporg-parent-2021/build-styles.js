@@ -1,14 +1,16 @@
+#!/usr/bin/env node
 /* eslint-disable no-console */
 /**
  * External dependencies.
  */
-const autoprefixer = require( 'autoprefixer' );
-const { dirname, resolve } = require( 'path' );
+const chalk = require( 'chalk' );
 const fs = require( 'fs' ); // eslint-disable-line id-length
+const path = require( 'path' );
 const { pathToFileURL } = require( 'url' );
 const postcss = require( 'postcss' );
-const rtlcss = require( 'rtlcss' );
 const sass = require( 'sass' );
+const { sync: resolveBin } = require( 'resolve-bin' );
+const { sync: spawn } = require( 'cross-spawn' );
 
 // An importer that redirects relative URLs starting with "~" to `node_modules`.
 // See https://sass-lang.com/documentation/js-api/interfaces/FileImporter.
@@ -19,53 +21,60 @@ const nodePackageImporter = {
 		}
 		const file = url.substring( 1 );
 		let nodeModulesPath = './node_modules/';
-		let path = resolve( process.cwd(), nodeModulesPath, dirname( file ) );
+		let pkgPath = path.resolve( process.cwd(), nodeModulesPath, path.dirname( file ) );
 		// Search upwards for the file, since it could be hoisted up to the parent project.
 		// If the string starts with `/node_modules`, we're at the system root and didn't find anything.
-		while ( ! fs.existsSync( path ) && ! path.startsWith( '/node_modules' ) ) {
+		while ( ! fs.existsSync( pkgPath ) && ! pkgPath.startsWith( '/node_modules' ) ) {
 			nodeModulesPath = '../' + nodeModulesPath;
-			path = resolve( process.cwd(), nodeModulesPath, dirname( file ) );
+			pkgPath = path.resolve( process.cwd(), nodeModulesPath, path.dirname( file ) );
 		}
 
 		// Build new URL with the found path.
-		const newUrl = pathToFileURL( resolve( process.cwd(), nodeModulesPath, file ) );
+		const newUrl = pathToFileURL( path.resolve( process.cwd(), nodeModulesPath, file ) );
 		return newUrl;
 	},
 };
 
 /**
- * Write a PostCSS Result to the given file destination.
+ * Build the JS files using webpack, if the `src` directory exists.
  *
- * @param {string} outputFile The file path to write to.
- *
- * @return {Function} The callback used in the promise resolution.
+ * @param {string} inputDir
+ * @param {string} outputDir
  */
-function writePostCSSResult( outputFile ) {
-	return ( res ) => {
-		res.warnings().forEach( ( warn ) => {
-			console.warn( warn.toString() );
-		} );
-		fs.writeFile( outputFile, res.css, ( writeError ) => {
-			if ( writeError ) {
-				console.log( writeError );
-			}
-		} );
-	};
+async function maybeBuildJavaScript( inputDir, outputDir ) {
+	const project = path.basename( path.dirname( inputDir ) );
+	// Set the src directory based on the relative location from projet root.
+	process.env.WP_SRC_DIRECTORY = path.relative( __dirname, inputDir );
+	const { status, stdout } = spawn(
+		resolveBin( 'webpack' ),
+		[
+			'--config',
+			path.resolve( __dirname, 'webpack.config.js' ),
+			'--output-path',
+			outputDir,
+			'--color', // Enables colors in `stdout`.
+		],
+		{
+			stdio: 'pipe',
+		}
+	);
+	// Only output the webpack result if there was an issue.
+	if ( 0 !== status ) {
+		console.log( stdout.toString() );
+		console.log( chalk.red( `Error in JavaScript for ${ project }` ) );
+	} else {
+		console.log( chalk.green( `JavaScript built for ${ project }` ) );
+	}
 }
 
 /**
- * Build the CSS for the theme. First run sass to compile down to plain CSS, then run PostCSS to apply
- * autoprefixer. If the `--no-rtl` flag is passed, that's all. If not, another PostCSS process is run to
- * apply rtlcss and autoprefixer to the Sass output, and save that to the `[file]-rtl.css` file.
+ * Build the CSS files using PostCSS, if the `postcss` directory exists.
  *
- * This assumes your main sass file will be `sass/style.scss`, and should be built into `build/style.css`.
- * It will also build any other top-level Sass files (unless they start with `_`) into `build`.
+ * @param {string} inputDir
+ * @param {string} outputDir
  */
-try {
-	const inputDir = resolve( 'sass' );
-	const outputDir = resolve( 'build' );
-	const skipRTL = process.argv.slice( 2 ).includes( '--no-rtl' );
-
+async function maybeBuildSass( inputDir, outputDir ) {
+	const project = path.basename( path.dirname( inputDir ) );
 	if ( ! fs.existsSync( outputDir ) ) {
 		fs.mkdirSync( outputDir );
 	}
@@ -74,28 +83,41 @@ try {
 	const files = fs.readdirSync( inputDir ).filter( ( name ) => sassRe.test( name ) );
 
 	for ( let i = 0; i < files.length; i++ ) {
-		const inputFile = resolve( inputDir, files[ i ] );
-		const outputFile = resolve( outputDir, files[ i ].replace( '.scss', '.css' ) );
+		const inputFile = path.resolve( inputDir, files[ i ] );
+		const outputFile = path.resolve( outputDir, files[ i ].replace( '.scss', '.css' ) );
 
-		const result = sass.compile( inputFile, {
+		const { css } = sass.compile( inputFile, {
 			outFile: outputFile,
 			outputStyle: 'expanded',
 			sourceMap: true,
 			importers: [ nodePackageImporter ],
 		} );
 
-		const css = result.css;
-
-		// Build LTR file.
-		postcss( [ autoprefixer ] ).process( css, { from: outputFile } ).then( writePostCSSResult( outputFile ) );
-
-		// Build RTL file if needed.
-		if ( ! skipRTL ) {
-			postcss( [ rtlcss, autoprefixer ] )
-				.process( css, { from: outputFile } )
-				.then( writePostCSSResult( outputFile.replace( '.css', '-rtl.css' ) ) );
-		}
+		const result = await postcss( [
+			// Enable transforms for stage 2+, explictly enable nesting (stage 1).
+			require( 'postcss-preset-env' )( {
+				stage: 2,
+			} ),
+		] ).process( css, { from: inputFile } );
+		result.warnings().forEach( ( warn ) => {
+			console.log( chalk.yellow( `Warning in ${ project }:` ), warn.toString() );
+		} );
+		fs.writeFileSync( outputFile, result.css );
 	}
-} catch ( error ) {
-	console.log( error.message );
+	console.log( chalk.green( `CSS built for ${ project }` ) );
 }
+
+async function build() {
+	try {
+		const outputDir = path.resolve( path.join( __dirname, 'build' ) );
+
+		// We `await` because JS needs to be built first— the first webpack step deletes
+		// the build directory, and would remove the built CSS if it was truly async.
+		await maybeBuildJavaScript( path.resolve( path.join( __dirname, 'src' ) ), outputDir );
+		await maybeBuildSass( path.resolve( path.join( __dirname, 'sass' ) ), outputDir );
+	} catch ( error ) {
+		console.log( chalk.red( `Error:` ), error.message );
+	}
+}
+
+build();
