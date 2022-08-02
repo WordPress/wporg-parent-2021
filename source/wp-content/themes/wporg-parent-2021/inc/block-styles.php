@@ -85,6 +85,15 @@ function setup_block_styles() {
 			'label'        => __( 'Features', 'wporg' ),
 		)
 	);
+
+	register_block_style(
+		'core/paragraph',
+		array(
+			'name'         => 'serif',
+			'label'        => __( 'Serif', 'wporg' ),
+			'style_handle' => STYLE_HANDLE,
+		)
+	);
 }
 
 /**

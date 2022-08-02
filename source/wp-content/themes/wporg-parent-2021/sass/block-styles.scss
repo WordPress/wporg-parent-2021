@@ -169,3 +169,9 @@
 		line-height: var(--wporg--style--feature--li-height);
 	}
 }
+
+.is-style-serif {
+	font-family: var(--wp--custom--heading--typography--font-family);
+	font-size: var(--wp--preset--font-size--heading-5);
+	line-height: var(--wp--custom--heading--level-5--typography--line-height);
+}
