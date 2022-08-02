@@ -92,11 +92,20 @@ function register_assets() {
 	);
 
 	if ( is_admin() ) {
+		$path        = __DIR__ . 'build/index.js';
+		$deps_path   = __DIR__ . 'build/index.asset.php';
+		$script_info = file_exists( $deps_path )
+			? require $deps_path
+			: array(
+				'dependencies' => array(),
+				'version'      => filemtime( $path ),
+			);
+
 		wp_enqueue_script(
 			'wporg-parent-block-tweaks',
-			get_template_directory_uri() . '/js/blocks.js',
-			array( 'wp-blocks', 'wp-hooks', 'wp-i18n' ),
-			filemtime( dirname( __DIR__ ) . '/js/blocks.js' )
+			get_template_directory_uri() . '/build/index.js',
+			$script_info['dependencies'],
+			$script_info['version']
 		);
 	}
 }
