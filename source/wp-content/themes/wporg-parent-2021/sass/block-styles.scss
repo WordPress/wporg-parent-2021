@@ -121,3 +121,28 @@
 		}
 	}
 }
+
+.wporg-pattern__two-columns-cta {
+
+	@include break-medium-only() {
+		> .wp-block-column {
+			border: none;
+
+			&:first-of-type {
+				border-bottom: 1px solid var(--wp--preset--color--light-grey-1);
+			}
+		}
+	}
+
+	@include break-small-only() {
+		.wp-block-buttons {
+			flex-direction: column;
+		}
+
+		.wp-block-button,
+		.wp-block-button__link {
+			display: block;
+			width: 100%;
+		}
+	}
+}
