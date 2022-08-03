@@ -459,7 +459,7 @@
 				{
 					"name": "Medium",
 					"slug": 50,
-					"size": "60px"
+					"size": "clamp( 40px, calc( 100vw / 16 ), 60px )"
 				},
 				{
 					"name": "Large",

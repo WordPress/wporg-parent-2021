@@ -77,6 +77,14 @@ function setup_block_styles() {
 			'label'        => __( 'Outline on dark', 'wporg' ),
 		)
 	);
+
+	register_block_style(
+		'core/list',
+		array(
+			'name'         => 'features',
+			'label'        => __( 'Features', 'wporg' ),
+		)
+	);
 }
 
 /**
