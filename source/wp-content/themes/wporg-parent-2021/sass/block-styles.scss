@@ -175,3 +175,73 @@
 	font-size: var(--wp--preset--font-size--heading-5);
 	line-height: var(--wp--custom--heading--level-5--typography--line-height);
 }
+
+.wporg-pattern__heading-with-arrow {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+
+	&:hover,
+	&:focus-within {
+		background-color: rgba(0, 0, 0, 0.1);
+		transition: background-color 0.15s linear;
+	}
+
+	// href added for specificity.
+	a[href] {
+		display: flex;
+		flex-direction: column;
+		align-items: left;
+		text-decoration: none;
+
+		&::after {
+			content: "";
+			display: block;
+			height: 38px;
+			background-image: url(../images/right-arrow.svg);
+			background-position: center right;
+			background-repeat: no-repeat;
+			pointer-events: none;
+			transition: all 0.15s linear;
+			margin-top: 10px;
+			width: 88vw;
+		}
+
+		&:hover,
+		&:focus {
+			text-decoration-line: underline;
+			text-decoration-thickness: 1px;
+			text-underline-offset: 0.15em;
+
+			&::after {
+				transform: translateX(10px);
+			}
+		}
+
+		@include break-small() {
+			&::after {
+				width: max(62vw, 100%);
+			}
+		}
+
+		@include break-xlarge() {
+			flex-direction: row;
+			align-items: center;
+
+			&::after {
+				height: 118px;
+				width: 35vw;
+				margin-left: 40px;
+				margin-top: 0;
+				transform: scale(0.9);
+			}
+
+			&:hover,
+			&:focus-within {
+				&::after {
+					transform: scale(0.9) translateX(10px);
+				}
+			}
+		}
+	}
+}
