@@ -124,16 +124,17 @@
 
 .is-style-features {
 	--wporg--style--feature--offset: 0.2em;
+	--wporg--style--feature--li-height: 1.1;
 	padding: 0;
 	list-style: none;
 	font-size: var(--wp--preset--font-size--heading-1);
 	font-weight: 200;
-	line-height: 1.1;
+	line-height: var(--wporg--style--feature--li-height);
 
 	li {
 		overflow: hidden;
 		box-sizing: border-box;
-		height: 1.1em;
+		height: calc(var(--wporg--style--feature--li-height) * 1em);
 		padding-top: var(--wporg--style--feature--offset);
 		padding-left: var(--wp--preset--spacing--50);
 		padding-right: var(--wp--preset--spacing--50);
@@ -165,6 +166,6 @@
 
 	// Blocks with set font sizes should still use this line height.
 	&[class*="-font-size"] {
-		line-height: 1.1;
+		line-height: var(--wporg--style--feature--li-height);
 	}
 }
