@@ -187,11 +187,13 @@
 		transition: background-color 0.15s linear;
 	}
 
-	a {
+	// href added for specificity.
+	a[href] {
 		display: flex;
 		flex-direction: column;
 		align-items: left;
 		font-size: var(--wp--preset--font-size--heading-2);
+		text-decoration: none;
 
 		&::after {
 			content: "";
@@ -207,7 +209,11 @@
 		}
 
 		&:hover,
-		&:focus-within {
+		&:focus {
+			text-decoration-line: underline;
+			text-decoration-thickness: 1px;
+			text-underline-offset: 0.15em;
+
 			&::after {
 				transform: translateX(10px);
 			}
