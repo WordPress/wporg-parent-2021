@@ -131,7 +131,7 @@
 	font-weight: 200;
 	line-height: var(--wporg--style--feature--li-height);
 
-	li {
+	> li {
 		overflow: hidden;
 		box-sizing: border-box;
 		height: calc(var(--wporg--style--feature--li-height) * 1em);
