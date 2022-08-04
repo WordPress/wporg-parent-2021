@@ -175,3 +175,71 @@
 	font-size: var(--wp--preset--font-size--heading-5);
 	line-height: var(--wp--custom--heading--level-5--typography--line-height);
 }
+
+.wporg-pattern__heading-with-arrow {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+
+	&:hover,
+	&:focus-within {
+		background-color: rgba(0, 0, 0, 0.1);
+		transition: background-color 0.15s linear;
+	}
+
+	a {
+		display: flex;
+		flex-direction: column;
+		align-items: left;
+		font-size: var(--wp--preset--font-size--heading-2);
+
+		&::after {
+			content: "";
+			display: block;
+			height: 38px;
+			background-image: url(../images/right-arrow.svg);
+			background-position: center right;
+			background-repeat: no-repeat;
+			pointer-events: none;
+			transition: all 0.15s linear;
+			margin-top: 10px;
+			width: 88vw;
+		}
+
+		&:hover,
+		&:focus-within {
+			&::after {
+				transform: translateX(10px);
+			}
+		}
+
+		@include break-small() {
+			font-size: var(--wp--preset--font-size--heading-1);
+
+			&::after {
+				width: max(62vw, 100%);
+			}
+		}
+
+		@include break-xlarge() {
+			font-size: var(--wp--preset--font-size--heading-cta);
+			flex-direction: row;
+			align-items: center;
+
+			&::after {
+				height: 118px;
+				width: 35vw;
+				margin-left: 40px;
+				margin-top: 0;
+				transform: scale(0.9);
+			}
+
+			&:hover,
+			&:focus-within {
+				&::after {
+					transform: scale(0.9) translateX(10px);
+				}
+			}
+		}
+	}
+}
