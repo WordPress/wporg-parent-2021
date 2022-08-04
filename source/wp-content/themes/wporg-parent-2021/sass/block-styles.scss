@@ -121,3 +121,51 @@
 		}
 	}
 }
+
+.is-style-features {
+	--wporg--style--feature--offset: 0.2em;
+	--wporg--style--feature--li-height: 1.1;
+	padding: 0;
+	list-style: none;
+	font-size: var(--wp--preset--font-size--heading-1);
+	font-weight: 200;
+	line-height: var(--wporg--style--feature--li-height);
+
+	> li {
+		overflow: hidden;
+		box-sizing: border-box;
+		height: calc(var(--wporg--style--feature--li-height) * 1em);
+		padding-top: var(--wporg--style--feature--offset);
+		padding-left: var(--wp--preset--spacing--50);
+		padding-right: var(--wp--preset--spacing--50);
+		color: #6682ff; // Hardcoded color for better contrast.
+		border-bottom: 1px solid var(--wp--preset--color--blueberry-3);
+		transition: all 0.2s ease-in-out;
+
+		a {
+			text-decoration: none;
+		}
+
+		&:hover,
+		&:focus,
+		&:focus-within {
+			padding-top: 0;
+			color: var(--wp--preset--color--blueberry-1);
+		}
+	}
+
+	// Make sure to remove padding from blocks with background colors.
+	&.has-background {
+		padding: 0;
+	}
+
+	// Use the set text color, if one exists.
+	&.has-text-color li {
+		color: inherit;
+	}
+
+	// Blocks with set font sizes should still use this line height.
+	&[class*="-font-size"] {
+		line-height: var(--wporg--style--feature--li-height);
+	}
+}
