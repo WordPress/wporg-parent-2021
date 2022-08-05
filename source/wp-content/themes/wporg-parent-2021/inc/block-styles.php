@@ -94,6 +94,14 @@ function setup_block_styles() {
 			'style_handle' => STYLE_HANDLE,
 		)
 	);
+
+	register_block_style(
+		'core/list',
+		array(
+			'name'         => 'list-of-links',
+			'label'        => __( 'List of links', 'wporg' ),
+		)
+	);
 }
 
 /**

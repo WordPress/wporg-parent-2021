@@ -176,6 +176,59 @@
 	line-height: var(--wp--custom--heading--level-5--typography--line-height);
 }
 
+.is-style-list-of-links {
+	--wporg--style--list-of-links--offset: 14px;
+	--wporg--style--list-of-links--li-height: 54px;
+	--wporg--style--list-of-links--line-height: 1.92;
+	--wporg--style--list-of-links--border-opacity: 0.2;
+	padding: var(--wporg--style--list-of-links--offset);
+	list-style: none;
+	font-size: var(--wp--preset--font-size--extra-large);
+	line-height: var(--wporg--style--list-of-links--line-height);
+	background-color: var(--wp--preset--color--blueberry-1);
+
+	> li {
+		display: flex;
+		align-items: center;
+		height: var(--wporg--style--list-of-links--li-height);
+		padding: var(--wporg--style--list-of-links--offset) 0;
+		color: var(--wp--preset--color--white);
+		border-bottom: 1px solid;
+		border-color: rgba(#fff, var(--wporg--style--list-of-links--border-opacity));
+
+		&:first-child {
+			border-top: 1px solid;
+			border-color: rgba(#fff, var(--wporg--style--list-of-links--border-opacity));
+		}
+
+		a {
+			text-decoration: none;
+			text-decoration-thickness: 1px !important;
+			color: var(--wp--preset--color--white) !important;
+
+			&:hover,
+			&:focus {
+				text-decoration: underline;
+			}
+		}
+	}
+
+	// Make sure to remove padding from blocks with background colors.
+	&.has-background {
+		padding: 0;
+	}
+
+	// Use the set text color, if one exists.
+	&.has-text-color li {
+		color: inherit;
+	}
+
+	// Blocks with set font sizes should still use this line height.
+	&[class*="-font-size"] {
+		line-height: var(--wporg--style--list-of-links--line-height);
+	}
+}
+
 .wporg-pattern__heading-with-arrow {
 	display: flex;
 	flex-direction: row;
