@@ -170,6 +170,47 @@
 	}
 }
 
+.is-style-links-list {
+	padding: 0;
+	list-style: none;
+	font-size: var(--wp--preset--font-size--extra-large);
+	line-height: 1.125;
+
+	> li {
+		padding: 14px 0;
+		// Use the current text color, to support different text/background color combos.
+		border-bottom: 1px solid currentColor;
+
+		a {
+			text-decoration: none;
+
+			&:hover,
+			&:focus {
+				text-decoration-line: underline;
+				text-decoration-thickness: 1px;
+				text-underline-offset: 0.15em;
+			}
+		}
+
+		&:first-of-type {
+			border-top: 1px solid currentColor;
+		}
+	}
+
+	// Remove padding from blocks with background colors.
+	&.has-background {
+		padding: 0;
+	}
+
+	// If the text color is set to white, the border should be semi-transparent.
+	// This matches the design, when the list is used inside a blue background.
+	&.has-white-color > li,
+	.has-white-color > & > li,
+	.has-white-color *:not(.has-text-color) & > li {
+		border-color: rgba(255 255 255 / 0.2);
+	}
+}
+
 .is-style-serif {
 	font-family: var(--wp--custom--heading--typography--font-family);
 	font-size: var(--wp--preset--font-size--heading-5);
