@@ -178,19 +178,17 @@
 
 .is-style-list-of-links {
 	--wporg--style--list-of-links--offset: 14px;
-	--wporg--style--list-of-links--li-height: 54px;
-	--wporg--style--list-of-links--line-height: 1.92;
+	--wporg--style--list-of-links--line-height: 1;
 	--wporg--style--list-of-links--border-opacity: 0.2;
 	padding: var(--wporg--style--list-of-links--offset);
 	list-style: none;
-	font-size: var(--wp--preset--font-size--extra-large);
+	font-size: var(--wp--preset--font-size--large);
 	line-height: var(--wporg--style--list-of-links--line-height);
 	background-color: var(--wp--preset--color--blueberry-1);
 
 	> li {
 		display: flex;
 		align-items: center;
-		height: var(--wporg--style--list-of-links--li-height);
 		padding: var(--wporg--style--list-of-links--offset) 0;
 		color: var(--wp--preset--color--white);
 		border-bottom: 1px solid;
@@ -211,6 +209,10 @@
 				text-decoration: underline;
 			}
 		}
+	}
+
+	@include break-mobile() {
+		font-size: var(--wp--preset--font-size--extra-large);
 	}
 
 	// Make sure to remove padding from blocks with background colors.
