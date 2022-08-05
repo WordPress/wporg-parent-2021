@@ -232,6 +232,14 @@
 				"extra-large": {
 					"typography": {
 						"lineHeight": 1.58
+					},
+					"breakpoint": {
+						"small-only": {
+							"typography": {
+								"fontSize": "20px",
+								"lineHeight": 1.5
+							}
+						}
 					}
 				},
 				"huge": {
