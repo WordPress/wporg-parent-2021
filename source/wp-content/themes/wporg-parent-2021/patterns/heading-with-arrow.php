@@ -11,7 +11,7 @@
 	<!-- wp:group {"align":"full","style":{"elements":{"link":{"color":{"text":"var:preset|color|white"}}},"spacing":{"padding":{"top":"97px","bottom":"97px"},"blockGap":"0px"}},"className":"wporg-pattern__heading-with-arrow"} -->
 	<div class="wp-block-group alignfull wporg-pattern__heading-with-arrow has-link-color" style="padding-top:97px;padding-bottom:97px">
 		<!-- wp:heading {"style":{"typography":{"fontStyle":"normal","fontWeight":"300","lineHeight":"1.1","letterSpacing":"-0.02em"}},"fontSize":"heading-cta","fontFamily":"inter"} -->
-		<h2 class="has-inter-font-family" style="font-style:normal;font-weight:300;letter-spacing:-0.02em;line-height:1.1"><a href="https://wordpress.org/download/">Get started</a></h2>
+		<h2 class="has-inter-font-family has-heading-cta-font-size" style="font-style:normal;font-weight:300;letter-spacing:-0.02em;line-height:1.1"><a href="https://wordpress.org/download/">Get started</a></h2>
 		<!-- /wp:heading -->
 	</div>
 	<!-- /wp:group -->
