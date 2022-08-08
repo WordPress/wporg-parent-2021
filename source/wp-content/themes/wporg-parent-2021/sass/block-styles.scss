@@ -236,11 +236,14 @@
 	--wporg--style--with-arrow--border-size: 1px;
 
 	position: relative;
-	display: flex;
+	display: grid;
 	align-items: center;
+	grid-template-columns: auto;
+	gap: 0.25em;
 
-	@media (max-width: #{ ($break-large - 1) }) {
-		display: grid;
+	@include break-large() {
+		grid-template-columns: auto 1fr;
+		gap: 0.5em;
 	}
 
 	&::before,
@@ -249,19 +252,20 @@
 		display: block;
 		transition: all 0.15s linear;
 		box-sizing: border-box;
+		grid-row: 1;
+		grid-column: 2;
 
 		@media (max-width: #{ ($break-large - 1) }) {
 			grid-row: 2;
 			grid-column: 1;
-			margin-top: 0.25em;
 		}
 	}
 
 	&::before {
-		order: 3;
-		// Offset by the width of the square and the extra space to the corner point.
-		// Add back in the border width to prevent the end poking out under the arrow.
-		margin-left: calc(#{($arrow_size * -1) - ($half_hyp - math.div($arrow-size, 2))} + var(--wporg--style--with-arrow--border-size));
+		position: relative;
+		// Pull the arrow back by the extra space to the corner point. Add back
+		// the border width to prevent the end poking out under the arrow.
+		left: calc(#{($half_hyp - math.div($arrow-size, 2)) * -1} + var(--wporg--style--with-arrow--border-size));
 		height: $arrow_size;
 		min-width: $arrow_size;
 		max-width: $arrow_size;
@@ -269,15 +273,13 @@
 		border-right: var(--wporg--style--with-arrow--border-size) solid currentColor;
 		transform: rotate(45deg);
 		transform-origin: center;
+		justify-self: end;
 
 		@media (max-width: #{ ($break-large - 1) }) {
 			// Use a smaller arrow on small screens.
 			$arrow_size: 0.5em;
 			$half_hyp: math.div(($arrow_size * $sqrt_2), 2);
 
-			margin-left: 0;
-			justify-self: end;
-			position: relative;
 			// Since this is Sass, not custom properties, the properties also need to be set again.
 			left: calc(#{($half_hyp - math.div($arrow-size, 2)) * -1} + var(--wporg--style--with-arrow--border-size));
 			height: $arrow_size;
@@ -287,8 +289,6 @@
 	}
 
 	&::after {
-		flex: 1;
-		margin-left: math.div($arrow_size, 2);
 		height: var(--wporg--style--with-arrow--border-size);
 		width: 100%;
 		min-width: 30vw;
