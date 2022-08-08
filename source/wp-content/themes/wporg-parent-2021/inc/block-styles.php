@@ -87,6 +87,14 @@ function setup_block_styles() {
 	);
 
 	register_block_style(
+		'core/list',
+		array(
+			'name'         => 'links-list',
+			'label'        => __( 'Links', 'wporg' ),
+		)
+	);
+
+	register_block_style(
 		'core/paragraph',
 		array(
 			'name'         => 'serif',
