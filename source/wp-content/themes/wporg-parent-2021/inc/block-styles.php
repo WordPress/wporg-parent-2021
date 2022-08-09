@@ -102,6 +102,15 @@ function setup_block_styles() {
 			'style_handle' => STYLE_HANDLE,
 		)
 	);
+
+	register_block_style(
+		'core/paragraph',
+		array(
+			'name'         => 'short-text',
+			'label'        => __( 'Short text', 'wporg' ),
+			'style_handle' => STYLE_HANDLE,
+		)
+	);
 }
 
 /**

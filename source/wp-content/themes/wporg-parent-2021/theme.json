@@ -183,8 +183,8 @@
 				},
 				"typography": {
 					"fontSize": "var(--wp--preset--font-size--normal)",
-					"fontWeight": "normal",
-					"lineHeight": 2
+					"fontWeight": "600",
+					"lineHeight": 1
 				}
 			},
 			"form": {
@@ -213,6 +213,11 @@
 			"body": {
 				"typography": {
 					"lineHeight": 1.875
+				},
+				"short-text": {
+					"typography": {
+						"lineHeight": 1.625
+					}
 				},
 				"extra-small": {
 					"typography": {
