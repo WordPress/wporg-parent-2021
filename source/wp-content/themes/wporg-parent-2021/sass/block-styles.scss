@@ -1,3 +1,4 @@
+@use "sass:math";
 @import "base/breakpoints";
 
 // A two-column grid, with a narrower left column and content centered in the right column.
@@ -221,72 +222,108 @@
 	line-height: var(--wp--custom--body--short-text--typography--line-height);
 }
 
-.wporg-pattern__heading-with-arrow {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
+.is-style-with-arrow {
+	// Note, these are Sass variables to make the math easier. While we could do
+	// this with `calc()`s, it would be even more unruly.
+	$arrow_size: 1em;
+	// Once rotated, the diagonal of the square is the hypotenuse of an isosceles
+	// triangle, which can be calculated by multiplying the side × √2. We only need
+	// the halfway point, so divide that by 2.
+	$sqrt_2: 1.4142;
+	$half_hyp: math.div(($arrow_size * $sqrt_2), 2);
 
-	&:hover,
-	&:focus-within {
-		background-color: rgba(0, 0, 0, 0.1);
-		transition: background-color 0.15s linear;
+	// This can be a custom property since we could let the editor control later.
+	--wporg--style--with-arrow--border-size: 1px;
+
+	position: relative;
+	display: grid;
+	align-items: center;
+	grid-template-columns: auto;
+	gap: 0.25em;
+
+	@include break-large() {
+		grid-template-columns: auto 1fr;
+		gap: 0.5em;
 	}
 
-	// href added for specificity.
-	a[href] {
-		display: flex;
-		flex-direction: column;
-		align-items: left;
-		text-decoration: none;
+	&::before,
+	&::after {
+		content: "";
+		display: block;
+		transition: all 0.15s linear;
+		box-sizing: border-box;
+		grid-row: 1;
+		grid-column: 2;
 
-		&::after {
-			content: "";
-			display: block;
-			height: 38px;
-			background-image: url(../images/right-arrow.svg);
-			background-position: center right;
-			background-repeat: no-repeat;
-			pointer-events: none;
-			transition: all 0.15s linear;
-			margin-top: 10px;
-			width: 88vw;
+		@media (max-width: #{ ($break-large - 1) }) {
+			grid-row: 2;
+			grid-column: 1;
 		}
+	}
+
+	&::before {
+		position: relative;
+		// Pull the arrow back by the extra space to the corner point. Add back
+		// the border width to prevent the end poking out under the arrow.
+		left: calc(#{($half_hyp - math.div($arrow-size, 2)) * -1} + var(--wporg--style--with-arrow--border-size));
+		height: $arrow_size;
+		min-width: $arrow_size;
+		max-width: $arrow_size;
+		border-top: var(--wporg--style--with-arrow--border-size) solid currentColor;
+		border-right: var(--wporg--style--with-arrow--border-size) solid currentColor;
+		transform: rotate(45deg);
+		transform-origin: center;
+		justify-self: end;
+
+		@media (max-width: #{ ($break-large - 1) }) {
+			// Use a smaller arrow on small screens.
+			$arrow_size: 0.5em;
+			$half_hyp: math.div(($arrow_size * $sqrt_2), 2);
+
+			// Since this is Sass, not custom properties, the properties also need to be set again.
+			left: calc(#{($half_hyp - math.div($arrow-size, 2)) * -1} + var(--wporg--style--with-arrow--border-size));
+			height: $arrow_size;
+			min-width: $arrow_size;
+			max-width: $arrow_size;
+		}
+	}
+
+	&::after {
+		height: var(--wporg--style--with-arrow--border-size);
+		width: 100%;
+		min-width: 3em;
+		background: currentColor;
+
+		// Fix issue in GB, where ::after is absolutely positioned.
+		.editor-styles-wrapper & {
+			position: revert !important;
+		}
+
+		@media (max-width: #{ ($break-large - 1) }) {
+			margin-left: 0;
+		}
+	}
+
+	a[href] {
+		text-decoration: none;
+		text-decoration-line: none;
 
 		&:hover,
 		&:focus {
 			text-decoration-line: underline;
 			text-decoration-thickness: 1px;
 			text-underline-offset: 0.15em;
+		}
+	}
 
-			&::after {
-				transform: translateX(10px);
-			}
+	&:hover,
+	&:focus-within {
+		&::before {
+			transform: translateX(#{math.div($arrow_size, 2)}) rotate(45deg);
 		}
 
-		@include break-small() {
-			&::after {
-				width: max(62vw, 100%);
-			}
-		}
-
-		@include break-xlarge() {
-			flex-direction: row;
-			align-items: center;
-
-			&::after {
-				height: 118px;
-				width: 35vw;
-				margin-left: 40px;
-				margin-top: 0;
-				transform: scale(0.9);
-			}
-
-			&:hover,
-			&:focus-within {
-				&::after {
-					transform: scale(0.9) translateX(10px);
-				}
-			}
+		&::after {
+			transform: translateX(#{math.div($arrow_size, 2)});
 		}
 	}
 }

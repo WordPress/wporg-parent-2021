@@ -83,6 +83,7 @@ function setup_block_styles() {
 		array(
 			'name'         => 'features',
 			'label'        => __( 'Features', 'wporg' ),
+			'style_handle' => STYLE_HANDLE,
 		)
 	);
 
@@ -108,6 +109,15 @@ function setup_block_styles() {
 		array(
 			'name'         => 'short-text',
 			'label'        => __( 'Short text', 'wporg' ),
+			'style_handle' => STYLE_HANDLE,
+		)
+	);
+
+	register_block_style(
+		'core/heading',
+		array(
+			'name'         => 'with-arrow',
+			'label'        => __( 'With Arrow', 'wporg' ),
 			'style_handle' => STYLE_HANDLE,
 		)
 	);
