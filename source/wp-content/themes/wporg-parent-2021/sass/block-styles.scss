@@ -217,6 +217,11 @@
 	line-height: var(--wp--custom--heading--level-5--typography--line-height);
 }
 
+.is-style-short-text {
+	// 26px / --wp--preset--font-size--normal
+	line-height: 1.625;
+}
+
 .wporg-pattern__heading-with-arrow {
 	display: flex;
 	flex-direction: row;
