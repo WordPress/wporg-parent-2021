@@ -218,8 +218,7 @@
 }
 
 .is-style-short-text {
-	// 26px / --wp--preset--font-size--normal
-	line-height: 1.625;
+	line-height: var(--wp--custom--body--short-text--typography--line-height);
 }
 
 .wporg-pattern__heading-with-arrow {
