@@ -291,7 +291,7 @@
 	&::after {
 		height: var(--wporg--style--with-arrow--border-size);
 		width: 100%;
-		min-width: 30vw;
+		min-width: 3em;
 		background: currentColor;
 
 		// Fix issue in GB, where ::after is absolutely positioned.
