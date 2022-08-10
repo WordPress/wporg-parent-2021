@@ -13,13 +13,6 @@
 	}
 }
 
-@mixin break-medium-only() {
-
-	@media (max-width: #{ ($break-medium - 1) }) {
-		@content;
-	}
-}
-
 // "giant" is an exaggeration, but it's named this way to stay consistent with Gutenberg.
 @mixin break-giant() {
 
