@@ -34,8 +34,8 @@ body[class] {
 
 	// Adjust button padding on small screens.
 	@include break-small-only() {
-		--wp--custom--button--spacing--padding--top: 23px;
-		--wp--custom--button--spacing--padding--bottom: 23px;
+		--wp--custom--button--spacing--padding--top: 19px;
+		--wp--custom--button--spacing--padding--bottom: 19px;
 		--wp--custom--button--spacing--padding--left: 30px;
 		--wp--custom--button--spacing--padding--right: 30px;
 
