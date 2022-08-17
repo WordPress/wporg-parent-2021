@@ -625,9 +625,6 @@
 				}
 			},
 			"core/navigation": {
-				"color": {
-					"text": "var(--wp--custom--link--color--text)"
-				},
 				"typography": {
 					"fontSize": "var(--wp--preset--font-size--normal)"
 				}
