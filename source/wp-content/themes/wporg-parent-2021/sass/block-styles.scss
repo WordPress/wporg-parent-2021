@@ -328,7 +328,7 @@
 	}
 }
 
-.wp-block-navigation.is-style-dots .wp-block-navigation-item {
+.wp-block-navigation.is-style-dots > .wp-block-navigation__container > .wp-block-navigation-item {
 	&::after {
 		content: "·";
 		color: var(--wp--preset--color--charcoal-4);
