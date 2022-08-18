@@ -352,4 +352,11 @@
 	.has-modal-open .wp-block-navigation-item::after {
 		content: "";
 	}
+
+	// The dots should default to charcoal-4, but if there is a custom color, use that.
+	&.has-text-color .wp-block-navigation-item::after,
+	.has-text-color & .wp-block-navigation-item::after {
+		color: inherit;
+		opacity: 0.5;
+	}
 }
