@@ -347,4 +347,9 @@
 			content: "";
 		}
 	}
+
+	// Remove the dots from the mobile menu.
+	.has-modal-open .wp-block-navigation-item::after {
+		content: "";
+	}
 }
