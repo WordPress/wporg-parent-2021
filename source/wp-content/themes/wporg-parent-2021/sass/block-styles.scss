@@ -328,16 +328,20 @@
 	}
 }
 
-.wp-block-navigation.is-style-dots > .wp-block-navigation__container > .wp-block-navigation-item {
-	&::after {
-		content: "·";
-		color: var(--wp--preset--color--charcoal-4);
-		width: 1em;
-		text-align: center;
-		position: relative;
-	}
+.wp-block-navigation.is-style-dots {
+	.wp-block-navigation-item {
+		&::after {
+			content: "·";
+			color: var(--wp--preset--color--charcoal-4);
+			width: 1em;
+			text-align: center;
+			position: relative;
+		}
 
-	&:last-of-type::after {
-		content: "";
+		&.wp-block-navigation-submenu::after,
+		.wp-block-navigation-item::after,
+		&:last-of-type::after {
+			content: "";
+		}
 	}
 }
