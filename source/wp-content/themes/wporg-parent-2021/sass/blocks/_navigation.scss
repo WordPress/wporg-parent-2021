@@ -1,0 +1,13 @@
+.wp-block-navigation {
+	// Increase specificity of core selector, to override when it's used in post content.
+	&:not([class*="has-text-decoration"]) a {
+		text-decoration: none;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 0.15em;
+
+		&:hover,
+		&:focus {
+			text-decoration-line: underline;
+		}
+	}
+}

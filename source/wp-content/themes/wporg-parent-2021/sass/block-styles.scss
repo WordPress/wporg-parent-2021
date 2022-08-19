@@ -327,3 +327,36 @@
 		}
 	}
 }
+
+.wp-block-navigation.is-style-dots {
+	// Remove the gap, since the dots function as spacing.
+	gap: 0;
+
+	.wp-block-navigation-item {
+		&::after {
+			content: "·";
+			color: var(--wp--preset--color--charcoal-4);
+			width: 1em;
+			text-align: center;
+			position: relative;
+		}
+
+		&.wp-block-navigation-submenu::after,
+		.wp-block-navigation-item::after,
+		&:last-of-type::after {
+			content: "";
+		}
+	}
+
+	// Remove the dots from the mobile menu.
+	.has-modal-open .wp-block-navigation-item::after {
+		content: "";
+	}
+
+	// The dots should default to charcoal-4, but if there is a custom color, use that.
+	&.has-text-color .wp-block-navigation-item::after,
+	.has-text-color & .wp-block-navigation-item::after {
+		color: inherit;
+		opacity: 0.5;
+	}
+}
