@@ -222,7 +222,7 @@
 	line-height: var(--wp--custom--body--short-text--typography--line-height);
 }
 
-.is-style-with-arrow a[href] {
+.is-style-with-arrow a[href]:first-of-type {
 	// Note, these are Sass variables to make the math easier. While we could do
 	// this with `calc()`s, it would be even more unruly.
 	$arrow_size: 1em;
