@@ -222,7 +222,7 @@
 	line-height: var(--wp--custom--body--short-text--typography--line-height);
 }
 
-.is-style-with-arrow {
+.is-style-with-arrow a[href]:first-of-type {
 	// Note, these are Sass variables to make the math easier. While we could do
 	// this with `calc()`s, it would be even more unruly.
 	$arrow_size: 1em;
@@ -236,6 +236,8 @@
 	--wporg--style--with-arrow--border-size: 1px;
 
 	position: relative;
+	text-decoration: none;
+	text-decoration-line: none;
 	display: grid;
 	align-items: center;
 	grid-template-columns: auto;
@@ -304,20 +306,13 @@
 		}
 	}
 
-	a[href] {
-		text-decoration: none;
-		text-decoration-line: none;
-
-		&:hover,
-		&:focus {
-			text-decoration-line: underline;
-			text-decoration-thickness: 1px;
-			text-underline-offset: 0.15em;
-		}
-	}
-
 	&:hover,
+	&:focus,
 	&:focus-within {
+		text-decoration-line: underline;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 0.15em;
+		
 		&::before {
 			transform: translateX(#{math.div($arrow_size, 2)}) rotate(45deg);
 		}
