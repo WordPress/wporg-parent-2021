@@ -117,7 +117,7 @@ function setup_block_styles() {
 		'core/heading',
 		array(
 			'name'         => 'with-arrow',
-			'label'        => __( 'CTA', 'wporg' ),
+			'label'        => __( 'Link arrow', 'wporg' ),
 			'style_handle' => STYLE_HANDLE,
 		)
 	);
