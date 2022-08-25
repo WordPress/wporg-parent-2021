@@ -3,7 +3,6 @@
  */
 @import "base/breakpoints";
 @import "blocks/button";
-@import "blocks/heading";
 @import "blocks/navigation";
 
 .wp-block-post-template {
@@ -23,4 +22,8 @@
 // Overwrite a style from wp4.css.
 h3 a {
 	font-weight: revert; // stylelint-disable-line font-weight-notation
+}
+
+.wp-block-heading.is-style-with-arrow {
+	white-space: revert !important;
 }
