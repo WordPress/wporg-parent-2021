@@ -78,6 +78,8 @@ These must be run in the project's root folder, _not_ in theme/plugin subfolders
 * Build assets once: `yarn workspace wporg-parent-2021 build`
 * Watch assets and build on changes: `yarn workspace wporg-parent-2021 start`
 
+If you want to test changes to the parent theme against a child theme in another repository, you can follow the instructions in the [Main theme readme](https://github.com/WordPress/wporg-main-2022/).
+
 ## Design
 
 ### Layout
