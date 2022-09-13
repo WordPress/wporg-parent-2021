@@ -143,6 +143,7 @@ function register_assets() {
 		array(),
 		filemtime( dirname( __DIR__ ) . '/build/block-styles.css' )
 	);
+	wp_style_add_data( STYLE_HANDLE, 'rtl', 'replace' );
 
 	if ( is_admin() ) {
 		wp_enqueue_script(

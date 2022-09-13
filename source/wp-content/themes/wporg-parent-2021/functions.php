@@ -28,9 +28,10 @@ function theme_support() {
 	add_theme_support( 'responsive-embeds' );
 
 	// Add support for editor styles.
-	add_theme_support( 'editor-styles' );
+	$suffix = is_rtl() ? '-rtl' : '';
+	add_theme_support( 'editor-style' );
 	add_editor_style( get_font_stylesheet_url() );
-	add_editor_style( '/build/editor.css' );
+	add_editor_style( "/build/editor{$suffix}.css" );
 
 	// Add support for post thumbnails.
 	add_theme_support( 'post-thumbnails' );
@@ -63,6 +64,7 @@ function enqueue_assets() {
 		array( 'wporg-global-fonts' ),
 		filemtime( __DIR__ . '/build/style.css' )
 	);
+	wp_style_add_data( 'wporg-parent-2021-style', 'rtl', 'replace' );
 }
 
 /**

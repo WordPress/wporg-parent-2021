@@ -17,8 +17,8 @@
 		"sass": "^1.50.0"
 	},
 	"scripts": {
-		"build": "node build-styles.js --no-rtl",
-		"start": "chokidar \"sass/**/*.scss\" -c \"node build-styles.js --no-rtl\" --initial",
+		"build": "node build-styles.js",
+		"start": "chokidar \"sass/**/*.scss\" -c \"node build-styles.js\" --initial",
 		"lint:css": "wp-scripts lint-style sass",
 		"lint:js": "echo \"No JS.\""
 	},
