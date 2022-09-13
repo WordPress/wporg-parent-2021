@@ -439,7 +439,7 @@
 					}
 				}
 			},
-			"multisite-latest-posts": {
+			"latest-news": {
 				"link": {
 					"color": "var(--wp--preset--color--charcoal-1)",
 					"spacing": "var(--wp--preset--spacing--10)",
