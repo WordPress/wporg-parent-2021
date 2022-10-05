@@ -690,7 +690,7 @@
 		},
 		"color": {
 			"background": "var(--wp--preset--color--white)",
-			"text": "var(--wp--preset--color--charcoal)"
+			"text": "var(--wp--preset--color--charcoal-1)"
 		},
 		"elements": {
 			"h1": {
