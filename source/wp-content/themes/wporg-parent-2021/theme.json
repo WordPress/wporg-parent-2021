@@ -525,7 +525,7 @@
 					"name": "Inter"
 				},
 				{
-					"fontFamily": "monospace",
+					"fontFamily": "'IBM Plex Mono', monospace",
 					"slug": "monospace",
 					"name": "Monospace"
 				}

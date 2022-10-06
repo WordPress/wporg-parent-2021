@@ -126,11 +126,11 @@ These three font families are available to switch in the editor, for blocks that
 
 Example of the generated property: `var(--wp--preset--font-family--eb-garamond)`
 
-| Name        | Slug          | Font family            |
-|-------------|---------------|------------------------|
-| EB Garamond | `eb-garamond` | `'EB Garamond', serif` |
-| Inter       | `inter`       | `'Inter', sans-serif`  |
-| Monospace   | `monospace`   | `monospace`            |
+| Name        | Slug          | Font family                  |
+|-------------|---------------|------------------------------|
+| EB Garamond | `eb-garamond` | `'EB Garamond', serif`       |
+| Inter       | `inter`       | `'Inter', sans-serif`        |
+| Monospace   | `monospace`   | `'IBM Plex Mono', monospace` |
 
 #### Font sizes
 
