@@ -432,13 +432,6 @@
 				"margin": "var(--wp--custom--margin--vertical) auto",
 				"width": "150px"
 			},
-			"table": {
-				"figcaption": {
-					"typography": {
-						"fontSize": "var(--wp--preset--font-size--extra-small)"
-					}
-				}
-			},
 			"latest-news": {
 				"link": {
 					"color": "var(--wp--preset--color--charcoal-1)",
@@ -744,6 +737,17 @@
 			"link": {
 				"color": {
 					"text": "var(--wp--custom--link--color--text)"
+				}
+			},
+			"caption": {
+				"typography": {
+					"fontSize": "var(--wp--custom--gallery--caption--font-size)"
+				},
+				"spacing": {
+					"margin": {
+						"top": "1em",
+						"bottom": "1em"
+					}
 				}
 			}
 		},
