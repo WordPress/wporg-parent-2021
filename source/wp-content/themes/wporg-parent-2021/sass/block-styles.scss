@@ -359,14 +359,13 @@
 .is-style-brush-stroke {
 	position: relative;
 
-	&::after {
+	&::before {
 		content: "";
 		min-height: var(--wp--custom--brush-stroke--spacing--height);
 		position: absolute;
 		top: 100%;
 		left: 0;
 		right: 0;
-		z-index: -1;
 		width: auto;
 		mask-image: url(../images/brush-stroke-mask.svg);
 		mask-repeat: no-repeat;
