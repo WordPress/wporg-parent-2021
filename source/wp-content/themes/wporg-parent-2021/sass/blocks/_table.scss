@@ -1,12 +1,29 @@
-.wp-block-table.is-style-stripes,
-.wp-block-table {
+.wp-block-table,
+.wp-block-table.is-style-stripes {
 	td,
 	th {
-		border: 1px solid;
-		padding: calc(0.5 * var(--wp--custom--margin--vertical)) calc(0.5 * var(--wp--custom--margin--horizontal));
+		border: 1px solid var(--wp--preset--color--light-grey-1);
+		padding: var(--wp--preset--spacing--20);
+		vertical-align: top;
+	}
+}
+
+.wp-block-table {
+	th {
+		text-align: left;
+		font-weight: 400;
 	}
 }
 
 .wp-block-table.is-style-stripes {
 	border-bottom: none;
+
+	thead tr,
+	tbody tr:nth-child(2n) {
+		background-color: var(--wp--preset--color--blueberry-4);
+	}
+
+	tbody tr:nth-child(2n+1) {
+		background-color: transparent;
+	}
 }
