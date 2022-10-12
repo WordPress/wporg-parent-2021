@@ -130,6 +130,15 @@ function setup_block_styles() {
 			'style_handle' => STYLE_HANDLE,
 		)
 	);
+
+	register_block_style(
+		'core/group',
+		array(
+			'name'         => 'brush-stroke',
+			'label'        => __( 'Brush Stroke', 'wporg' ),
+			'style_handle' => STYLE_HANDLE,
+		)
+	);
 }
 
 /**
