@@ -139,6 +139,15 @@ function setup_block_styles() {
 			'style_handle' => STYLE_HANDLE,
 		)
 	);
+
+	register_block_style(
+		'core/navigation',
+		array(
+			'name'         => 'dropdown-on-mobile',
+			'label'        => __( 'Dropdown on Mobile', 'wporg' ),
+			'style_handle' => STYLE_HANDLE,
+		)
+	);
 }
 
 /**

@@ -370,7 +370,7 @@
 		mask-image: url(../images/brush-stroke-mask.svg);
 		mask-repeat: no-repeat;
 		mask-size: cover;
-		mask-position: bottom;
+		mask-position: bottom right;
 		background-color: inherit;
 	}
 }
@@ -386,5 +386,69 @@
 	main > .is-style-brush-stroke:first-child {
 		position: sticky;
 		top: var(--wp-global-header-offset, 0);
+	}
+}
+
+/**
+ * Add the "Dropdown on Mobile" style for menus.
+ */
+
+.wp-block-navigation.is-style-dropdown-on-mobile {
+	position: relative;
+
+	.wp-block-navigation__responsive-container-open {
+		background-image: url(../images/down-chevron.svg);
+		background-position: center;
+		background-repeat: no-repeat;
+		height: 24px;
+		width: 24px;
+
+		svg {
+			display: none;
+		}
+
+		.has-modal-open & {
+			display: none;
+		}
+	}
+
+	.wp-block-navigation__responsive-container.is-menu-open {
+		position: relative;
+		width: 100%;
+		padding: 0;
+		overflow: visible;
+		animation: overlay-menu__drop-down-animation 0.1s ease-out;
+
+		.wp-block-navigation__responsive-dialog {
+			margin-top: 0;
+		}
+
+		.wp-block-navigation__responsive-container-content {
+			padding: 0 var(--wp--preset--spacing--20) var(--wp--preset--spacing--20);
+		}
+
+		.wp-block-navigation__responsive-container-close {
+			background-image: url(../images/up-chevron.svg);
+			background-position: center;
+			background-repeat: no-repeat;
+			height: 24px;
+			width: 24px;
+
+			svg {
+				display: none;
+			}
+		}
+	}
+}
+
+@keyframes overlay-menu__drop-down-animation {
+	from {
+		opacity: 0;
+		transform: translateY(-0.5em);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
 	}
 }
