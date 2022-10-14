@@ -440,11 +440,16 @@
 						"fontSize": "var(--wp--preset--font-size--small)"
 					}
 				},
-				"spacing":  "var(--wp--preset--spacing--40)",
+				"spacing": "var(--wp--preset--spacing--40)",
 				"title": {
 					"fontFamily": "var(--wp--preset--font-family--eb-garamond)",
 					"fontSize": "var(--wp--preset--font-size--heading-5)",
 					"lineHeight": "var(--wp--custom--heading--level-3--typography--line-height)"
+				}
+			},
+			"brush-stroke": {
+				"spacing": {
+					"height": "16px"
 				}
 			}
 		},
