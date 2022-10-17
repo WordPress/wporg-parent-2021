@@ -397,6 +397,10 @@
 .wp-block-navigation.is-style-dropdown-on-mobile {
 	position: relative;
 
+	&.has-background a {
+		padding: 0;
+	}
+
 	.wp-block-navigation__responsive-container-open {
 		background-image: url(../images/down-chevron.svg);
 		background-position: center;
