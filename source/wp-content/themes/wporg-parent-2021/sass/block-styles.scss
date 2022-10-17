@@ -386,6 +386,7 @@
 	main > .is-style-brush-stroke:first-child {
 		position: sticky;
 		top: var(--wp-global-header-offset, 0);
+		z-index: 50;
 	}
 }
 
