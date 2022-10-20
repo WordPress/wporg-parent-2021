@@ -52,6 +52,13 @@ function theme_support() {
 			'primary' => __( 'Primary Navigation', 'wporg' ),
 		)
 	);
+
+	register_block_pattern_category(
+		'wporg',
+		array(
+			'label' => __( 'WordPress.org', 'wporg' ),
+		)
+	);
 }
 
 /**

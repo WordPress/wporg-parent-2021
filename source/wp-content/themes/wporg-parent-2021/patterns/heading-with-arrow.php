@@ -2,7 +2,7 @@
 /**
  * Title: Heading with arrow
  * Slug: wporg-parent-2021/heading-with-arrow
- * Categories: header
+ * Categories: wporg
  */
 
 ?>

@@ -2,7 +2,7 @@
 /**
  * Title: Latest Posts with Heading
  * Slug: wporg-parent-2021/latest-posts-with-heading
- * Categories: query, columns
+ * Categories: wporg
  */
 
 ?>

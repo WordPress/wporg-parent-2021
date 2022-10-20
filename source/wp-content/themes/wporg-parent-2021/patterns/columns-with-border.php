@@ -2,7 +2,7 @@
 /**
  * Title: Columns with Border
  * Slug: wporg-parent-2021/columns-with-border
- * Categories: columns
+ * Categories: wporg
  */
 
 ?>
