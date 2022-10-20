@@ -17,6 +17,7 @@ defined( 'WPINC' ) || die();
 add_filter( 'get_the_archive_title_prefix', __NAMESPACE__ . '\modify_archive_title_prefix' );
 add_filter( 'render_block_data', __NAMESPACE__ . '\custom_query_block_attributes' );
 add_action( 'parse_query', __NAMESPACE__ . '\compat_workaround_core_55100' );
+add_filter( 'render_block_core/pattern', __NAMESPACE__ . '\convert_inline_style_to_rtl', 20 );
 
 /**
  * Blank out the archive title prefix sometimes.
@@ -80,4 +81,46 @@ function compat_workaround_core_55100( $query ) {
 			$query->set( 'author', $author->ID );
 		}
 	}
+}
+
+/**
+ * Flip inline styles and class names when using RTL display.
+ *
+ * @param string $content Content of the current post.
+ * @return string The updated content.
+ */
+function convert_inline_style_to_rtl( $content ) {
+	if ( ! is_rtl() ) {
+		return $content;
+	}
+
+	/*
+	 * Replace initial item with "temp" so that we don't immediately replace it with the original direction.
+	 *
+	 * For example, the transform works like this:
+	 * Start with border-left-color: red; border-right-color: blue;
+	 *         -> border-temp-color: red; border-right-color: blue;
+	 *         -> border-temp-color: red; border-left-color: blue;
+	 *         -> border-right-color: red; border-left-color: blue;
+	 */
+	$replacements = [
+		// Borders.
+		'border-left'  => 'border-temp',
+		'border-right' => 'border-left',
+		'border-temp'  => 'border-right',
+		// Padding
+		'padding-left'  => 'padding-temp',
+		'padding-right' => 'padding-left',
+		'padding-temp'  => 'padding-right',
+		// Margins.
+		'margin-left'  => 'margin-temp',
+		'margin-right' => 'margin-left',
+		'margin-temp'  => 'margin-right',
+		// Text alignment.
+		'has-text-align-left'  => 'has-text-align-temp',
+		'has-text-align-right' => 'has-text-align-left',
+		'has-text-align-temp'  => 'has-text-align-right',
+	];
+
+	return str_replace( array_keys( $replacements ), array_values( $replacements ), $content );
 }

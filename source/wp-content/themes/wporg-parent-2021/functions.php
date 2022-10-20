@@ -82,3 +82,32 @@ function use_wporg_profile_for_author_link( $link, $author_id, $author_nicename 
 		$author_nicename
 	);
 }
+
+/**
+ * Increase the "Big image" threshold so our full-size high-DPI-ready images are
+ * not scaled down.
+ */
+add_filter(
+	'big_image_size_threshold',
+	function() {
+		// 3200 = 2 × 1600px for full-width images on wide screens.
+		return 3200;
+	}
+);
+
+/**
+ * Make posts and pages available for export from the staging site, so the import script can
+ * fetch them to a local dev environment.
+ */
+add_filter(
+	'wporg_export_context_post_types',
+	function( $types ) {
+		return array_merge(
+			$types,
+			[
+				'post',
+				'page',
+			]
+		);
+	}
+);
