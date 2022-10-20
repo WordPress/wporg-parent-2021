@@ -8,8 +8,8 @@
 ?>
 <!-- wp:columns {"style":{"border":{"top":{"color":"var:preset|color|light-grey-1","width":"1px"}},"spacing":{"blockGap":"0px"}}} -->
 <div class="wp-block-columns" style="border-top-color:var(--wp--preset--color--light-grey-1);border-top-width:1px">
-	<!-- wp:column {"style":{"spacing":{"padding":{"top":"60px","right":"80px","bottom":"60px","left":"80px"}},"border":{"right":{"color":"var:preset|color|light-grey-1","width":"1px"}}}} -->
-	<div class="wp-block-column" style="border-right-color:var(--wp--preset--color--light-grey-1);border-right-width:1px;padding-top:60px;padding-right:80px;padding-bottom:60px;padding-left:80px">
+	<!-- wp:column {"style":{"spacing":{"padding":{"top":"var:preset|spacing|50","right":"var:preset|spacing|60","bottom":"var:preset|spacing|50","left":"var:preset|spacing|60"}},"border":{"right":{"color":"var:preset|color|light-grey-1","width":"1px"}}}} -->
+	<div class="wp-block-column" style="border-right-color:var(--wp--preset--color--light-grey-1);border-right-width:1px;padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--60)">
 		<!-- wp:heading -->
 		<h2>Follow The Code</h2>
 		<!-- /wp:heading -->
@@ -20,8 +20,8 @@
 	</div>
 	<!-- /wp:column -->
 
-	<!-- wp:column {"style":{"spacing":{"padding":{"top":"60px","right":"80px","bottom":"60px","left":"80px"}}}} -->
-	<div class="wp-block-column" style="padding-top:60px;padding-right:80px;padding-bottom:60px;padding-left:80px">
+	<!-- wp:column {"style":{"spacing":{"padding":{"top":"var:preset|spacing|50","right":"var:preset|spacing|60","bottom":"var:preset|spacing|50","left":"var:preset|spacing|60"}}}} -->
+	<div class="wp-block-column" style="padding-top:var(--wp--preset--spacing--50);padding-right:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--50);padding-left:var(--wp--preset--spacing--60)">
 		<!-- wp:heading -->
 		<h2>Find An Event Near You</h2>
 		<!-- /wp:heading -->
