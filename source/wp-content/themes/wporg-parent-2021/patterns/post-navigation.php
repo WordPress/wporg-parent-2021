@@ -2,7 +2,7 @@
 /**
  * Title: Post Navigation
  * Slug: wporg-parent-2021/post-navigation
- * Inserter: no
+ * Category: wporg
  */
 
 ?>
