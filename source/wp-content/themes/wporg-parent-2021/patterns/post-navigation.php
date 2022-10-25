@@ -19,7 +19,7 @@
 		padding-left: var( --wp--preset--spacing--20 );
 	"
 >
-	<!-- wp:post-navigation-link {"type":"previous","showTitle":true,"label":"<?php _e( 'Previous', 'wporg' ); ?>","linkLabel":true} /-->
-	<!-- wp:post-navigation-link {"type":"next","showTitle":true,"label":"<?php _e( 'Next', 'wporg' ); ?>","linkLabel":true} /-->
+	<!-- wp:post-navigation-link {"type":"previous","showTitle":true,"label":"<?php esc_attr_e( 'Previous', 'wporg' ); ?>","linkLabel":true} /-->
+	<!-- wp:post-navigation-link {"type":"next","showTitle":true,"label":"<?php esc_attr_e( 'Next', 'wporg' ); ?>","linkLabel":true} /-->
 </div>
 <!-- /wp:group -->
