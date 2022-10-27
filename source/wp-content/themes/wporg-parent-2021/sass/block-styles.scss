@@ -356,17 +356,6 @@
 	}
 }
 
-// Styles for when Navigation background is light.
-.wp-block-navigation.is-style-dropdown-on-mobile.is-style-light {
-	.wp-block-navigation__responsive-container-open {
-		background-image: url(../images/down-chevron-dark.svg);
-	}
-
-	.wp-block-navigation__responsive-container-close {
-		background-image: url(../images/down-chevron-dark.svg);
-	}
-}
-
 .is-style-brush-stroke {
 	position: relative;
 
@@ -454,6 +443,17 @@
 				display: none;
 			}
 		}
+	}
+}
+
+// Styles for when Navigation background is light.
+.wp-block-navigation.is-style-dropdown-on-mobile.has-white-background-color {
+	.wp-block-navigation__responsive-container-open {
+		background-image: url(../images/down-chevron-dark.svg);
+	}
+
+	.wp-block-navigation__responsive-container-close {
+		background-image: url(../images/down-chevron-dark.svg);
 	}
 }
 

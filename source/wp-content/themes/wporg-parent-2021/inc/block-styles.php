@@ -132,15 +132,6 @@ function setup_block_styles() {
 	);
 
 	register_block_style(
-		'core/navigation',
-		array(
-			'name'         => 'light',
-			'label'        => __( 'Light', 'wporg' ),
-			'style_handle' => STYLE_HANDLE,
-		)
-	);
-
-	register_block_style(
 		'core/group',
 		array(
 			'name'         => 'brush-stroke',
