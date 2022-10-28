@@ -452,6 +452,7 @@
 		background-image: url(../images/down-chevron-dark.svg);
 	}
 
+	// .is-menu-open is needed for specificity
 	.is-menu-open .wp-block-navigation__responsive-container-close {
 		background-image: url(../images/up-chevron-dark.svg);
 	}
