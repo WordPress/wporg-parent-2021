@@ -452,7 +452,7 @@
 		background-image: url(../images/down-chevron-dark.svg);
 	}
 
-	.wp-block-navigation__responsive-container-close {
+	.is-menu-open .wp-block-navigation__responsive-container-close {
 		background-image: url(../images/up-chevron-dark.svg);
 	}
 }
