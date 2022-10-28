@@ -446,15 +446,25 @@
 	}
 }
 
-// Styles for when Navigation background is light.
-.wp-block-navigation.is-style-dropdown-on-mobile.has-white-background-color {
+// Use a dark chevron when the nav text is charcoal-1.
+.wp-block-navigation.is-style-dropdown-on-mobile.has-charcoal-1-color {
 	.wp-block-navigation__responsive-container-open {
 		background-image: url(../images/down-chevron-dark.svg);
 	}
 
-	// .is-menu-open is needed for specificity
-	.is-menu-open .wp-block-navigation__responsive-container-close {
+	.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close {
 		background-image: url(../images/up-chevron-dark.svg);
+	}
+}
+
+// Use a blue chevron when the nav text is blueberry-1.
+.wp-block-navigation.is-style-dropdown-on-mobile.has-blueberry-1-color {
+	.wp-block-navigation__responsive-container-open {
+		background-image: url(../images/down-chevron-blueberry.svg);
+	}
+
+	.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close {
+		background-image: url(../images/up-chevron-blueberry.svg);
 	}
 }
 
