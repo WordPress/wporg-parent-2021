@@ -446,6 +446,28 @@
 	}
 }
 
+// Use a dark chevron when the nav text is charcoal-1.
+.wp-block-navigation.is-style-dropdown-on-mobile.has-charcoal-1-color {
+	.wp-block-navigation__responsive-container-open {
+		background-image: url(../images/down-chevron-dark.svg);
+	}
+
+	.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close {
+		background-image: url(../images/up-chevron-dark.svg);
+	}
+}
+
+// Use a blue chevron when the nav text is blueberry-1.
+.wp-block-navigation.is-style-dropdown-on-mobile.has-blueberry-1-color {
+	.wp-block-navigation__responsive-container-open {
+		background-image: url(../images/down-chevron-blueberry.svg);
+	}
+
+	.wp-block-navigation__responsive-container.is-menu-open .wp-block-navigation__responsive-container-close {
+		background-image: url(../images/up-chevron-blueberry.svg);
+	}
+}
+
 @keyframes overlay-menu__drop-down-animation {
 	from {
 		opacity: 0;
