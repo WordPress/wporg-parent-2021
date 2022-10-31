@@ -10,8 +10,8 @@
 <div class="wp-block-group alignfull has-white-color has-blueberry-1-background-color has-text-color has-background has-link-color" style="padding-top:var(--wp--preset--spacing--60);padding-right:var(--wp--preset--spacing--60);padding-bottom:var(--wp--preset--spacing--60);padding-left:var(--wp--preset--spacing--60)">
 	<!-- wp:group {"align":"wide"} -->
 	<div class="wp-block-group alignwide">
-		<!-- wp:heading {"align":"wide","className":"is-style-with-arrow","fontSize":"heading-cta","fontFamily":"inter"} -->
-		<h2 class="alignwide is-style-with-arrow has-inter-font-family has-heading-cta-font-size"><a href="https://wordpress.org/download/">Get started</a></h2>
+		<!-- wp:heading {"align":"wide","style":{"typography":{"fontStyle":"normal","fontWeight":"300","letterSpacing":"-2px"}},"className":"is-style-with-arrow","fontSize":"heading-cta","fontFamily":"inter"} -->
+		<h2 class="alignwide is-style-with-arrow has-inter-font-family has-heading-cta-font-size" style="font-style:normal;font-weight:300;letter-spacing:-2px"><a href="https://wordpress.org/download/">Get started</a></h2>
 		<!-- /wp:heading -->
 	</div>
 	<!-- /wp:group -->
