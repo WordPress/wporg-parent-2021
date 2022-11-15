@@ -28,6 +28,22 @@ mark.has-inline-color {
 	}
 }
 
+// For links that navigate users to different site
+.external-link > a::after, // In case we don't access to <a> tag
+a.external-link::after {
+	content: "";
+	display: inline-flex;
+	background-color: var(--wp--preset--color--charcoal-4);
+	width: 1em;
+	height: 1em;
+	margin-left: 0.1em;
+	vertical-align: middle;
+	-webkit-mask-image: url(../images/external-link-icon.svg);
+	mask-image: url(../images/external-link-icon.svg);
+	-webkit-mask-size: cover;
+	mask-size: cover;
+}
+
 // Inline code tags should use the monospace font.
 code {
 	font-family: var(--wp--preset--font-family--monospace);
