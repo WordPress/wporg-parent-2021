@@ -17,14 +17,8 @@
 	<h1><?php esc_html_e( 'This page doesn\'t exist.', 'wporg' ); ?></h1>
 	<!-- /wp:heading -->
 	
-	<!-- wp:paragraph -->
-	<p>
-		<?php esc_html_e( 'Go to', 'wporg' ); ?>
-		<a href="https://wordpress.org"><?php esc_html_e( 'the homepage', 'wporg' ); ?></a>,
-		<?php esc_html_e( 'or try searching WordPress.org sites using the field below.', 'wporg' ); ?>
-	</p>
-	<!-- /wp:paragraph -->
-	
+	<!-- wp:pattern {"slug":"wporg-parent-2021/404-page-subtitle"} /-->
+
 	<!-- wp:search {"showLabel":false,"placeholder":"Search sites...","width":100,"widthUnit":"%","buttonText":"Search","buttonPosition":"button-inside","buttonUseIcon":true} /-->
 </div>
 <!-- /wp:group -->
