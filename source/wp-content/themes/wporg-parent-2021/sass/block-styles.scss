@@ -377,13 +377,13 @@
 
 @media (min-width: 890px) {
 	// Only add this for pages with the block on it.
-	html:has(main > .is-style-brush-stroke) {
+	html:has(.is-style-brush-stroke.is-sticky) {
 		// 57px is height of the brush-stroke bar.
 		scroll-padding-top: calc(var(--wp-global-header-offset, 0px) + 57px);
 	}
 
 	// If the brush-stroke style is the first item, it should be sticky.
-	main > .is-style-brush-stroke:first-child {
+	.is-style-brush-stroke.is-sticky {
 		position: sticky;
 		top: var(--wp-global-header-offset, 0);
 		z-index: 50;
