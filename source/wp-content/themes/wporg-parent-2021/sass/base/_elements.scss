@@ -29,8 +29,7 @@ mark.has-inline-color {
 }
 
 // For links that navigate users to different site
-.external-link > a::after, // In case we don't access to <a> tag
-a.external-link::after {
+a:not([href*="wordpress.org"])::after {
 	content: "";
 	display: inline-flex;
 	background-color: var(--wp--preset--color--charcoal-4);
