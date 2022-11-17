@@ -24,8 +24,8 @@
 		<?php esc_html_e( 'or try searching WordPress.org sites using the field below.', 'wporg' ); ?>
 	</p>
 	<!-- /wp:paragraph -->
-
-	<!-- wp:search {"label":"","placeholder":"Search...","buttonText":"Search","buttonPosition":"button-inside","buttonUseIcon":true} /-->
+	
+	<!-- wp:search {"showLabel":false,"placeholder":"Search sites...","width":100,"widthUnit":"%","buttonText":"Search","buttonPosition":"button-inside","buttonUseIcon":true} /-->
 </div>
 <!-- /wp:group -->
 
