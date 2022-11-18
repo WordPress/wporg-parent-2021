@@ -358,6 +358,8 @@
 
 .is-style-brush-stroke {
 	position: relative;
+	// Locally override this value to create a fixed breakpoint, rather than the
+	// scaling effect from `clamp(…)`.
 	--wp--preset--spacing--60: 20px;
 
 	&::before {
@@ -384,6 +386,7 @@
 	}
 
 	.is-style-brush-stroke {
+		// When larger than 890px, this should snap to 80px.
 		--wp--preset--spacing--60: 80px;
 	}
 
