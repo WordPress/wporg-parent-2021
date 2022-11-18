@@ -358,6 +358,7 @@
 
 .is-style-brush-stroke {
 	position: relative;
+	--wp--preset--spacing--60: 20px;
 
 	&::before {
 		content: "";
@@ -380,6 +381,10 @@
 	html:has(.is-style-brush-stroke.is-sticky) {
 		// 57px is height of the brush-stroke bar.
 		scroll-padding-top: calc(var(--wp-global-header-offset, 0px) + 57px);
+	}
+
+	.is-style-brush-stroke {
+		--wp--preset--spacing--60: 80px;
 	}
 
 	// If the brush-stroke style is the first item, it should be sticky.
