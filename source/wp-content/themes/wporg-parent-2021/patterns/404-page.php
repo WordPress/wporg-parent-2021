@@ -2,7 +2,7 @@
 /**
  * Title: 404 Page
  * Slug: wporg-parent-2021/404-page
- * Categories: wporg
+ * Inserter: no
  */
 
 ?>
