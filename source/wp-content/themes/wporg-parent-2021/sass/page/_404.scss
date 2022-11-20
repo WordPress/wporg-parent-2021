@@ -12,8 +12,8 @@ body.error404 {
 		overflow: hidden;
 
 		margin-top: 0;
-		padding-left: var(--wp--custom--alignment--edge-spacing);
-		padding-right: var(--wp--custom--alignment--edge-spacing);
+		padding-left: var(--wp--preset--spacing--60);
+		padding-right: var(--wp--preset--spacing--60);
 
 		@include break-small() {
 			display: flex;
