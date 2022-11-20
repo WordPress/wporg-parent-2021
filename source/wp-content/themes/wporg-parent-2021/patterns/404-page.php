@@ -8,11 +8,7 @@
 ?>
 
 <!-- wp:group {"className":"site-content-container"} -->
-<div class="wp-block-group site-content-container">
-	<p class="error404__oops" aria-hidden="true">
-		<?php esc_html_e( 'Oops!', 'wporg' ); ?>
-	</p>
-	
+<div class="wp-block-group site-content-container">	
 	<!-- wp:heading {"level":1} -->
 	<h1><?php esc_html_e( 'This page doesn\'t exist.', 'wporg' ); ?></h1>
 	<!-- /wp:heading -->

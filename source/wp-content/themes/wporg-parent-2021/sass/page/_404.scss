@@ -26,20 +26,22 @@ body.error404 {
 			// The max will start cutting off the text after ~2500px, but that's an edge case.
 			min-height: min(var(--oops-font-size), 975px);
 		}
-	}
 
-	.error404__oops {
-		z-index: -1;
-		position: absolute;
-		top: 22px;
-		left: -4.9vw;
-		font-family: var(--wp--preset--font-family--eb-garamond);
-		font-size: var(--oops-font-size);
-		line-height: var(--oops-font-size);
-		opacity: 0.4; // Make the overlaid text more readable.
+		&::after {
+			content: "Oops!";
+			display: block;
+			z-index: -1;
+			position: absolute;
+			top: 22px;
+			left: -4.9vw;
+			font-family: var(--wp--preset--font-family--eb-garamond);
+			font-size: var(--oops-font-size);
+			line-height: var(--oops-font-size);
+			opacity: 0.4; // Make the overlaid text more readable.
 
-		@include break-small() {
-			top: calc(var(--oops-font-size) * -0.25);
+			@include break-small() {
+				top: calc(var(--oops-font-size) * -0.25);
+			}
 		}
 	}
 
