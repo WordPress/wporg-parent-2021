@@ -1,6 +1,9 @@
 body.error404 {
 	--oops-font-size: 47vw; // "Magic number" ala https://css-tricks.com/fitting-text-to-a-container/
 
+	background-color: var(--wp--preset--color--charcoal-2);
+	color: var(--wp--preset--color--blueberry-4);
+
 	.site-content-container {
 
 		/*
@@ -14,6 +17,7 @@ body.error404 {
 		margin-top: 0;
 		padding-left: var(--wp--preset--spacing--60);
 		padding-right: var(--wp--preset--spacing--60);
+		border-top: 1px solid var(--wp--preset--color--charcoal-1);
 
 		@include break-small() {
 			display: flex;
@@ -29,6 +33,7 @@ body.error404 {
 
 		&::after {
 			content: "Oops!";
+			color: var(--wp--preset--color--charcoal-1);
 			display: block;
 			z-index: -1;
 			position: absolute;
@@ -59,44 +64,33 @@ body.error404 {
 	}
 
 	a {
-		color: var(--wp--preset--color--blue-3);
+		color: var(--wp--preset--color--blueberry-2);
 		text-decoration: underline;
 	}
 
 	.site-content-container .wp-block-search.wp-block-search__button-inside {
 		display: flex;
 		align-items: center;
-		margin-top: 35px;
+		margin: 35px 0;
+		background-color: var(--wp--preset--color--white);
+		border-radius: var(--wp--custom--button--border--radius);
 
 		@include break-small() {
 			max-width: 400px;
-		}
-
-		> label {
-			flex: 0;
-			font-size: var(--wp--preset--font-size--extra-small);
-			padding-right: var(--wp--preset--spacing--10);
-		}
-
-		input[type="search"] {
-			border: none;
-			font-size: var(--wp--preset--font-size--extra-small);
-			padding: 0 var(--wp--preset--spacing--10);
+			margin-bottom: 0;
 		}
 
 		.wp-block-search__inside-wrapper {
-			border: 1px solid var(--wp--preset--color--charcoal-1);
-			border-radius: 2px;
+			border: none;
+			padding: 0;
 
 			.wp-block-search__input {
-				font-size: 20px;
+				font-size: var(--wp--preset--font-size--large);
 				-webkit-appearance: none; /* Remove duplicate magnifying glass icon on Safari-mobile. */
 
-				padding: 12px 0 12px 19px;
-
 				@include break-small() {
-					padding: 6px 0 6px 14px;
-					font-size: 14px;
+					padding: var(--wp--preset--spacing--10);
+					font-size: var(--wp--preset--font-size--small);
 				}
 			}
 		}
@@ -106,9 +100,10 @@ body.error404 {
 			margin: 2px;
 			background-color: transparent;
 			color: var(--wp--preset--color--charcoal-1);
+			outline: none;
 
 			svg {
-				fill: var(--wp--preset--color--charcoal-1);
+				fill: currentColor;
 			}
 		}
 	}

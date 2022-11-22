@@ -15,7 +15,7 @@
 	
 	<!-- wp:pattern {"slug":"wporg-parent-2021/404-page-subtitle"} /-->
 
-	<!-- wp:search {"showLabel":false,"placeholder":"Search sites...","width":100,"widthUnit":"%","buttonText":"Search","buttonPosition":"button-inside","buttonUseIcon":true} /-->
+	<!-- wp:search {"showLabel":false,"placeholder":"Search...","width":100,"widthUnit":"%","buttonText":"Search","buttonPosition":"button-inside","buttonUseIcon":true} /-->
 </div>
 <!-- /wp:group -->
 
