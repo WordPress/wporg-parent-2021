@@ -1,6 +1,8 @@
 body.error404 {
 	--oops-font-size: 47vw; // "Magic number" ala https://css-tricks.com/fitting-text-to-a-container/
 
+	background-color: var(--wp--preset--color--charcoal-2);
+
 	.site-content-container {
 
 		/*
@@ -54,10 +56,11 @@ body.error404 {
 		margin-top: calc(var(--oops-font-size) * 0.6);
 		margin-bottom: 30px;
 		line-height: 40px;
+		font-size: 38px;
 
 		@include break-small() {
 			margin-top: 0;
-			font-size: 70px !important;
+			font-size: 70px;
 			line-height: 72px;
 		}
 	}
@@ -70,13 +73,13 @@ body.error404 {
 	.site-content-container .wp-block-search.wp-block-search__button-inside {
 		display: flex;
 		align-items: center;
-		margin: 35px 0;
+		margin-top: var(--wp--custom--margin--vertical);
 		background-color: var(--wp--preset--color--white);
 		border-radius: var(--wp--custom--button--border--radius);
 
 		@include break-small() {
+			margin-top: 55px;
 			max-width: 400px;
-			margin-bottom: 0;
 		}
 
 		.wp-block-search__inside-wrapper {
@@ -84,10 +87,12 @@ body.error404 {
 			padding: 0;
 
 			.wp-block-search__input {
+				line-height: calc(var(--wp--custom--button--typography--line-height) * 2);
 				font-size: var(--wp--preset--font-size--large);
 				-webkit-appearance: none; /* Remove duplicate magnifying glass icon on Safari-mobile. */
 
 				@include break-small() {
+					line-height: revert;
 					padding: var(--wp--preset--spacing--10);
 					font-size: var(--wp--preset--font-size--small);
 				}
