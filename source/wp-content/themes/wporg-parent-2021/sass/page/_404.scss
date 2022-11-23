@@ -1,9 +1,6 @@
 body.error404 {
 	--oops-font-size: 47vw; // "Magic number" ala https://css-tricks.com/fitting-text-to-a-container/
 
-	background-color: var(--wp--preset--color--charcoal-2);
-	color: var(--wp--preset--color--blueberry-4);
-
 	.site-content-container {
 
 		/*
@@ -14,10 +11,7 @@ body.error404 {
 		position: relative; // needed for overflow to work
 		overflow: hidden;
 
-		margin-top: 0;
-		padding-left: var(--wp--preset--spacing--60);
-		padding-right: var(--wp--preset--spacing--60);
-		border-top: 1px solid var(--wp--preset--color--charcoal-1);
+		z-index: 0;
 
 		@include break-small() {
 			display: flex;
@@ -31,21 +25,27 @@ body.error404 {
 			min-height: min(var(--oops-font-size), 975px);
 		}
 
-		&::after {
-			content: "Oops!";
-			color: var(--wp--preset--color--charcoal-1);
-			display: block;
-			z-index: -1;
-			position: absolute;
-			top: 22px;
-			left: -4.9vw;
-			font-family: var(--wp--preset--font-family--eb-garamond);
-			font-size: var(--oops-font-size);
-			line-height: var(--oops-font-size);
-			opacity: 0.4; // Make the overlaid text more readable.
+		.wporg-parent-oops-container {
+			> p {
+				display: none;
+			}
 
-			@include break-small() {
-				top: calc(var(--oops-font-size) * -0.25);
+			&::after {
+				content: "Oops!";
+				color: inherit;
+				display: block;
+				z-index: -1;
+				position: absolute;
+				top: 22px;
+				left: -4.9vw;
+				font-family: var(--wp--preset--font-family--eb-garamond);
+				font-size: var(--oops-font-size);
+				line-height: var(--oops-font-size);
+				opacity: 0.4; // Make the overlaid text more readable.
+
+				@include break-small() {
+					top: calc(var(--oops-font-size) * -0.25);
+				}
 			}
 		}
 	}
@@ -53,12 +53,11 @@ body.error404 {
 	h1 {
 		margin-top: calc(var(--oops-font-size) * 0.6);
 		margin-bottom: 30px;
-		font-size: 38px;
 		line-height: 40px;
 
 		@include break-small() {
 			margin-top: 0;
-			font-size: 70px;
+			font-size: 70px !important;
 			line-height: 72px;
 		}
 	}
@@ -98,8 +97,6 @@ body.error404 {
 		button[type="submit"] {
 			padding: calc(var(--wp--preset--spacing--10) / 2);
 			margin: 2px;
-			background-color: transparent;
-			color: var(--wp--preset--color--charcoal-1);
 			outline: none;
 
 			svg {
