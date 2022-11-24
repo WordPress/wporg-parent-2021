@@ -12,7 +12,7 @@
 	<?php
 	printf(
 		/* translators: %s is the site URL. */
-		wp_kses_post( __( 'Go to <a href="%s">the homepage</a> or try searching WordPress.org sites using the field below.', 'wporg' ) ),
+		wp_kses_post( __( 'Go to <a href="%s">the homepage</a> or try searching using the field below.', 'wporg' ) ),
 		esc_url( get_site_url( '/' ) )
 	);
 	?>
