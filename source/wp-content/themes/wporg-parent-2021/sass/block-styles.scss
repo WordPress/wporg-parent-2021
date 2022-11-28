@@ -479,9 +479,10 @@
 }
 
 /**
- * Update the "Dropdown on Mobile" style when the menu is inside a "Brush Stroke" group block.
+ * Update the "Dropdown on Mobile" style when the menu is inside a "Brush Stroke" group block or is sticky.
  */
 
+.is-sticky .is-style-dropdown-on-mobile,
 .is-style-brush-stroke .is-style-dropdown-on-mobile {
 	.wp-block-navigation__responsive-container-open {
 		position: absolute;
