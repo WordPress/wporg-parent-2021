@@ -15,7 +15,7 @@
 <!-- /wp:group -->
 
 <!-- wp:heading {"level":1} -->
-<h1><?php esc_html_e( 'This page doesn\'t exist.', 'wporg' ); ?></h1>
+<h1><?php esc_html_e( 'This page doesn&#146;t exist.', 'wporg' ); ?></h1>
 <!-- /wp:heading -->
 
 <!-- wp:pattern {"slug":"wporg-parent-2021/404-page-subtitle"} /-->
