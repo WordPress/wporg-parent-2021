@@ -1,0 +1,112 @@
+body.error404 {
+	--oops-font-size: 47vw; // "Magic number" ala https://css-tricks.com/fitting-text-to-a-container/
+
+	background-color: var(--wp--preset--color--charcoal-2);
+
+	.site-content-container {
+
+		/*
+		 * Prevent "oops" from creating a horizontal scroll.
+		 * In some iOS versions, these rules also have to be applied to <html>, but that would bleed over to other
+		 * pages. It's better to just let there be a scroll, since it's not a commonly used page.
+		 */
+		position: relative; // needed for overflow to work
+		overflow: hidden;
+
+		z-index: 0;
+
+		@include break-small() {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			padding-top: 100px;
+			padding-bottom: 100px;
+
+			// Prevent the gap under the content container from growing too big.
+			// The max will start cutting off the text after ~2500px, but that's an edge case.
+			min-height: min(var(--oops-font-size), 975px);
+		}
+
+		.wporg-parent-oops-container {
+			> p {
+				display: none;
+			}
+
+			&::after {
+				content: "Oops!";
+				color: inherit;
+				display: block;
+				z-index: -1;
+				position: absolute;
+				top: 22px;
+				left: -4.9vw;
+				font-family: var(--wp--preset--font-family--eb-garamond);
+				font-size: var(--oops-font-size);
+				line-height: var(--oops-font-size);
+				opacity: 0.4; // Make the overlaid text more readable.
+
+				@include break-small() {
+					top: calc(var(--oops-font-size) * -0.25);
+				}
+			}
+		}
+	}
+
+	h1 {
+		margin-top: calc(var(--oops-font-size) * 0.6);
+		margin-bottom: 30px;
+		line-height: 40px;
+		font-size: 38px;
+
+		@include break-small() {
+			margin-top: 0;
+			font-size: 70px;
+			line-height: 72px;
+		}
+	}
+
+	a {
+		color: var(--wp--preset--color--blueberry-2);
+		text-decoration: underline;
+	}
+
+	.site-content-container .wp-block-search.wp-block-search__button-inside {
+		display: flex;
+		align-items: center;
+		margin-top: var(--wp--custom--margin--vertical);
+		background-color: var(--wp--preset--color--white);
+		border-radius: var(--wp--custom--button--border--radius);
+
+		@include break-small() {
+			margin-top: 55px;
+			max-width: 400px;
+		}
+
+		.wp-block-search__inside-wrapper {
+			border: none;
+			padding: 0;
+
+			.wp-block-search__input {
+				line-height: calc(var(--wp--custom--button--typography--line-height) * 2);
+				font-size: var(--wp--preset--font-size--large);
+				-webkit-appearance: none; /* Remove duplicate magnifying glass icon on Safari-mobile. */
+
+				@include break-small() {
+					line-height: revert;
+					padding: var(--wp--preset--spacing--10);
+					font-size: var(--wp--preset--font-size--small);
+				}
+			}
+		}
+
+		button[type="submit"] {
+			padding: calc(var(--wp--preset--spacing--10) / 2);
+			margin: 2px;
+			outline: none;
+
+			svg {
+				fill: currentColor;
+			}
+		}
+	}
+}
