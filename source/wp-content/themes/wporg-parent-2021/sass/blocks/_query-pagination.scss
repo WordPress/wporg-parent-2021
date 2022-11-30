@@ -2,11 +2,11 @@
 	padding: 2em 0;
 }
 
-.wp-block-query-pagination {
+.wp-block-query-pagination.wp-block-query-pagination {
 	line-height: normal;
 	color: var(--wp--custom--link--color--text);
-	padding-top: 40px;
-	padding-bottom: 64px;
+	margin-top: var(--wp--preset--spacing--40);
+	margin-bottom: var(--wp--preset--spacing--40);
 	gap: 0 !important;
 
 	@include break-small-only() {
