@@ -358,9 +358,6 @@
 
 .is-style-brush-stroke {
 	position: relative;
-	// Locally override this value to create a fixed breakpoint, rather than the
-	// scaling effect from `clamp(…)`.
-	--wp--preset--spacing--60: 20px;
 
 	&::before {
 		content: "";
@@ -375,26 +372,6 @@
 		mask-size: cover;
 		mask-position: bottom right;
 		background-color: inherit;
-	}
-}
-
-@media (min-width: 890px) {
-	// Only add this for pages with the block on it.
-	html:has(.is-style-brush-stroke.is-sticky) {
-		// 57px is height of the brush-stroke bar.
-		scroll-padding-top: calc(var(--wp-global-header-offset, 0px) + 57px);
-	}
-
-	.is-style-brush-stroke {
-		// When larger than 890px, this should snap to 80px.
-		--wp--preset--spacing--60: 80px;
-	}
-
-	// If the brush-stroke style is the first item, it should be sticky.
-	.is-style-brush-stroke.is-sticky {
-		position: sticky;
-		top: var(--wp-global-header-offset, 0);
-		z-index: 50;
 	}
 }
 
@@ -479,10 +456,37 @@
 }
 
 /**
- * Update the "Dropdown on Mobile" style when the menu is inside a "Brush Stroke" group block.
+ * Add support for a "sticky" header by using the `is-sticky` class. At 890px,
+ * this will snap to under the global header, and stay fixed while scrolling.
  */
 
-.is-style-brush-stroke .is-style-dropdown-on-mobile {
+.is-sticky {
+	// Locally override this value to create a fixed breakpoint, rather than the
+	// scaling effect from `clamp(…)`.
+	--wp--preset--spacing--60: 20px;
+}
+
+@media (min-width: 890px) {
+	// Only add this for pages with the block on it.
+	html:has(.is-sticky) {
+		// 57px is height of the sticky bar.
+		scroll-padding-top: calc(var(--wp-global-header-offset, 0px) + 57px);
+	}
+
+	.is-sticky {
+		// When larger than 890px, this should snap to 80px.
+		--wp--preset--spacing--60: 80px;
+		position: sticky;
+		top: var(--wp-global-header-offset, 0);
+		z-index: 50;
+	}
+}
+
+/**
+ * Update the "Dropdown on Mobile" style when the menu is inside a sticky header.
+ */
+
+.is-sticky .is-style-dropdown-on-mobile {
 	.wp-block-navigation__responsive-container-open {
 		position: absolute;
 		right: 0;
