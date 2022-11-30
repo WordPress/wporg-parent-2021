@@ -148,6 +148,15 @@ function setup_block_styles() {
 			'style_handle' => STYLE_HANDLE,
 		)
 	);
+
+	register_block_style(
+		'core/search',
+		array(
+			'name'         => 'secondary-search-control',
+			'label'        => __( 'Secondary', 'wporg' ),
+			'style_handle' => STYLE_HANDLE,
+		)
+	);
 }
 
 /**
