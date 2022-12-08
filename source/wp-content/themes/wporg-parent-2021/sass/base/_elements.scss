@@ -29,7 +29,10 @@ mark.has-inline-color {
 }
 
 // For links that navigate users to different site
-a:not([href*="wordpress.org"])::after {
+a.external-link::after,
+a.external-link-light::after,
+.external-link > a:not([href*="wordpress.org"])::after,
+.external-link-light > a:not([href*="wordpress.org"])::after {
 	content: "";
 	display: inline-flex;
 	background-color: var(--wp--preset--color--charcoal-4);
@@ -39,8 +42,12 @@ a:not([href*="wordpress.org"])::after {
 	vertical-align: middle;
 	-webkit-mask-image: url(../images/external-link-icon.svg);
 	mask-image: url(../images/external-link-icon.svg);
-	-webkit-mask-size: cover;
 	mask-size: cover;
+}
+
+a.external-link-light::after,
+.external-link-light > a:not([href*="wordpress.org"])::after {
+	background-color: var(--wp--preset--color--light-grey-2);
 }
 
 // Inline code tags should use the monospace font.
