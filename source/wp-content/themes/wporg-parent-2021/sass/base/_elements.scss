@@ -28,6 +28,27 @@ mark.has-inline-color {
 	}
 }
 
+// For links that navigate users to different site
+a.external-link::after,
+a.external-link-light::after,
+.external-link > a:not([href*="wordpress.org"])::after,
+.external-link-light > a:not([href*="wordpress.org"])::after {
+	content: "";
+	display: inline-flex;
+	background-color: var(--wp--preset--color--charcoal-4);
+	width: 1em;
+	height: 1em;
+	margin-left: 0.1em;
+	vertical-align: middle;
+	mask-image: url(../images/external-link-icon.svg);
+	mask-size: cover;
+}
+
+a.external-link-light::after,
+.external-link-light > a:not([href*="wordpress.org"])::after {
+	background-color: var(--wp--preset--color--light-grey-2);
+}
+
 // Inline code tags should use the monospace font.
 code {
 	font-family: var(--wp--preset--font-family--monospace);
