@@ -463,6 +463,11 @@
 			"customSpacingSize": true,
 			"spacingSizes": [
 				{
+					"name": "Edge Spacing",
+					"slug": "edge-space",
+					"size": "80px"
+				},
+				{
 					"name": "3X-Small",
 					"slug": 10,
 					"size": "10px"
