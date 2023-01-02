@@ -694,6 +694,16 @@
 					"lineHeight": "var(--wp--custom--pullquote--typography--line-height)"
 				}
 			},
+			"core/query": {
+				"elements": {
+					"heading": {
+						"typography": {
+							"fontSize": "var(--wp--preset--font-size--heading-2)",
+							"lineHeight": "var(--wp--custom--heading--level-2--typography--line-height)"
+						}
+					}
+				}
+			},
 			"core/query-pagination": {
 				"elements": {
 					"link": {
