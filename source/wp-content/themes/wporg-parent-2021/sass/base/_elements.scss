@@ -52,20 +52,28 @@ figure[class*="wp-block-"],
 [class*="wp-block-"] {
 	figcaption,
 	.wp-element-caption {
-		text-align: right;
+		text-align: center;
 	}
 
 	&.wp-block-gallery.has-nested-images {
-		> figcaption,
-		> .wp-element-caption {
-			margin-top: 0;
-		}
-	}
-
-	&.alignfull {
-		> figcaption,
-		> .wp-element-caption {
-			padding-right: var(--wp--style--block-gap);
+		figure.wp-block-image {
+			display: block;
+	
+			&:not(#individual-image) a,
+			&:not(#individual-image) img {
+				height: auto;
+			}
+	
+			figcaption,
+			.wp-element-caption {
+				position: static;
+				margin: calc(var(--wp--style--block-gap) / 2) 0 0;
+				padding: 0;
+				background: transparent;
+				color: var(--wp--preset--color--charcoal-4);
+				font-size: var(--wp--custom--gallery--caption--font-size);
+				line-height: 1.6;
+			}
 		}
 	}
 }
