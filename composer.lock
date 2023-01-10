@@ -235,30 +235,30 @@
         },
         {
             "name": "doctrine/instantiator",
-            "version": "1.4.1",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "10dcfce151b967d20fde1b34ae6640712c3891bc"
+                "reference": "0a0fa9780f5d4e507415a065172d26a98d02047b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/10dcfce151b967d20fde1b34ae6640712c3891bc",
-                "reference": "10dcfce151b967d20fde1b34ae6640712c3891bc",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/0a0fa9780f5d4e507415a065172d26a98d02047b",
+                "reference": "0a0fa9780f5d4e507415a065172d26a98d02047b",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1 || ^8.0"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^9",
+                "doctrine/coding-standard": "^9 || ^11",
                 "ext-pdo": "*",
                 "ext-phar": "*",
                 "phpbench/phpbench": "^0.16 || ^1",
                 "phpstan/phpstan": "^1.4",
                 "phpstan/phpstan-phpunit": "^1",
                 "phpunit/phpunit": "^7.5 || ^8.5 || ^9.5",
-                "vimeo/psalm": "^4.22"
+                "vimeo/psalm": "^4.30 || ^5.4"
             },
             "type": "library",
             "autoload": {
@@ -285,7 +285,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/instantiator/issues",
-                "source": "https://github.com/doctrine/instantiator/tree/1.4.1"
+                "source": "https://github.com/doctrine/instantiator/tree/1.5.0"
             },
             "funding": [
                 {
@@ -301,7 +301,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-03-03T08:28:38+00:00"
+            "time": "2022-12-30T00:15:36+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -2186,15 +2186,15 @@
         },
         {
             "name": "wpackagist-plugin/gutenberg",
-            "version": "14.7.3",
+            "version": "14.9.1",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/gutenberg/",
-                "reference": "tags/14.7.3"
+                "reference": "tags/14.9.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/gutenberg.14.7.3.zip"
+                "url": "https://downloads.wordpress.org/plugin/gutenberg.14.9.1.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -2204,15 +2204,15 @@
         },
         {
             "name": "wpackagist-plugin/jetpack",
-            "version": "11.6",
+            "version": "11.7",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/jetpack/",
-                "reference": "tags/11.6"
+                "reference": "tags/11.7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/jetpack.11.6.zip"
+                "url": "https://downloads.wordpress.org/plugin/jetpack.11.7.zip"
             },
             "require": {
                 "composer/installers": "^1.0 || ^2.0"
@@ -2244,12 +2244,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WordPress/wporg-mu-plugins.git",
-                "reference": "58089e6b8ff35be41276ee9c236c0fa29acce511"
+                "reference": "9276ce3861afbdcc91bfe43aa9fd6ba63d3b5646"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/wporg-mu-plugins/zipball/58089e6b8ff35be41276ee9c236c0fa29acce511",
-                "reference": "58089e6b8ff35be41276ee9c236c0fa29acce511",
+                "url": "https://api.github.com/repos/WordPress/wporg-mu-plugins/zipball/9276ce3861afbdcc91bfe43aa9fd6ba63d3b5646",
+                "reference": "9276ce3861afbdcc91bfe43aa9fd6ba63d3b5646",
                 "shasum": ""
             },
             "require-dev": {
@@ -2287,7 +2287,7 @@
                 "source": "https://github.com/WordPress/wporg-mu-plugins/tree/build",
                 "issues": "https://github.com/WordPress/wporg-mu-plugins/issues"
             },
-            "time": "2022-12-15T16:07:58+00:00"
+            "time": "2023-01-10T20:53:46+00:00"
         },
         {
             "name": "wporg/wporg-repo-tools",
