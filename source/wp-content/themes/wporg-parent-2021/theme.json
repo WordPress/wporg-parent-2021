@@ -755,6 +755,9 @@
 				}
 			},
 			"caption": {
+				"color": {
+					"text": "var(--wp--preset--color--charcoal-4)"
+				},
 				"typography": {
 					"fontSize": "var(--wp--custom--gallery--caption--font-size)"
 				},
