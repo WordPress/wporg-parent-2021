@@ -585,3 +585,7 @@
 		padding: var(--wp--preset--spacing--10) !important;
 	}
 }
+
+.is-style-list-long-items > li {
+	margin-bottom: var(--wp--preset--spacing--20);
+}
