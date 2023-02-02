@@ -141,6 +141,15 @@ function setup_block_styles() {
 	);
 
 	register_block_style(
+		'core/list',
+		array(
+			'name'         => 'list-long-items',
+			'label'        => __( 'Long items', 'wporg' ),
+			'style_handle' => STYLE_HANDLE,
+		)
+	);
+
+	register_block_style(
 		'core/navigation',
 		array(
 			'name'         => 'dropdown-on-mobile',
