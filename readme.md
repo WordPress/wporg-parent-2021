@@ -158,17 +158,18 @@ Example of the generated property: `--wp--preset--font-size--extra-small`
 
 The responsive/scaling size values are still being updated, but for now they are as follows.
 
-| Name     | Slug | Value                                   |
-|----------|------|-----------------------------------------|
-| 3X-Small | `10` |  10px                                   |
-| 2X-Small | `20` |  20px                                   |
-| X-Small  | `30` |  30px                                   |
-| Small    | `40` |  40px                                   |
-| Medium   | `50` | clamp( 40px, calc( 100vw / 16 ), 60px ) |
-| Large    | `60` | clamp( 20px, calc( 100vw / 18 ), 80px ) |
-| X-Large  | `70` | 100px                                   |
-| 2X-Large | `80` | clamp( 80px, calc( 100vw / 7 ), 120px ) |
-| 3X-Large | `90` | clamp( 80px, calc( 100vw / 7 ), 160px ) |
+| Name         | Slug         | Value                                   |
+|--------------|--------------|-----------------------------------------|
+| 3X-Small     | `10`         |  10px                                   |
+| 2X-Small     | `20`         |  20px                                   |
+| X-Small      | `30`         |  30px                                   |
+| Small        | `40`         |  40px                                   |
+| Medium       | `50`         | clamp( 40px, calc( 100vw / 16 ), 60px ) |
+| Large        | `60`         | clamp( 20px, calc( 100vw / 18 ), 80px ) |
+| X-Large      | `70`         | 100px                                   |
+| 2X-Large     | `80`         | clamp( 80px, calc( 100vw / 7 ), 120px ) |
+| 3X-Large     | `90`         | clamp( 80px, calc( 100vw / 7 ), 160px ) |
+| Edge Spacing | `edge-space` | 80px; <890px = 20px                     |
 
 ## History
 
