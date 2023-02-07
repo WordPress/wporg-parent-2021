@@ -95,10 +95,12 @@ These colors map to the values used in Figma.
 
 | Name           | slug           | Hex     |
 |----------------|----------------|---------|
+| Charcoal 0     | `charcoal-0`     | #1a1919 |
 | Charcoal       | `charcoal-1`     | #1e1e1e |
 | Charcoal 2     | `charcoal-2`     | #23282d |
 | Charcoal 3     | `charcoal-3`     | #40464d |
 | Charcoal 4     | `charcoal-4`     | #656a71 |
+| Charcoal 5     | `charcoal-5`     | #979aa1 |
 | Light Grey     | `light-grey-1`   | #d9d9d9 |
 | Light Grey 2   | `light-grey-2`   | #f6f6f6 |
 | White          | `white`          | #ffffff |

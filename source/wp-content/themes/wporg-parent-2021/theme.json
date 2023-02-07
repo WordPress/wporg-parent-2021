@@ -8,6 +8,11 @@
 			"gradients": [],
 			"palette": [
 				{
+					"slug": "charcoal-0",
+					"color": "#1a1919",
+					"name": "Charcoal 0"
+				},
+				{
 					"slug": "charcoal-1",
 					"color": "#1e1e1e",
 					"name": "Charcoal"
@@ -26,6 +31,11 @@
 					"slug": "charcoal-4",
 					"color": "#656a71",
 					"name": "Charcoal 4"
+				},
+				{
+					"slug": "charcoal-5",
+					"color": "#979aa1",
+					"name": "Charcoal 5"
 				},
 				{
 					"slug": "light-grey-1",
