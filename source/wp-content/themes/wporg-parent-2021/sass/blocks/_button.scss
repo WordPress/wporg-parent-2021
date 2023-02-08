@@ -25,7 +25,7 @@
 		--wp--custom--button--color--text: var(--wp--preset--color--charcoal-1);
 		--wp--custom--button--color--background: var(--wp--preset--color--white);
 		--wp--custom--button--hover--color--text: var(--wp--preset--color--charcoal-1);
-		--wp--custom--button--hover--color--background: var(--wp--preset--color--blueberry-2);
+		--wp--custom--button--hover--color--background: var(--wp--preset--color--white);
 		--wp--custom--button--active--color--text: var(--wp--preset--color--white);
 		--wp--custom--button--active--color--background: transparent;
 	}
@@ -33,9 +33,9 @@
 	&.is-style-outline-on-dark {
 		--wp--custom--button--outline--color--text: var(--wp--preset--color--white);
 
-		--wp--custom--button--outline--hover--color--text: var(--wp--preset--color--blueberry-2);
+		--wp--custom--button--outline--hover--color--text: var(--wp--preset--color--white);
 		--wp--custom--button--outline--hover--color--background: transparent;
-		--wp--custom--button--outline--hover--border--color: var(--wp--preset--color--blueberry-2);
+		--wp--custom--button--outline--hover--border--color: var(--wp--preset--color--white);
 
 		--wp--custom--button--outline--active--color--text: var(--wp--preset--color--white);
 		--wp--custom--button--outline--active--color--background: transparent;
