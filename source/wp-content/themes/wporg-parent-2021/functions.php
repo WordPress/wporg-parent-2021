@@ -142,8 +142,8 @@ function merge_parent_child_theme_json( $theme_json ) {
 		$parent_theme           = new \WP_Theme_JSON_Gutenberg( $parent_theme_json_data );
 
 		// Get base theme.json settings.
-		$theme_settings = $parent_theme->get_settings();
-		$settings       = $child_theme['settings'];
+		$parent_settings = $parent_theme->get_settings();
+		$child_settings  = $child_theme['settings'];
 
 		// Define the array values here, so they can be updated if the theme.json schema changes.
 		$color_keys = [ 'duotone', 'gradient', 'palette' ];
@@ -151,34 +151,34 @@ function merge_parent_child_theme_json( $theme_json ) {
 		$space_keys = [ 'spacingSizes' ];
 
 		foreach ( $color_keys as $key ) {
-			if ( ! empty( $settings['color'][ $key ]['theme'] ) ) {
-				$settings['color'][ $key ]['theme'] = _merge_by_slug(
-					$theme_settings['color'][ $key ]['theme'],
-					$settings['color'][ $key ]['theme']
+			if ( ! empty( $child_settings['color'][ $key ]['theme'] ) ) {
+				$child_settings['color'][ $key ]['theme'] = _merge_by_slug(
+					$parent_settings['color'][ $key ]['theme'],
+					$child_settings['color'][ $key ]['theme']
 				);
 
 			}
 		}
 
 		foreach ( $typog_keys as $key ) {
-			if ( ! empty( $settings['typography'][ $key ]['theme'] ) ) {
-				$settings['typography'][ $key ]['theme'] = _merge_by_slug(
-					$theme_settings['typography'][ $key ]['theme'],
-					$settings['typography'][ $key ]['theme']
+			if ( ! empty( $child_settings['typography'][ $key ]['theme'] ) ) {
+				$child_settings['typography'][ $key ]['theme'] = _merge_by_slug(
+					$parent_settings['typography'][ $key ]['theme'],
+					$child_settings['typography'][ $key ]['theme']
 				);
 			}
 		}
 
 		foreach ( $space_keys as $key ) {
-			if ( ! empty( $settings['spacing'][ $key ]['theme'] ) ) {
-				$settings['spacing'][ $key ]['theme'] = _merge_by_slug(
-					$theme_settings['spacing'][ $key ]['theme'],
-					$settings['spacing'][ $key ]['theme']
+			if ( ! empty( $child_settings['spacing'][ $key ]['theme'] ) ) {
+				$child_settings['spacing'][ $key ]['theme'] = _merge_by_slug(
+					$parent_settings['spacing'][ $key ]['theme'],
+					$child_settings['spacing'][ $key ]['theme']
 				);
 			}
 		}
 
-		$new_data['settings'] = $settings;
+		$new_data['settings'] = $child_settings;
 	}
 
 	return $theme_json->update_with( $new_data );
