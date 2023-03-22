@@ -698,11 +698,6 @@
 					"fontSize": "clamp(20px, calc(100vw / 12), 120px)"
 				}
 			},
-			"core/table": {
-				"typography": {
-					"fontSize": "var(--wp--preset--font-size--extra-small)"
-				}
-			},
 			"core/quote": {
 				"border": {
 					"color": "var(--wp--preset--color--deep-blueberry)",
