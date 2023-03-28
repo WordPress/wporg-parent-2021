@@ -97,6 +97,10 @@
 		font-size: var(--wp--custom--form--typography--font-size);
 		padding: var(--wp--custom--form--padding);
 	}
+
+	@include break-small-only {
+		--wp--custom--form--typography--font-size: 16px;
+	}
 }
 
 .is-style-secondary-search-control {
