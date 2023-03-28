@@ -198,21 +198,21 @@
 				}
 			},
 			"form": {
-				"padding": "calc( 0.5 * var(--wp--custom--margin--horizontal) )",
+				"padding": "var(--wp--preset--spacing--10)",
 				"border": {
-					"color": "#EFEFEF",
-					"radius": "0",
+					"color": "transparent",
+					"radius": "2px",
 					"style": "solid",
-					"width": "2px"
+					"width": "1px"
 				},
 				"color": {
-					"background": "transparent",
+					"label": "var(--wp--preset--color--white)",
+					"background": "var(--wp--preset--color--white)",
+					"placeholder": "var(--wp--preset--color--charcoal-4)",
 					"boxShadow": "none"
 				},
-				"label": {
-					"typography": {
-						"fontSize": "var(--wp--preset--font-size--extra-small)"
-					}
+				"typography": {
+					"fontSize": "var(--wp--preset--font-size--small)"
 				}
 			},
 			"gallery": {

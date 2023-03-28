@@ -1,31 +1,81 @@
 @import "button-mixins";
 
 .wp-block-search {
+	// Set the custom properties so hover/focus/etc still work.
+	--wp--custom--button--color--text: var(--wp--preset--color--charcoal-1);
+	--wp--custom--button--color--background: transparent;
+	--wp--custom--button--hover--color--text: var(--wp--preset--color--charcoal-1);
+	--wp--custom--button--hover--color--background: var(--wp--preset--color--light-grey-2);
+	// Set a local custom property so child themes can set this in one place.
+	--local--border-color: var(--wp--custom--form--border--color);
+
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
 	margin-top: var(--wp--custom--margin--baseline);
+
+	> label {
+		width: 100%;
+		margin-bottom: calc(var(--wp--custom--form--padding) / 2);
+		font-size: var(--wp--custom--form--typography--font-size);
+		color: var(--wp--custom--form--color--label);
+	}
 
 	&.wp-block-search__button-inside {
 		.wp-block-search__inside-wrapper {
-			padding: var(--wp--custom--form--border--width);
-			border: var(--wp--custom--form--border--width) var(--wp--custom--form--border--style) var(--wp--custom--form--border--color);
+			padding: 0;
+			border: var(--wp--custom--form--border--width) var(--wp--custom--form--border--style) var(--local--border-color);
 			border-radius: var(--wp--custom--form--border--radius);
+			background-color: var(--wp--custom--form--color--background);
 
 			.wp-block-search__input {
-				padding: 0 var(--wp--custom--form--padding);
+				border-radius: var(--wp--custom--form--border--radius) 0 0 var(--wp--custom--form--border--radius);
+			}
+
+			.wp-block-search__button {
+				border-radius: 0 var(--wp--custom--form--border--radius) var(--wp--custom--form--border--radius) 0;
+			}
+		}
+	}
+
+	&.wp-block-search__button-outside {
+		.wp-block-search__input {
+			border: var(--wp--custom--form--border--width) var(--wp--custom--form--border--style) var(--local--border-color);
+		}
+
+		.wp-block-search__button {
+			color: var(--wp--custom--form--color--label);
+
+			svg {
+				fill: var(--wp--custom--form--color--label);
 			}
 		}
 	}
 
 	.wp-block-search__input {
+		border: none;
+		background-color: var(--wp--custom--form--color--background);
+		font-size: var(--wp--custom--form--typography--font-size);
 		line-height: var(--wp--custom--button--typography--line-height);
-		padding: var(--wp--custom--form--padding);
-		border: var(--wp--custom--form--border--width) var(--wp--custom--form--border--style) var(--wp--custom--form--border--color);
+
+		&::placeholder {
+			opacity: 1;
+			color: var(--wp--custom--form--color--placeholder);
+		}
 	}
 
-	&.wp-block-search__button-inside .wp-block-search__inside-wrapper .wp-block-search__button,
+	&.wp-block-search__no-button .wp-block-search__input {
+		min-height: var(--wp--preset--spacing--40);
+		border: var(--wp--custom--form--border--width) var(--wp--custom--form--border--style) var(--local--border-color);
+		border-radius: var(--wp--custom--form--border--radius);
+	}
+
 	.wp-block-search__button {
 
 		@include button-main-styles;
 		@include button-color-styles;
+
+		border-radius: var(--wp--custom--form--border--radius);
 
 		&.has-icon {
 			line-height: 0;
@@ -38,4 +88,18 @@
 			}
 		}
 	}
+
+	&.wp-block-search__icon-button .wp-block-search__button {
+		padding: calc(var(--wp--custom--form--padding) / 2);
+	}
+
+	&.wp-block-search__text-button .wp-block-search__button {
+		font-size: var(--wp--custom--form--typography--font-size);
+		padding: var(--wp--custom--form--padding);
+	}
+}
+
+.is-style-secondary-search-control {
+	--local--border-color: var(--wp--preset--color--charcoal-1);
+	--wp--custom--form--color--label: var(--wp--preset--color--charcoal-1);
 }

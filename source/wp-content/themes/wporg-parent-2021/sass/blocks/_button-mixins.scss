@@ -20,6 +20,10 @@
 	&:focus {
 		color: var(--wp--custom--button--hover--color--text);
 		background-color: var(--wp--custom--button--hover--color--background);
+
+		svg {
+			fill: var(--wp--custom--button--hover--color--text);
+		}
 	}
 
 	&:focus {
@@ -30,6 +34,10 @@
 	&:active {
 		color: var(--wp--custom--button--active--color--text);
 		background-color: var(--wp--custom--button--active--color--background);
+
+		svg {
+			fill: var(--wp--custom--button--active--color--text);
+		}
 	}
 }
 
