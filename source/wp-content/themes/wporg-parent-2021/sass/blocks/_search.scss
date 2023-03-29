@@ -22,6 +22,11 @@
 		color: var(--wp--custom--form--color--label);
 	}
 
+	.wp-block-search__inside-wrapper {
+		// Remove the core-set flex value so it will recognize the width.
+		flex: initial;
+	}
+
 	&.wp-block-search__button-inside {
 		.wp-block-search__inside-wrapper {
 			padding: 0;
