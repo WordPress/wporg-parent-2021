@@ -8,7 +8,7 @@
 	--wp--custom--button--hover--color--background: var(--wp--preset--color--light-grey-2);
 	// Set local custom properties so child themes can set these in one place.
 	--local--border-color: var(--wp--custom--form--border--color);
-	--local--focus--border-color: var(--wp--preset--color--blueberry-2);
+	--local--focus--border-color: var(--wp--preset--color--blueberry-1);
 
 	display: flex;
 	flex-wrap: wrap;
@@ -69,6 +69,14 @@
 			opacity: 1;
 			color: var(--wp--custom--form--color--placeholder);
 		}
+
+		&::-webkit-search-cancel-button {
+			-webkit-appearance: none;
+			height: 10px;
+			width: 10px;
+			background: transparent;
+			background-image: url(../images/search-x.svg);
+		}
 	}
 
 	&.wp-block-search__no-button .wp-block-search__input {
@@ -94,6 +102,10 @@
 				cursor: pointer;
 			}
 		}
+
+		&:focus {
+			background-color: var(--wp--custom--form--color--background);
+		}
 	}
 
 	.wp-block-search__input,
@@ -104,9 +116,9 @@
 		}
 
 		&:focus-visible {
-			outline: 1px solid #fff;
-			border-radius: 2px;
-			box-shadow: inset 0 0 0 1.5px var(--local--focus--border-color);
+			outline: 1.5px solid #fff;
+			outline-offset: -1.5px;
+			box-shadow: inset 0 0 0 3px var(--local--focus--border-color);
 		}
 	}
 
@@ -137,8 +149,20 @@
 	.wp-block-search__input,
 	.wp-block-search__button {
 		&:focus-visible {
-			outline: none;
-			box-shadow: 0 0 0 1.5px var(--local--focus--border-color);
+			outline: 1.5px solid var(--local--focus--border-color);
+			outline-offset: -0.5px;
+			box-shadow: none;
+		}
+	}
+
+	// Use outline on button-outside/no-button, to overlay the input border.
+	&.wp-block-search__no-button,
+	&.wp-block-search__button-outside {
+		.wp-block-search__input:focus-visible,
+		.wp-block-search__button:focus-visible {
+			outline: 1.5px solid var(--local--focus--border-color);
+			outline-offset: -1.5px;
+			box-shadow: none;
 		}
 	}
 }
