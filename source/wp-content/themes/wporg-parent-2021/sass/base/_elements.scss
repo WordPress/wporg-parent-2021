@@ -125,6 +125,16 @@ input[type="checkbox"] + label {
 	line-height: 1em; // stylelint-disable-line declaration-property-unit-allowed-list
 }
 
+// Headings.
+// Add margin to default h2 & h3 (no font size changes).
+.wp-site-blocks h2:not([class*="-font-size"], [style*="font-size"]) {
+	margin-top: var(--wp--preset--spacing--40);
+}
+
+.wp-site-blocks h3:not([class*="-font-size"], [style*="font-size"]) {
+	margin-top: var(--wp--preset--spacing--30);
+}
+
 // Line heights for custom sizes.
 .has-extra-small-font-size {
 	line-height: var(--wp--custom--body--extra-small--typography--line-height);
