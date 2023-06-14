@@ -18,6 +18,7 @@ add_filter( 'get_the_archive_title_prefix', __NAMESPACE__ . '\modify_archive_tit
 add_filter( 'render_block_data', __NAMESPACE__ . '\custom_query_block_attributes' );
 add_action( 'parse_query', __NAMESPACE__ . '\compat_workaround_core_55100' );
 add_filter( 'render_block_core/pattern', __NAMESPACE__ . '\convert_inline_style_to_rtl', 20 );
+add_filter( 'render_block_core/query-title', __NAMESPACE__ . '\render_index_title', 10, 2 );
 
 /**
  * Blank out the archive title prefix sometimes.
@@ -123,4 +124,19 @@ function convert_inline_style_to_rtl( $content ) {
 	];
 
 	return str_replace( array_keys( $replacements ), array_values( $replacements ), $content );
+}
+
+/**
+ * Replace the empty header when "type" is our custom "index".
+ *
+ * @param string   $content Content of the current post.
+ * @param WP_Block $block
+ * @return string The updated content.
+ */
+function render_index_title( $content, $block ) {
+	if ( isset( $block['attrs']['type'] ) && 'index' === $block['attrs']['type'] ) {
+		// Replace `></h` to capture empty tags of all heading levels.
+		return str_replace( '></h', '>' . __( 'All posts', 'wporg' ) . '</h', $content );
+	}
+	return $content;
 }
