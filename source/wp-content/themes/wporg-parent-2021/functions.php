@@ -19,6 +19,14 @@ add_filter( 'render_block_core/pattern', __NAMESPACE__ . '\prevent_arrow_emoji',
 add_filter( 'the_content', __NAMESPACE__ . '\prevent_arrow_emoji', 20 );
 add_filter( 'wp_theme_json_data_theme', __NAMESPACE__ . '\merge_parent_child_theme_json' );
 
+// Enable embeds in patterns.
+// See https://github.com/WordPress/gutenberg/issues/46556.
+global $wp_embed;
+add_filter( 'render_block_core/pattern', array( $wp_embed, 'autoembed' ) );
+
+// Render shortcodes in patterns.
+add_filter( 'render_block_core/pattern', 'do_shortcode' );
+
 /**
  * Register theme support.
  */
