@@ -10,6 +10,8 @@
 		"@wordpress/env": "^5.9.0"
 	},
 	"scripts": {
+		"build:theme": "yarn workspace wporg-parent-2021 build",
+		"start:theme": "yarn workspace wporg-parent-2021 start",
 		"setup:tools": "yarn && composer install && TEXTDOMAIN=wporg composer exec update-configs",
 		"setup:wp": "wp-env run cli \"bash env/setup.sh\"",
 		"update:tools": "composer update && TEXTDOMAIN=wporg composer exec update-configs",
