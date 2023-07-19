@@ -140,7 +140,11 @@ function merge_parent_child_theme_json( $theme_json ) {
 	if ( ! empty( $child_theme['settings'] ) ) {
 		$parent_theme_json_file = get_template_directory() . '/theme.json';
 		$parent_theme_json_data = wp_json_file_decode( $parent_theme_json_file, array( 'associative' => true ) );
-		$parent_theme           = new \WP_Theme_JSON_Gutenberg( $parent_theme_json_data );
+		if ( class_exists( 'WP_Theme_JSON_Gutenberg' ) ) {
+			$parent_theme           = new \WP_Theme_JSON_Gutenberg( $parent_theme_json_data );
+		} else {
+			$parent_theme           = new \WP_Theme_JSON( $parent_theme_json_data );
+		}
 
 		// Get base theme.json settings.
 		$parent_settings = $parent_theme->get_settings();
