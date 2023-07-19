@@ -57,13 +57,6 @@ function theme_support() {
 	// handled by the theme, in `_site-header.scss`.
 	add_theme_support( 'admin-bar', array( 'callback' => '__return_false' ) );
 
-	// This theme has one menu location.
-	register_nav_menus(
-		array(
-			'primary' => __( 'Primary Navigation', 'wporg' ),
-		)
-	);
-
 	register_block_pattern_category(
 		'wporg',
 		array(
