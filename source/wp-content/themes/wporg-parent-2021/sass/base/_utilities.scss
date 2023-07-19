@@ -1,0 +1,21 @@
+// Utilities: A set of class names that can be manually applied to blocks.
+
+// Dynamically create .has-z-index-1, .has-z-index-2, .has-z-index-3,
+// .has-z-index-4 to apply z-indexes to blocks.
+@for $i from 1 through 4 {
+	.has-z-index-#{$i} {
+		z-index: #{$i};
+	}
+}
+
+.has-overflow-hidden {
+	overflow: hidden;
+}
+
+// This should only be used on template part containers to work around nested
+// sticky headers.
+// See https://github.com/WordPress/wporg-parent-2021/commit/49347b094f16835895c499a6181ca0e6fd853090
+.has-display-contents {
+	display: contents;
+}
+
