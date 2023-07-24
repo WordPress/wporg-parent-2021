@@ -4,6 +4,7 @@
 // .has-z-index-4 to apply z-indexes to blocks.
 @for $i from 1 through 4 {
 	.has-z-index-#{$i} {
+		position: relative;
 		z-index: #{$i};
 	}
 }
