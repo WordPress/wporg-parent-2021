@@ -34,13 +34,11 @@
 		> * {
 			grid-column: 1;
 			grid-row: auto;
-			margin-top: 0;
 
 			// Any following item should be in the second column.
 			&.is-right-column,
 			+ * {
 				grid-column: 2;
-				margin-top: 0;
 				justify-self: center;
 				width: 100%;
 				max-width: var(--wp--custom--layout--content-size);
