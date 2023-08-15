@@ -15,6 +15,8 @@ require_once __DIR__ . '/inc/block-styles.php';
 add_action( 'after_setup_theme', __NAMESPACE__ . '\theme_support', 9 );
 add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\enqueue_assets' );
 add_filter( 'author_link', __NAMESPACE__ . '\use_wporg_profile_for_author_link', 10, 3 );
+add_filter( 'render_block_core/pattern', __NAMESPACE__ . '\add_aria_hidden_to_arrows', 19 );
+add_filter( 'the_content', __NAMESPACE__ . '\add_aria_hidden_to_arrows', 19 );
 add_filter( 'render_block_core/pattern', __NAMESPACE__ . '\prevent_arrow_emoji', 20 );
 add_filter( 'the_content', __NAMESPACE__ . '\prevent_arrow_emoji', 20 );
 add_filter( 'wp_theme_json_data_theme', __NAMESPACE__ . '\merge_parent_child_theme_json' );
@@ -92,6 +94,20 @@ function use_wporg_profile_for_author_link( $link, $author_id, $author_nicename 
 		'https://profiles.wordpress.org/%s/',
 		$author_nicename
 	);
+}
+
+/**
+ * Wrap the arrow emoji in an aria-hidden span tag, to prevent screen readers
+ * from trying to read them.
+ *
+ * This runs just before `prevent_arrow_emoji`, so that the variation-selector
+ * can be added inside the span.
+ *
+ * @param string $content Content of the current post.
+ * @return string The updated content.
+ */
+function add_aria_hidden_to_arrows( $content ) {
+	return preg_replace( '/([←↑→↓↔↕↖↗↘↙])/u', '<span aria-hidden="true">\1</span>', $content );
 }
 
 /**
