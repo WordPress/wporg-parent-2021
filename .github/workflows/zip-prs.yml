@@ -1,6 +1,7 @@
 name: Build and push to build branch
 
-on: repository_dispatch
+on:
+  pull_request: [edited]
 
 jobs:
   build:
