@@ -1,0 +1,26 @@
+name: Build and push to build branch
+
+on: repository_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Trim the repo down to just the theme
+        run: |
+          rm -rf source/wp-content/themes/wporg-parent-2021/node_modules
+
+      - name: Zip theme folder
+        uses: montudor/action-zip@v1
+        with:
+          args: zip -qq -r theme.zip source/wp-content/themes/wporg-parent-2021
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: theme-archive
+          path: theme.zip
