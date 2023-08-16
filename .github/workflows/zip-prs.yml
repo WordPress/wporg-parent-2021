@@ -3,7 +3,8 @@ name: Build and push to build branch
 on:
   pull_request: 
     types:
-      - edited
+      - opened
+      - synchronize
 
 jobs:
   build:
