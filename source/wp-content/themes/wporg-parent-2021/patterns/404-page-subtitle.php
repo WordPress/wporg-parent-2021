@@ -13,7 +13,7 @@
 	printf(
 		/* translators: %s is the site URL. */
 		wp_kses_post( __( 'Go to <a href="%s">the homepage</a> or try searching using the field below.', 'wporg' ) ),
-		esc_url( get_site_url( '/' ) )
+		esc_url( get_site_url( null, '/' ) )
 	);
 	?>
 </p>
