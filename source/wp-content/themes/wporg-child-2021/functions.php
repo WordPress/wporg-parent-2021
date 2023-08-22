@@ -2,6 +2,8 @@
 
 namespace WordPressdotorg\Theme\Child_2021;
 
+defined ( 'WPINC' ) || die ();
+
 /**
  * Actions and filters.
  */
