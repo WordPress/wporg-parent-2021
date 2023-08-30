@@ -14,6 +14,8 @@
 
 	&.is-style-outline,
 	&.is-style-outline-on-dark {
+		color: var(--wp--custom--button--outline--color--text);
+
 		.wp-block-button__link {
 
 			@include button-color-styles;
@@ -28,6 +30,8 @@
 		--wp--custom--button--hover--color--background: var(--wp--preset--color--blueberry-2);
 		--wp--custom--button--active--color--text: var(--wp--preset--color--white);
 		--wp--custom--button--active--color--background: transparent;
+		--wp--custom--button--active--border--color: var(--wp--preset--color--blueberry-2);
+		--wp--custom--button--focus--border--color: var(--wp--preset--color--blueberry-1);
 	}
 
 	&.is-style-outline-on-dark {
