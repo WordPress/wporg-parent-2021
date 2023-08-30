@@ -32,11 +32,11 @@ a.external-link::after,
 .external-link > a:not([href*="wordpress.org"])::after {
 	content: "";
 	display: inline-flex;
-	background-color: currentcolor;
-	width: 1em;
-	height: 1em;
-	margin-left: 0.1em;
-	vertical-align: middle;
+	background-color: currentColor;
+	width: 0.65em;
+	height: 0.65em;
+	margin-left: 0.25em;
+	vertical-align: baseline;
 	mask-image: url(../images/external-link-icon.svg);
 	mask-size: cover;
 }
@@ -57,12 +57,12 @@ figure[class*="wp-block-"],
 	&.wp-block-gallery.has-nested-images {
 		figure.wp-block-image {
 			display: block;
-	
+
 			&:not(#individual-image) a,
 			&:not(#individual-image) img {
 				height: auto;
 			}
-	
+
 			figcaption,
 			.wp-element-caption {
 				position: static;
