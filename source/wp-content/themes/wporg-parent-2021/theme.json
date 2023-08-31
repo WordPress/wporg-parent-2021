@@ -203,16 +203,22 @@
 					"color": "transparent",
 					"radius": "2px",
 					"style": "solid",
-					"width": "1px"
+					"width": "0"
 				},
 				"color": {
-					"label": "var(--wp--preset--color--white)",
-					"background": "var(--wp--preset--color--white)",
-					"placeholder": "var(--wp--preset--color--charcoal-4)",
+					"label": "var(--wp--preset--color--charcoal-4)",
+					"background": "var(--wp--preset--color--light-grey-2)",
+					"text": "var(--wp--preset--color--charcoal-4)",
 					"boxShadow": "none"
 				},
 				"typography": {
 					"fontSize": "var(--wp--preset--font-size--small)"
+				},
+				"active": {
+					"color": {
+						"background": "var(--wp--preset--color--white)",
+						"text": "var(--wp--preset--color--charcoal-1)"
+					}
 				}
 			},
 			"gallery": {

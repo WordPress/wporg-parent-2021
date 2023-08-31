@@ -161,8 +161,8 @@ function setup_block_styles() {
 	register_block_style(
 		'core/search',
 		array(
-			'name'         => 'secondary-search-control',
-			'label'        => __( 'Secondary', 'wporg' ),
+			'name'         => 'on-dark',
+			'label'        => __( 'On dark', 'wporg' ),
 			'style_handle' => STYLE_HANDLE,
 		)
 	);
