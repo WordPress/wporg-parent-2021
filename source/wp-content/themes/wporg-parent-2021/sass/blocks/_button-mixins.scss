@@ -91,9 +91,7 @@
 		padding-left: calc(var(--wp--custom--button--spacing--padding--left) + var(--wp--custom--button--border--width));
 		padding-right: calc(var(--wp--custom--button--spacing--padding--right) + var(--wp--custom--button--border--width));
 		border-width: 0;
-
-		background-color: var(--wp--custom--button--outline--color--background);
-		color: var(--wp--custom--button--outline--color--text);
+		background-color: var(--wp--custom--button--outline--focus--color--background);
 		outline-color: var(--wp--custom--button--outline--focus--border--color);
 	}
 
