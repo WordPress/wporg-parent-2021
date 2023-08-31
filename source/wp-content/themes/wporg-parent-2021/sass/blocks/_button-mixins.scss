@@ -28,7 +28,7 @@
 
 	&:focus {
 		background-color: var(--wp--custom--button--color--background);
-		box-shadow: inset 0 0 0 3px #fff;
+		box-shadow: inset 0 0 0 3px var(--wp--preset--color--white);
 		outline: 1.5px solid var(--wp--custom--button--focus--border--color);
 		outline-offset: -1.5px;
 	}
