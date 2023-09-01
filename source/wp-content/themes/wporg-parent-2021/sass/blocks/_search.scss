@@ -28,6 +28,10 @@
 		margin-bottom: calc(var(--wp--custom--form--padding) / 2);
 		font-size: var(--wp--custom--form--typography--font-size);
 		color: var(--wp--custom--form--color--label);
+
+		.has-text-color & {
+			color: inherit;
+		}
 	}
 
 	.wp-block-search__inside-wrapper {
@@ -53,6 +57,7 @@
 		}
 	}
 
+	&.wp-block-search__button-only,
 	&.wp-block-search__button-outside {
 		.wp-block-search__input {
 			border-width: var(--wp--custom--form--border--width);
