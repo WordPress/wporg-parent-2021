@@ -11,16 +11,14 @@
 	--local--focus--outline-color: var(--wp--preset--color--white);
 	--local--focus--border-color: var(--wp--preset--color--blueberry-1);
 
-	&:focus-within {
-		--wp--custom--form--color--background: var(--wp--custom--form--active--color--background);
-	}
-
 	&.is-style-on-dark {
 		--local--focus--outline-color: var(--wp--preset--color--blueberry-2);
+		--local--focus--border-color: var(--wp--preset--color--charcoal-3);
 		--wp--custom--form--color--label: var(--wp--preset--color--light-grey-1);
 		--wp--custom--form--color--background: var(--wp--preset--color--charcoal-3);
 		--wp--custom--form--color--text: var(--wp--preset--color--light-grey-1);
 		--wp--custom--form--active--color--text: var(--wp--preset--color--white);
+		--wp--custom--form--active--color--background: var(--wp--preset--color--charcoal-3);
 		--wp--custom--button--color--text: var(--wp--preset--color--white);
 		--wp--custom--button--hover--color--text: var(--wp--preset--color--white);
 		--wp--custom--button--hover--color--background: var(--wp--preset--color--charcoal-3);
@@ -62,6 +60,7 @@
 
 		.wp-block-search__button {
 			color: var(--wp--custom--button--color--text);
+			background-color: var(--wp--custom--form--color--background);
 
 			svg {
 				fill: var(--wp--custom--button--color--text);
@@ -119,10 +118,6 @@
 				cursor: pointer;
 			}
 		}
-
-		&:focus {
-			background-color: var(--wp--custom--form--color--background);
-		}
 	}
 
 	.wp-block-search__input,
@@ -130,6 +125,7 @@
 		&:focus {
 			outline: none;
 			outline-offset: unset;
+			background-color: var(--wp--custom--form--active--color--background);
 		}
 
 		&:focus-visible {
