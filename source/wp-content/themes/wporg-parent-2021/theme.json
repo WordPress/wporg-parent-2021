@@ -150,7 +150,15 @@
 						"text": "var(--wp--preset--color--white)"
 					}
 				},
+				"focus": {
+					"border": {
+						"color": "var(--wp--preset--color--blueberry-1)"
+					}
+				},
 				"active": {
+					"border": {
+						"color": "var(--wp--preset--color--blueberry-1)"
+					},
 					"color": {
 						"background": "var(--wp--preset--color--charcoal-1)",
 						"text": "var(--wp--preset--color--white)"
@@ -169,8 +177,16 @@
 							"color": "var(--wp--preset--color--blueberry-1)"
 						},
 						"color": {
-							"background": "var(--wp--preset--color--blueberry-1)",
+							"background": "var(--wp--preset--color--deep-blueberry)",
 							"text": "var(--wp--preset--color--white)"
+						}
+					},
+					"focus": {
+						"border": {
+							"color": "var(--wp--preset--color--blueberry-1)"
+						},
+						"color": {
+							"background": "var(--wp--preset--color--blueberry-1)"
 						}
 					},
 					"active": {
