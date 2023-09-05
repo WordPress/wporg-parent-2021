@@ -53,6 +53,11 @@
 					"name": "White"
 				},
 				{
+					"slug": "opacities-white-10",
+					"color": "rgba(255, 255, 255, 0.1)",
+					"name": "White 10%"
+				},
+				{
 					"slug": "dark-blueberry",
 					"color": "#1d35b4",
 					"name": "Dark Blueberry"
