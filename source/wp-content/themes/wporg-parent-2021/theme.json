@@ -53,6 +53,16 @@
 					"name": "White"
 				},
 				{
+					"slug": "white-opacity-15",
+					"color": "#ffffff26",
+					"name": "White 15%"
+				},
+				{
+					"slug": "black-opacity-15",
+					"color": "#00000026",
+					"name": "Black 15%"
+				},
+				{
 					"slug": "dark-blueberry",
 					"color": "#1d35b4",
 					"name": "Dark Blueberry"
