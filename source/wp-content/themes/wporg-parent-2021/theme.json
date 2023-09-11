@@ -53,9 +53,14 @@
 					"name": "White"
 				},
 				{
-					"slug": "opacities-white-10",
-					"color": "rgba(255, 255, 255, 0.1)",
-					"name": "White 10%"
+					"slug": "white-opacity-15",
+					"color": "#ffffff26",
+					"name": "White 15%"
+				},
+				{
+					"slug": "black-opacity-15",
+					"color": "#00000026",
+					"name": "Black 15%"
 				},
 				{
 					"slug": "dark-blueberry",
