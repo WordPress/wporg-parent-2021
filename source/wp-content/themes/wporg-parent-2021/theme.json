@@ -534,17 +534,17 @@
 				{
 					"name": "Small",
 					"slug": "40",
-					"size": "clamp(30px, calc(100vw / 19), 50px)"
+					"size": "clamp(30px, 5vw, 50px)"
 				},
 				{
 					"name": "Medium",
 					"slug": "50",
-					"size": "clamp(40px, calc(100vw / 16), 60px)"
+					"size": "clamp(40px, calc(5vw + 10px), 60px)"
 				},
 				{
 					"name": "Large",
 					"slug": "60",
-					"size": "clamp(20px, calc(10vw + -40px), 80px)"
+					"size": "clamp(20px, calc(10vw - 40px), 80px)"
 				},
 				{
 					"name": "X-Large",
@@ -554,12 +554,12 @@
 				{
 					"name": "2X-Large",
 					"slug": "80",
-					"size": "clamp(80px, calc(100vw / 7), 120px)"
+					"size": "clamp(80px, calc(6.67vw + 40px), 120px)"
 				},
 				{
 					"name": "3X-Large",
 					"slug": "90",
-					"size": "clamp(80px, calc(100vw / 7), 160px)"
+					"size": "clamp(80px, 13.33vw, 160px)"
 				}
 			]
 		},
