@@ -518,17 +518,17 @@
 				},
 				{
 					"name": "3X-Small",
-					"slug": 10,
+					"slug": "10",
 					"size": "10px"
 				},
 				{
 					"name": "2X-Small",
-					"slug": 20,
+					"slug": "20",
 					"size": "20px"
 				},
 				{
 					"name": "X-Small",
-					"slug": 30,
+					"slug": "30",
 					"size": "30px"
 				},
 				{
@@ -538,8 +538,8 @@
 				},
 				{
 					"name": "Medium",
-					"slug": 50,
-					"size": "clamp( 40px, calc( 100vw / 16 ), 60px )"
+					"slug": "50",
+					"size": "clamp(40px, calc(100vw / 16), 60px)"
 				},
 				{
 					"name": "Large",
@@ -548,18 +548,18 @@
 				},
 				{
 					"name": "X-Large",
-					"slug": 70,
+					"slug": "70",
 					"size": "100px"
 				},
 				{
 					"name": "2X-Large",
-					"slug": 80,
-					"size": "clamp( 80px, calc( 100vw / 7 ), 120px )"
+					"slug": "80",
+					"size": "clamp(80px, calc(100vw / 7), 120px)"
 				},
 				{
 					"name": "3X-Large",
-					"slug": 90,
-					"size": "clamp( 80px, calc( 100vw / 7 ), 160px )"
+					"slug": "90",
+					"size": "clamp(80px, calc(100vw / 7), 160px)"
 				}
 			]
 		},
@@ -766,7 +766,7 @@
 				"typography": {
 					"fontFamily": "var(--wp--preset--font-family--eb-garamond)",
 					"fontSize": "var(--wp--custom--pullquote--typography--font-size)",
-					"fontWeight": 400,
+					"fontWeight": "400",
 					"lineHeight": "var(--wp--custom--pullquote--typography--line-height)"
 				}
 			},
@@ -834,8 +834,8 @@
 					"fontFamily": "var(--wp--preset--font-family--eb-garamond)",
 					"fontSize": "30px",
 					"fontStyle": "normal",
-					"fontWeight": 400,
-					"lineHeight": 1.3
+					"fontWeight": "400",
+					"lineHeight": "1.3"
 				}
 			}
 		},
