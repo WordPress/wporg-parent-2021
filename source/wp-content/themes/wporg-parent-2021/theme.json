@@ -533,8 +533,8 @@
 				},
 				{
 					"name": "Small",
-					"slug": 40,
-					"size": "40px"
+					"slug": "40",
+					"size": "clamp(30px, calc(100vw / 19), 50px)"
 				},
 				{
 					"name": "Medium",
@@ -543,8 +543,8 @@
 				},
 				{
 					"name": "Large",
-					"slug": 60,
-					"size": "clamp( 20px, calc( 100vw / 18 ), 80px )"
+					"slug": "60",
+					"size": "clamp(20px, calc(10vw + -40px), 80px)"
 				},
 				{
 					"name": "X-Large",
