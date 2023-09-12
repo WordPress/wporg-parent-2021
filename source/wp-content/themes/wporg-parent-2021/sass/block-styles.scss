@@ -223,12 +223,14 @@
 .is-style-with-arrow a[href]:first-of-type {
 	// Note, these are Sass variables to make the math easier. While we could do
 	// this with `calc()`s, it would be even more unruly.
-	$arrow_size: 1em;
-	// Once rotated, the diagonal of the square is the hypotenuse of an isosceles
-	// triangle, which can be calculated by multiplying the side × √2. We only need
-	// the halfway point, so divide that by 2.
 	$sqrt_2: 1.4142;
-	$half_hyp: math.div(($arrow_size * $sqrt_2), 2);
+	// Once rotated, the diagonal of the square is larger than the container.
+	// The diagonal should be 1em, so that it matches the content height.
+	// To achieve that, we need to find the side of a triangle with
+	// `hypotenuse=1em`, which can be calculated by dividing the side by √2.
+	$arrow_size: math.div(1em, $sqrt-2);
+	// We also save a variable with half the hypotenuse for later calculations.
+	$half_hyp: 0.5em;
 
 	// This can be a custom property since we could let the editor control later.
 	--wporg--style--with-arrow--border-size: 1px;
@@ -277,8 +279,8 @@
 
 		@media (max-width: #{ ($break-large - 1) }) {
 			// Use a smaller arrow on small screens.
-			$arrow_size: 0.5em;
-			$half_hyp: math.div(($arrow_size * $sqrt_2), 2);
+			$arrow_size: math.div(0.5em, $sqrt-2);
+			$half_hyp: 0.25em;
 
 			// Since this is Sass, not custom properties, the properties also need to be set again.
 			left: calc(#{($half_hyp - math.div($arrow-size, 2)) * -1} + var(--wporg--style--with-arrow--border-size));
