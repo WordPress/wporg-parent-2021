@@ -158,20 +158,20 @@ Example of the generated property: `--wp--preset--font-size--extra-small`
 
 ### Spacing
 
-The responsive/scaling size values are still being updated, but for now they are as follows.
+The responsive/scaling size values are still being updated, but for now they are as follows. The "Min"/"Max" columns refer to where the scaling stops at each end of the scale. For example, at 590px, `--wp--preset--spacing--40` is 30px; while at 1320px, `--wp--preset--spacing--80` is 120px.
 
-| Name         | Slug         | Value                                   |
-|--------------|--------------|-----------------------------------------|
-| 3X-Small     | `10`         |  10px                                   |
-| 2X-Small     | `20`         |  20px                                   |
-| X-Small      | `30`         |  30px                                   |
-| Small        | `40`         |  40px                                   |
-| Medium       | `50`         | clamp( 40px, calc( 100vw / 16 ), 60px ) |
-| Large        | `60`         | clamp( 20px, calc( 100vw / 18 ), 80px ) |
-| X-Large      | `70`         | 100px                                   |
-| 2X-Large     | `80`         | clamp( 80px, calc( 100vw / 7 ), 120px ) |
-| 3X-Large     | `90`         | clamp( 80px, calc( 100vw / 7 ), 160px ) |
-| Edge Spacing | `edge-space` | 80px; <890px = 20px                     |
+| Name         | Slug         | Value                                   | Min | Max  |
+|--------------|--------------|-----------------------------------------|-----|------|
+| 3X-Small     | `10`         |  10px                                   |     |      |
+| 2X-Small     | `20`         |  20px                                   |     |      |
+| X-Small      | `30`         |  30px                                   |     |      |
+| Small        | `40`         | clamp(30px, 5vw, 50px)                  | 600 | 1000 |
+| Medium       | `50`         | clamp(40px, calc(5vw + 10px), 60px)     | 600 | 1000 |
+| Large        | `60`         | clamp(20px, calc(10vw - 40px), 80px)    | 600 | 1000 |
+| X-Large      | `70`         | 100px                                   |     |      |
+| 2X-Large     | `80`         | clamp(80px, calc(6.67vw + 40px), 120px) | 600 | 1200 |
+| 3X-Large     | `90`         | clamp(80px, 13.33vw, 160px)             | 600 | 1200 |
+| Edge Spacing | `edge-space` |  80px; <890px = 20px                    |     |      |
 
 ## History
 
