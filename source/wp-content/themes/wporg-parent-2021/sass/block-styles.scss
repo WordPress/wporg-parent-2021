@@ -218,6 +218,10 @@ ul[class*="is-style-cards"] {
 	grid-auto-rows: 1fr;
 	gap: var(--wp--preset--spacing--10);
 
+	[dir="rtl"] & {
+		padding-right: 0;
+	}
+
 	&.is-style-cards-3-col {
 
 		@include break-large() {
