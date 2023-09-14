@@ -90,6 +90,22 @@ function setup_block_styles() {
 	register_block_style(
 		'core/list',
 		array(
+			'name'         => 'cards-2-col',
+			'label'        => __( 'Cards 2 Col', 'wporg' ),
+		)
+	);
+
+	register_block_style(
+		'core/list',
+		array(
+			'name'         => 'cards-3-col',
+			'label'        => __( 'Cards 3 Col', 'wporg' ),
+		)
+	);
+
+	register_block_style(
+		'core/list',
+		array(
 			'name'         => 'links-list',
 			'label'        => __( 'Links', 'wporg' ),
 		)
