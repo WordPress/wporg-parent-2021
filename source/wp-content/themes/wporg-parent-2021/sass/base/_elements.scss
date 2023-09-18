@@ -101,7 +101,8 @@ textarea {
 	border-radius: var(--wp--custom--form--border--radius);
 	box-shadow: var(--wp--custom--form--color--box-shadow);
 	font-family: inherit;
-	padding: var(--wp--custom--form--padding);
+	padding-inline: var(--wp--custom--form--padding--inline);
+	padding-block: var(--wp--custom--form--padding--block);
 
 	&:focus {
 		border-color: var(--custom--form--color--border);

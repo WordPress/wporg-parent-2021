@@ -220,11 +220,14 @@
 				"typography": {
 					"fontSize": "var(--wp--preset--font-size--normal)",
 					"fontWeight": "600",
-					"lineHeight": 1
+					"lineHeight": "var(--wp--custom--body--small--typography--line-height)"
 				}
 			},
 			"form": {
-				"padding": "var(--wp--preset--spacing--10)",
+				"padding": {
+					"inline": "calc(var(--wp--preset--spacing--10) * 1.5)",
+					"block": "calc(var(--wp--preset--spacing--10) * 0.8)"
+				},
 				"border": {
 					"color": "transparent",
 					"radius": "2px",
@@ -275,7 +278,7 @@
 				},
 				"small": {
 					"typography": {
-						"lineHeight": 1.71
+						"lineHeight": 1.714
 					}
 				},
 				"large": {

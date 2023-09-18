@@ -29,7 +29,7 @@
 	}
 
 	> label {
-		margin-bottom: calc(var(--wp--custom--form--padding) / 2);
+		margin-bottom: calc(var(--wp--custom--form--padding--block) / 2);
 		font-size: var(--wp--custom--form--typography--font-size);
 		color: var(--wp--custom--form--search--color--label);
 
@@ -134,7 +134,7 @@
 		&:focus {
 			outline: none;
 			outline-offset: unset;
-			background-color: var(--wp--custom--form--active--color--background);
+			background-color: var(--wp--custom--form--search--color--background);
 		}
 
 		&:focus-visible {
@@ -145,15 +145,13 @@
 	}
 
 	&.wp-block-search__icon-button .wp-block-search__button {
-		padding: calc(var(--wp--custom--form--padding) / 2);
+		padding-inline: var(--wp--custom--form--padding--block);
+		padding-block: var(--wp--custom--form--padding--block);
 	}
 
 	&.wp-block-search__text-button .wp-block-search__button {
 		font-size: var(--wp--custom--form--typography--font-size);
-		padding: var(--wp--custom--form--padding);
-	}
-
-	@include break-small-only {
-		--wp--custom--form--typography--font-size: 16px;
+		padding-inline: var(--wp--custom--form--padding--inline);
+		padding-block: var(--wp--custom--form--padding--block);
 	}
 }
