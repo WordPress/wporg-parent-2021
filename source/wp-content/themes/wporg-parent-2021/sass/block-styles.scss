@@ -234,7 +234,7 @@
 
 			strong {
 				display: block;
-				margin-bottom: var(--wp--preset--spacing--10);
+				margin-bottom: calc(var(--wp--preset--spacing--10) / 2);
 				color: var(--wp--custom--link--color--text);
 			}
 
