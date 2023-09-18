@@ -90,22 +90,6 @@ function setup_block_styles() {
 	register_block_style(
 		'core/list',
 		array(
-			'name'         => 'cards-2-col',
-			'label'        => __( 'Cards 2 Col', 'wporg' ),
-		)
-	);
-
-	register_block_style(
-		'core/list',
-		array(
-			'name'         => 'cards-3-col',
-			'label'        => __( 'Cards 3 Col', 'wporg' ),
-		)
-	);
-
-	register_block_style(
-		'core/list',
-		array(
 			'name'         => 'links-list',
 			'label'        => __( 'Links', 'wporg' ),
 		)
@@ -180,6 +164,14 @@ function setup_block_styles() {
 			'name'         => 'on-dark',
 			'label'        => __( 'On dark', 'wporg' ),
 			'style_handle' => STYLE_HANDLE,
+		)
+	);
+
+	register_block_style(
+		'core/group',
+		array(
+			'name'         => 'cards-grid',
+			'label'        => __( 'Cards Grid', 'wporg' ),
 		)
 	);
 }
