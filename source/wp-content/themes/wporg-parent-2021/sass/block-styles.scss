@@ -217,7 +217,7 @@
 	grid-auto-rows: 1fr;
 
 	@include break-small-only() {
-		grid-template-columns: 1fr;
+		grid-template-columns: 1fr !important;
 		grid-auto-rows: unset;
 	}
 
