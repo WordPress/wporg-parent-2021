@@ -210,6 +210,8 @@
 	}
 }
 
+.is-style-cards-grid,
+// Required to override link styles in the editor
 .wp-block-post-content .is-style-cards-grid {
 	display: grid;
 	grid-auto-rows: 1fr;
