@@ -210,6 +210,50 @@
 	}
 }
 
+.is-style-cards-grid,
+// Required to override link styles in the editor
+.wp-block-post-content .is-style-cards-grid {
+	display: grid;
+	grid-auto-rows: 1fr;
+
+	@include break-small-only() {
+		grid-template-columns: 1fr !important;
+		grid-auto-rows: unset;
+	}
+
+	> * {
+		display: flex;
+
+		> a {
+			flex: 1 1 auto;
+			padding: var(--wp--preset--spacing--20);
+			border: 1px solid var(--wp--preset--color--light-grey-1);
+			text-decoration: none;
+			color: var(--wp--preset--color--charcoal-1);
+			border-radius: 2px;
+
+			strong {
+				display: block;
+				margin-bottom: calc(var(--wp--preset--spacing--10) / 2);
+				color: var(--wp--custom--link--color--text);
+			}
+
+			&:hover {
+				background-color: var(--wp--preset--color--light-grey-2);
+			}
+
+			&:focus {
+				border-color: transparent;
+			}
+
+			&:focus-visible {
+				outline: 1.5px solid var(--wp--preset--color--blueberry-1);
+				outline-offset: -1.5px;
+			}
+		}
+	}
+}
+
 .is-style-serif {
 	font-family: var(--wp--custom--heading--typography--font-family);
 	font-size: var(--wp--preset--font-size--heading-5);

@@ -166,6 +166,14 @@ function setup_block_styles() {
 			'style_handle' => STYLE_HANDLE,
 		)
 	);
+
+	register_block_style(
+		'core/group',
+		array(
+			'name'         => 'cards-grid',
+			'label'        => __( 'Cards Grid', 'wporg' ),
+		)
+	);
 }
 
 /**
