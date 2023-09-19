@@ -3,14 +3,16 @@
 }
 
 .wp-block-query-pagination.wp-block-query-pagination {
-	line-height: normal;
-	color: var(--wp--custom--link--color--text);
+	gap: 0 !important;
 	margin-top: var(--wp--preset--spacing--40);
 	margin-bottom: var(--wp--preset--spacing--40);
-	gap: 0 !important;
+	text-align: center;
+	color: var(--wp--preset--color--charcoal-1);
+	line-height: 1;
 
 	@include break-small-only() {
 		justify-content: center;
+		flex-direction: column;
 	}
 
 	> .wp-block-query-pagination-previous,
@@ -21,29 +23,47 @@
 	}
 
 	.wp-block-query-pagination-previous {
-		&::after {
-			content: "\00B7";
-			display: inline-block;
-			padding: 0 8px;
-		}
+		padding: calc((7 / 16) * 1em) 0;
 	}
 
 	.wp-block-query-pagination-next {
-		&::before {
-			content: "\00B7";
-			display: inline-block;
-			padding: 0 8px;
-		}
+		padding: calc((7 / 16) * 1em) 0;
 	}
 
 	.wp-block-query-pagination-numbers {
+		display: flex;
+
 		> * {
-			display: inline-block;
-			padding: 0 2px;
+			display: block;
+			padding: calc((7 / 16) * 1em) 0;
+			width: 1.875em;
+
+			+ * {
+				margin-left: 0.5em;
+			}
 		}
 
 		.current {
 			text-decoration: underline;
+		}
+	}
+
+	// Add middot for Next/Prev only when
+	@include break-small() {
+		.wp-block-query-pagination-previous::after,
+		.wp-block-query-pagination-next::before {
+			content: "\00B7";
+			display: inline-block;
+			width: 1.875em;
+			color: var(--wp--preset--color--charcoal-1);
+		}
+
+		.wp-block-query-pagination-previous::after {
+			margin-inline-start: 0.5em;
+		}
+
+		.wp-block-query-pagination-next::before {
+			margin-inline-end: 0.5em;
 		}
 	}
 }
