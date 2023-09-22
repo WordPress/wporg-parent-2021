@@ -210,8 +210,7 @@
 	}
 }
 
-.wp-block-group-is-layout-grid.is-style-cards-grid,
-.wp-block-post-content .wp-block-group-is-layout-grid.is-style-cards-grid {
+.wp-block-group-is-layout-grid.is-style-cards-grid {
 	grid-auto-rows: 1fr;
 
 	@include break-small-only() {
