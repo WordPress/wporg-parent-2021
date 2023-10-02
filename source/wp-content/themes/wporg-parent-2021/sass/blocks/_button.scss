@@ -10,51 +10,57 @@
 
 		@include button-color-styles;
 		@include button-main-styles;
+	}
 
-		&.is-style-small {
+	&.is-style-small {
+		.wp-block-button__link {
 
 			@include button-small-styles;
 		}
+	}
 
-		&.is-style-toggle {
+	&.is-style-toggle {
+		.wp-block-button__link {
 
 			@include button-toggle-styles;
 		}
 
-		&.is-style-tertiary {
+		input[type="checkbox"]:checked + .wp-block-button__link,
+		.wp-block-button__link[aria-pressed="true"] {
+
+			@include button-toggle-active-styles;
+
+			&:focus {
+				--wp--custom--button--outline--focus--color--background: var(--wp--preset--color--charcoal-1);
+				--wp--custom--button--outline--hover--color--text: var(--wp--preset--color--white);
+			}
+		}
+
+		input[type="checkbox"]:focus + .wp-block-button__link {
+
+			@include button-color-focus-styles;
+			@include button-outline-focus-styles;
+			@include button-toggle-focus-styles;
+
+			&:hover {
+				--wp--custom--button--outline--hover--color--text: var(--wp--preset--color--charcoal-1);
+				--wp--custom--button--outline--focus--color--background: var(--wp--preset--color--light-grey-1);
+			}
+		}
+
+		input[type="checkbox"]:focus:checked + .wp-block-button__link {
+			--wp--custom--button--outline--focus--color--background: var(--wp--preset--color--charcoal-1);
+
+			&:hover {
+				--wp--custom--button--outline--hover--color--text: var(--wp--preset--color--white);
+			}
+		}
+	}
+
+	&.is-style-tertiary {
+		.wp-block-button__link {
 
 			@include button-tertiary-styles;
-		}
-	}
-
-	input[type="checkbox"]:checked + .wp-block-button__link.is-style-toggle,
-	.wp-block-button__link.is-style-toggle[aria-pressed="true"] {
-
-		@include button-toggle-active-styles;
-
-		&:focus {
-			--wp--custom--button--outline--focus--color--background: var(--wp--preset--color--charcoal-1);
-			--wp--custom--button--outline--hover--color--text: var(--wp--preset--color--white);
-		}
-	}
-
-	input[type="checkbox"]:focus + .wp-block-button__link.is-style-toggle {
-
-		@include button-color-focus-styles;
-		@include button-outline-focus-styles;
-		@include button-toggle-focus-styles;
-
-		&:hover {
-			--wp--custom--button--outline--hover--color--text: var(--wp--preset--color--charcoal-1);
-			--wp--custom--button--outline--focus--color--background: var(--wp--preset--color--light-grey-1);
-		}
-	}
-
-	input[type="checkbox"]:focus:checked + .wp-block-button__link.is-style-toggle {
-		--wp--custom--button--outline--focus--color--background: var(--wp--preset--color--charcoal-1);
-
-		&:hover {
-			--wp--custom--button--outline--hover--color--text: var(--wp--preset--color--white);
 		}
 	}
 
