@@ -114,21 +114,17 @@
 }
 
 @mixin button-small-styles {
-	--button--small--height: 40px;
-	--button--small--height-content: calc(var(--wp--preset--font-size--small) * var(--wp--custom--body--typography--line-height));
-	--button--small--padding--vertical: calc(( var(--button--small--height) - var(--button--small--height-content)) / 2);
+	--wp--custom--button--spacing--padding--top: var(--wp--custom--button--small--spacing--padding--top);
+	--wp--custom--button--spacing--padding--bottom: var(--wp--custom--button--small--spacing--padding--bottom);
+	--wp--custom--button--spacing--padding--left: var(--wp--custom--button--small--spacing--padding--left);
+	--wp--custom--button--spacing--padding--right: var(--wp--custom--button--small--spacing--padding--right);
 
-	--wp--custom--button--spacing--padding--top: var(--button--small--padding--vertical);
-	--wp--custom--button--spacing--padding--bottom: var(--button--small--padding--vertical);
-	--wp--custom--button--spacing--padding--left: 12px;
-	--wp--custom--button--spacing--padding--right: 12px;
-
-	--wp--custom--button--typography--font-size: var(--wp--preset--font-size--small);
-	--wp--custom--button--typography--line-height: var(--wp--custom--body--typography--line-height);
+	--wp--custom--button--typography--font-size: var(--wp--custom--button--small--typography--font-size);
 }
 
 @mixin button-toggle-styles {
 
+	@include button-small-styles;
 	@include button-outline-styles;
 
 	--wp--custom--button--outline--color--text: var(--wp--preset--color--charcoal-1);
@@ -173,9 +169,12 @@
 }
 
 @mixin button-tertiary-styles {
+
+	@include button-small-styles;
+
 	--wp--custom--button--color--text: var(--wp--preset--color--blueberry-1);
 	--wp--custom--button--color--background: transparent;
-	--wp--custom--button--typography--font-weight: 400;
+	--wp--custom--button--typography--font-weight: var(--wp--custom--button--tertiary--typography--font-weight);
 	--wp--custom--button--outline--border--color: transparent;
 
 	&:hover {

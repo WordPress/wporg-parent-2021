@@ -209,12 +209,30 @@
 						}
 					}
 				},
+				"small": {
+					"spacing": {
+						"padding": {
+							"top": "7px",
+							"bottom": "7px",
+							"left": "12px",
+							"right": "12px"
+						}
+					},
+					"typography": {
+						"fontSize": "var(--wp--preset--font-size--small)"
+					}
+				},
 				"spacing": {
 					"padding": {
 						"top": "16px",
 						"bottom": "16px",
 						"left": "32px",
 						"right": "32px"
+					}
+				},
+				"tertiary": {
+					"typography": {
+						"fontWeight": "400"
 					}
 				},
 				"typography": {
