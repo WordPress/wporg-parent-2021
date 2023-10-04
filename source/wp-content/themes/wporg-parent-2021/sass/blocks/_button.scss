@@ -59,10 +59,10 @@
 		}
 	}
 
-	&.is-style-tertiary {
+	&.is-style-text {
 		.wp-block-button__link {
 
-			@include button-tertiary-styles;
+			@include button-text-styles;
 		}
 	}
 

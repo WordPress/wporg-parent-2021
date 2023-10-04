@@ -230,7 +230,7 @@
 						"right": "32px"
 					}
 				},
-				"tertiary": {
+				"text": {
 					"typography": {
 						"fontWeight": "400"
 					}

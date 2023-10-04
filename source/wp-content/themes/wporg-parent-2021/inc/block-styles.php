@@ -81,8 +81,8 @@ function setup_block_styles() {
 	register_block_style(
 		'core/button',
 		array(
-			'name'         => 'tertiary',
-			'label'        => __( 'Tertiary', 'wporg' ),
+			'name'         => 'text',
+			'label'        => __( 'text', 'wporg' ),
 		)
 	);
 
