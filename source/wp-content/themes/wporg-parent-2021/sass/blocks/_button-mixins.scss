@@ -124,7 +124,6 @@
 
 @mixin button-toggle-styles {
 
-	@include button-small-styles;
 	@include button-outline-styles;
 
 	--wp--custom--button--outline--color--text: var(--wp--preset--color--charcoal-1);
@@ -170,7 +169,6 @@
 
 @mixin button-tertiary-styles {
 
-	@include button-small-styles;
 
 	--wp--custom--button--color--text: var(--wp--preset--color--blueberry-1);
 	--wp--custom--button--color--background: transparent;

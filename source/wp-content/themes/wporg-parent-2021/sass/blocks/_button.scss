@@ -12,7 +12,7 @@
 		@include button-main-styles;
 	}
 
-	&.is-style-small {
+	&.is-small {
 		.wp-block-button__link {
 
 			@include button-small-styles;
@@ -20,6 +20,8 @@
 	}
 
 	&.is-style-toggle {
+		position: relative;
+
 		.wp-block-button__link {
 
 			@include button-toggle-styles;

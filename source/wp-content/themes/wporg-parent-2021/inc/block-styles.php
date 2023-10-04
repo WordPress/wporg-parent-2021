@@ -81,14 +81,6 @@ function setup_block_styles() {
 	register_block_style(
 		'core/button',
 		array(
-			'name'         => 'small',
-			'label'        => __( 'Default Small', 'wporg' ),
-		)
-	);
-
-	register_block_style(
-		'core/button',
-		array(
 			'name'         => 'tertiary',
 			'label'        => __( 'Tertiary', 'wporg' ),
 		)
