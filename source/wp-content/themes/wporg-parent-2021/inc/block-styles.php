@@ -82,7 +82,7 @@ function setup_block_styles() {
 		'core/button',
 		array(
 			'name'         => 'text',
-			'label'        => __( 'text', 'wporg' ),
+			'label'        => __( 'Text', 'wporg' ),
 		)
 	);
 
