@@ -27,10 +27,8 @@
 	}
 
 	&:focus {
-		background-color: var(--wp--custom--button--color--background);
-		box-shadow: inset 0 0 0 3px var(--wp--preset--color--white);
-		outline: 1.5px solid var(--wp--custom--button--focus--border--color);
-		outline-offset: -1.5px;
+
+		@include button-color-focus-styles;
 	}
 
 	&:active {
@@ -46,6 +44,13 @@
 			fill: var(--wp--custom--button--active--color--text);
 		}
 	}
+}
+
+@mixin button-color-focus-styles {
+	background-color: var(--wp--custom--button--color--background);
+	box-shadow: inset 0 0 0 3px var(--wp--preset--color--white);
+	outline: 1.5px solid var(--wp--custom--button--focus--border--color);
+	outline-offset: -1.5px;
 }
 
 @mixin button-padding-styles {
@@ -66,6 +71,7 @@
 	text-decoration: none; // Needed because link styles inside .entry-content add a text decoration
 }
 
+// Toggle button styles extend these styles.
 @mixin button-outline-styles {
 	background-color: var(--wp--custom--button--outline--color--background);
 	border: var(--wp--custom--button--border--width) solid var(--wp--custom--button--outline--border--color);
@@ -85,19 +91,97 @@
 	}
 
 	&:focus {
-		// Need to update the padding since the border was removed.
-		padding-top: calc(var(--wp--custom--button--spacing--padding--top) + var(--wp--custom--button--border--width));
-		padding-bottom: calc(var(--wp--custom--button--spacing--padding--bottom) + var(--wp--custom--button--border--width));
-		padding-left: calc(var(--wp--custom--button--spacing--padding--left) + var(--wp--custom--button--border--width));
-		padding-right: calc(var(--wp--custom--button--spacing--padding--right) + var(--wp--custom--button--border--width));
-		border-width: 0;
-		background-color: var(--wp--custom--button--outline--focus--color--background);
-		outline-color: var(--wp--custom--button--outline--focus--border--color);
+
+		@include button-outline-focus-styles;
 	}
 
 	&:active {
 		background-color: var(--wp--custom--button--outline--active--color--background);
 		border-color: var(--wp--custom--button--outline--active--border--color);
 		color: var(--wp--custom--button--outline--active--color--text);
+	}
+}
+
+@mixin button-outline-focus-styles {
+	// Need to update the padding since the border was removed.
+	padding-top: calc(var(--wp--custom--button--spacing--padding--top) + var(--wp--custom--button--border--width));
+	padding-bottom: calc(var(--wp--custom--button--spacing--padding--bottom) + var(--wp--custom--button--border--width));
+	padding-left: calc(var(--wp--custom--button--spacing--padding--left) + var(--wp--custom--button--border--width));
+	padding-right: calc(var(--wp--custom--button--spacing--padding--right) + var(--wp--custom--button--border--width));
+	border-width: 0;
+	background-color: var(--wp--custom--button--outline--focus--color--background);
+	outline-color: var(--wp--custom--button--outline--focus--border--color);
+}
+
+@mixin button-small-styles {
+	--wp--custom--button--spacing--padding--top: var(--wp--custom--button--small--spacing--padding--top);
+	--wp--custom--button--spacing--padding--bottom: var(--wp--custom--button--small--spacing--padding--bottom);
+	--wp--custom--button--spacing--padding--left: var(--wp--custom--button--small--spacing--padding--left);
+	--wp--custom--button--spacing--padding--right: var(--wp--custom--button--small--spacing--padding--right);
+
+	--wp--custom--button--typography--font-size: var(--wp--custom--button--small--typography--font-size);
+}
+
+@mixin button-toggle-styles {
+
+	@include button-outline-styles;
+
+	--wp--custom--button--outline--color--text: var(--wp--preset--color--charcoal-1);
+	--wp--custom--button--typography--font-weight: 400;
+	--wp--custom--button--outline--border--color: var(--wp--preset--color--light-grey-1);
+
+	display: inline-block;
+	cursor: pointer;
+	margin-left: 0;
+
+	&:hover {
+
+		@include button-toggle-hover-styles;
+	}
+
+	&:focus {
+
+		@include button-toggle-focus-styles;
+	}
+
+	&:active {
+
+		@include button-toggle-active-styles;
+	}
+}
+
+@mixin button-toggle-hover-styles {
+	--wp--custom--button--outline--hover--color--text: var(--wp--preset--color--charcoal-1);
+	--wp--custom--button--outline--hover--border--color: var(--wp--preset--color--light-grey-1);
+	--wp--custom--button--outline--hover--color--background: var(--wp--preset--color--light-grey-1);
+}
+
+@mixin button-toggle-focus-styles {
+	--wp--custom--button--outline--focus--color--background: transparent;
+	--wp--custom--button--outline--hover--color--text: var(--wp--preset--color--blueberry-1);
+}
+
+@mixin button-toggle-active-styles {
+	--wp--custom--button--outline--color--text: var(--wp--preset--color--white);
+	--wp--custom--button--outline--color--background: var(--wp--preset--color--charcoal-1);
+	--wp--custom--button--outline--border--color: var(--wp--preset--color--charcoal-1);
+}
+
+@mixin button-text-styles {
+
+	@include button-outline-styles;
+
+	--wp--custom--button--typography--font-weight: var(--wp--custom--button--text--typography--font-weight);
+	--wp--custom--button--outline--border--color: transparent;
+
+	&:hover {
+		--wp--custom--button--outline--hover--color--text: var(--wp--preset--color--blueberry-1);
+		--wp--custom--button--outline--hover--color--background: var(--wp--preset--color--blueberry-4);
+		--wp--custom--button--outline--hover--border--color: var(--wp--preset--color--blueberry-4);
+	}
+
+	&:focus {
+		--wp--custom--button--outline--hover--color--text: var(--wp--preset--color--blueberry-1);
+		--wp--custom--button--outline--focus--color--background: transparent;
 	}
 }

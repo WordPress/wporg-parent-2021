@@ -79,6 +79,22 @@ function setup_block_styles() {
 	);
 
 	register_block_style(
+		'core/button',
+		array(
+			'name'         => 'text',
+			'label'        => __( 'text', 'wporg' ),
+		)
+	);
+
+	register_block_style(
+		'core/button',
+		array(
+			'name'         => 'toggle',
+			'label'        => __( 'Toggle', 'wporg' ),
+		)
+	);
+
+	register_block_style(
 		'core/list',
 		array(
 			'name'         => 'features',

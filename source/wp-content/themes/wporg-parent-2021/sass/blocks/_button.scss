@@ -12,6 +12,60 @@
 		@include button-main-styles;
 	}
 
+	&.is-small {
+		.wp-block-button__link {
+
+			@include button-small-styles;
+		}
+	}
+
+	&.is-style-toggle {
+		position: relative;
+
+		.wp-block-button__link {
+
+			@include button-toggle-styles;
+		}
+
+		input[type="checkbox"]:checked + .wp-block-button__link,
+		.wp-block-button__link[aria-pressed="true"] {
+
+			@include button-toggle-active-styles;
+
+			&:focus {
+				--wp--custom--button--outline--focus--color--background: var(--wp--preset--color--charcoal-1);
+				--wp--custom--button--outline--hover--color--text: var(--wp--preset--color--white);
+			}
+		}
+
+		input[type="checkbox"]:focus + .wp-block-button__link {
+
+			@include button-color-focus-styles;
+			@include button-outline-focus-styles;
+			@include button-toggle-focus-styles;
+
+			&:hover {
+				--wp--custom--button--outline--hover--color--text: var(--wp--preset--color--charcoal-1);
+				--wp--custom--button--outline--focus--color--background: var(--wp--preset--color--light-grey-1);
+			}
+		}
+
+		input[type="checkbox"]:focus:checked + .wp-block-button__link {
+			--wp--custom--button--outline--focus--color--background: var(--wp--preset--color--charcoal-1);
+
+			&:hover {
+				--wp--custom--button--outline--hover--color--text: var(--wp--preset--color--white);
+			}
+		}
+	}
+
+	&.is-style-text {
+		.wp-block-button__link {
+
+			@include button-text-styles;
+		}
+	}
+
 	&.is-style-outline,
 	&.is-style-outline-on-dark {
 		color: var(--wp--custom--button--outline--color--text);
