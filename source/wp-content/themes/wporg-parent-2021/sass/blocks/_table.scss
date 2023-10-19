@@ -27,3 +27,35 @@
 		background-color: transparent;
 	}
 }
+
+.wp-block-table.is-style-borderless {
+	thead {
+		border-bottom: none;
+
+		tr {
+			background-color: var(--wp--preset--color--blueberry-4);
+		}
+
+		th {
+			font-weight: 700;
+		}
+	}
+
+	tbody {
+		tr {
+			&:nth-child(2n) {
+				background-color: var(--wp--preset--color--light-grey-2);
+			}
+
+			&:nth-child(2n+1) {
+				background-color: transparent;
+			}
+		}
+	}
+
+	thead th,
+	tbody td {
+		border: none;
+		padding: var(--wp--preset--spacing--10);
+	}
+}
