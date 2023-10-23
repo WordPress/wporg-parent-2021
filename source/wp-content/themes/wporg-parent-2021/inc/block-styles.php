@@ -190,6 +190,14 @@ function setup_block_styles() {
 			'label'        => __( 'Cards Grid', 'wporg' ),
 		)
 	);
+
+	register_block_style(
+		'core/table',
+		array(
+			'name'         => 'borderless',
+			'label'        => __( 'Borderless', 'wporg' ),
+		)
+	);
 }
 
 /**
