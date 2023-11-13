@@ -74,7 +74,7 @@ function enqueue_assets() {
 	wp_enqueue_style(
 		'wporg-parent-2021-style',
 		get_template_directory_uri() . '/build/style.css',
-		array( 'wporg-global-fonts' ),
+		array( 'wporg-global-fonts', 'wporg-parent-block-styles' ),
 		filemtime( __DIR__ . '/build/style.css' )
 	);
 	wp_style_add_data( 'wporg-parent-2021-style', 'rtl', 'replace' );
