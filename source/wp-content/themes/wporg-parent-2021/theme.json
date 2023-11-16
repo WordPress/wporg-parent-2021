@@ -601,6 +601,11 @@
 					"fontFamily": "'IBM Plex Mono', monospace",
 					"slug": "monospace",
 					"name": "Monospace"
+				},
+				{
+					"fontFamily": "'IBM Plex Sans', san-serif",
+					"slug": "ibm-plex-sans",
+					"name": "IBM Plex Sans"
 				}
 			],
 			"fontSizes": [
