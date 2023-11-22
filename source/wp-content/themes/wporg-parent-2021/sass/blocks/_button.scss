@@ -28,7 +28,8 @@
 		}
 
 		input[type="checkbox"]:checked + .wp-block-button__link,
-		.wp-block-button__link[aria-pressed="true"] {
+		.wp-block-button__link[aria-pressed="true"],
+		.wp-block-button__link[aria-selected="true"] {
 
 			@include button-toggle-active-styles;
 
