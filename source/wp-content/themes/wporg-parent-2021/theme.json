@@ -196,7 +196,8 @@
 							"color": "var(--wp--preset--color--blueberry-1)"
 						},
 						"color": {
-							"background": "var(--wp--preset--color--blueberry-1)"
+							"background": "var(--wp--preset--color--blueberry-1)",
+							"text": "var(--wp--preset--color--white)"
 						}
 					},
 					"active": {
