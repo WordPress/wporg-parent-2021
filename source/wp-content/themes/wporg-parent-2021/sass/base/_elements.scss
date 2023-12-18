@@ -8,6 +8,7 @@ h6,
 caption,
 figcaption {
 	text-wrap: var(--wp--custom--heading--typography--text-wrap);
+	overflow-wrap: normal;
 }
 
 // Prevent orphans
