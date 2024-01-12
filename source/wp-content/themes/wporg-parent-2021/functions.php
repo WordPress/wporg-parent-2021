@@ -8,6 +8,7 @@ defined( 'WPINC' ) || die();
 
 require_once __DIR__ . '/inc/gutenberg-tweaks.php';
 require_once __DIR__ . '/inc/block-styles.php';
+require_once __DIR__ . '/inc/rosetta-styles.php';
 
 /**
  * Actions and filters.
