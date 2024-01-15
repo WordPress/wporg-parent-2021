@@ -284,7 +284,7 @@
 
 	@include break-large() {
 		grid-template-columns: auto 1fr;
-		gap: 0.5em;
+		gap: 0.1em 0.5em;
 	}
 
 	&::before,
@@ -359,6 +359,10 @@
 		&::after {
 			transform: translateX(#{math.div($arrow_size, 2)});
 		}
+	}
+
+	span {
+		font-size: var(--wp--preset--font-size--huge);
 	}
 }
 
