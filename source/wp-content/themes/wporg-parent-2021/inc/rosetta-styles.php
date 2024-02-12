@@ -72,6 +72,9 @@ function get_locale_customizations( $locale ) {
 								],
 							],
 						],
+						'typography' => [
+							'text-wrap' => 'unset',
+						],
 					],
 				],
 				'typography' => [
