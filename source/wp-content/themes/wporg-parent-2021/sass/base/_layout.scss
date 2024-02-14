@@ -26,3 +26,76 @@
 		max-width: var(--wp--custom--alignment--aligned-max-width);
 	}
 }
+
+// Configures a 3 column layout where `wporg/sidebar-container` blocks sit either side of the main content.
+// Examples: Developer Resources, Documentation.
+.has-three-columns {
+	--local--sidebar--width: 248px;
+	--local--column-gap: 40px;
+	justify-content: flex-end;
+
+	> * {
+		width: 100%;
+	}
+
+	main {
+		order: 1;
+	}
+
+	article {
+		max-width: var(--wp--style--global--content-size);
+	}
+
+	// Left sidebar: Typically Chapter List
+	> .wp-block-wporg-sidebar-container {
+		margin-top: var(--wp--preset--spacing--20);
+	}
+
+	// Right sidebar: Typically Table of Contents
+	article .wp-block-wporg-sidebar-container {
+		margin-bottom: var(--wp--preset--spacing--50);
+	}
+
+	@media (min-width: 768px) {
+		flex-direction: row !important;
+		column-gap: var(--local--column-gap);
+
+		> .wp-block-wporg-sidebar-container {
+			width: var(--local--sidebar--width);
+			inset-inline-start: var(--wp--preset--spacing--edge-space);
+		}
+
+		// Allow room for the left column.
+		// Only necessary at this width if the left sidebar is present.
+		&:has(> .wp-block-wporg-sidebar-container) main {
+			width: calc(100% - var(--local--sidebar--width) - var(--local--column-gap));
+		}
+
+		.wp-block-wporg-sidebar-container {
+			--local--block-end-sidebar--width: var(--local--sidebar--width);
+		}
+	}
+
+	@media (min-width: 1300px) {
+		// Allow room for the right column.
+		width: calc(100% - var(--local--sidebar--width) - var(--local--column-gap));
+
+		article {
+			width: 100%;
+			margin-left: auto;
+			margin-right: auto;
+
+			.wp-block-wporg-sidebar-container {
+				inset-inline-end: var(--wp--preset--spacing--edge-space);
+			}
+		}
+	}
+
+	@media (min-width: 1400px) {
+		// Create an empty left column.
+		// If a left sidebar is present, space would have already been created on screens >= 768px.
+		main {
+			width: calc(100% - var(--local--sidebar--width) - var(--local--column-gap));
+		}
+	}
+}
