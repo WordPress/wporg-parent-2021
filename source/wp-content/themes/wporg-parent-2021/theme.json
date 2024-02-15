@@ -143,6 +143,11 @@
 			"alignment": {
 				"alignedMaxWidth": "50%"
 			},
+			"code": {
+				"border": {
+					"radius": "2px"
+				}
+			},
 			"button": {
 				"color": {
 					"background": "var(--wp--preset--color--blueberry-1)",
