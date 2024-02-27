@@ -2,7 +2,7 @@
 .wp-site-blocks {
 	display: flex;
 	flex-direction: column;
-	min-height: calc(100vh - var(--wp-global-header-offset, 0px) - var(--local-header-height, 0px));
+	min-height: calc(100vh - var(--wp-admin--admin-bar--height, 0px));
 	overflow-wrap: break-word;
 
 	> main,
