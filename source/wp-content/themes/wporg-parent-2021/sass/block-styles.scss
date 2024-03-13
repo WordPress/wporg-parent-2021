@@ -218,12 +218,14 @@
 		grid-auto-rows: unset;
 	}
 
-	.wp-block-wporg-link-wrapper {
+	> * {
 		padding: var(--wp--preset--spacing--20);
 		border: 1px solid var(--wp--preset--color--light-grey-1);
 		color: var(--wp--preset--color--charcoal-1);
 		border-radius: 2px;
+	}
 
+	> a {
 		h2,
 		h3,
 		h4,
