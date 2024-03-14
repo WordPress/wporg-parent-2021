@@ -223,6 +223,19 @@
 		border: 1px solid var(--wp--preset--color--light-grey-1);
 		color: var(--wp--preset--color--charcoal-1);
 		border-radius: 2px;
+
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			margin-top: 0;
+			margin-bottom: calc(var(--wp--preset--spacing--10) / 2);
+		}
+
+		p {
+			margin-top: 0;
+		}
 	}
 
 	> a {
@@ -231,13 +244,7 @@
 		h4,
 		h5,
 		h6 {
-			margin-top: 0;
-			margin-bottom: calc(var(--wp--preset--spacing--10) / 2);
 			color: var(--wp--custom--link--color--text);
-		}
-
-		p {
-			margin-top: 0;
 		}
 
 		&:hover {
