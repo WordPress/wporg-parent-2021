@@ -119,6 +119,8 @@
 
 		.wp-block-navigation-item__content {
 			--wp--custom--button--outline--border--color: transparent !important;
+			--wp--custom--button--outline--hover--border--color: var(--wp--preset--color--light-grey-2) !important;
+			--wp--custom--button--outline--hover--color--background: var(--wp--preset--color--light-grey-2) !important;
 			border-radius: 2px;
 
 			&:hover,
@@ -144,7 +146,7 @@
 
 			&:hover {
 				--wp--custom--button--outline--hover--color--text: var(--wp--preset--color--charcoal-1);
-				--wp--custom--button--outline--hover--color--background: var(--wp--preset--color--light-grey-1);
+				--wp--custom--button--outline--hover--color--background: var(--wp--preset--color--light-grey-2);
 			}
 		}
 	}
