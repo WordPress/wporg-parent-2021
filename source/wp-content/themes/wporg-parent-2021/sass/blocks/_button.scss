@@ -116,6 +116,8 @@
 	// Block style for navigation, but uses button style mixins.
 	&.is-style-button-list {
 		gap: 0;
+		overflow-x: auto;
+		white-space: nowrap;
 
 		.wp-block-navigation-item__content {
 			--wp--custom--button--outline--border--color: transparent !important;
