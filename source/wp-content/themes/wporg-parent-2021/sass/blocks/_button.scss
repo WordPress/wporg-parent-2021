@@ -112,4 +112,44 @@
 			box-shadow: inset 0 0 0 3px var(--wp--custom--button--outline--hover--border--color);
 		}
 	}
+
+	// Block style for navigation, but uses button style mixins.
+	&.is-style-button-list {
+		gap: 0;
+		overflow-x: auto;
+		white-space: nowrap;
+
+		.wp-block-navigation-item__content {
+			--wp--custom--button--outline--border--color: transparent !important;
+			--wp--custom--button--outline--hover--border--color: var(--wp--preset--color--light-grey-2) !important;
+			--wp--custom--button--outline--hover--color--background: var(--wp--preset--color--light-grey-2) !important;
+			border-radius: 2px;
+
+			&:hover,
+			&:focus {
+				text-decoration: none;
+			}
+
+			&:focus {
+
+				@include button-color-focus-styles;
+			}
+
+			@include button-small-styles;
+			@include button-toggle-styles;
+		}
+
+		.current-menu-item .wp-block-navigation-item__content {
+
+			@include button-toggle-active-styles;
+
+			--wp--custom--button--outline--hover--color--text: var(--wp--preset--color--white);
+			--wp--custom--button--outline--focus--color--background: var(--wp--preset--color--charcoal-1);
+
+			&:hover {
+				--wp--custom--button--outline--hover--color--text: var(--wp--preset--color--charcoal-1);
+				--wp--custom--button--outline--hover--color--background: var(--wp--preset--color--light-grey-2);
+			}
+		}
+	}
 }

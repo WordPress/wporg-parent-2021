@@ -198,6 +198,15 @@ function setup_block_styles() {
 			'label'        => __( 'Borderless', 'wporg' ),
 		)
 	);
+
+	register_block_style(
+		'core/navigation',
+		array(
+			'name'         => 'button-list',
+			'label'        => __( 'Buttons', 'wporg' ),
+			'style_handle' => STYLE_HANDLE,
+		)
+	);
 }
 
 /**
