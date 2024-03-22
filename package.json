@@ -1,23 +1,35 @@
 {
-	"name": "wporg-parent-2021-project",
+	"name": "wporg-parent-2021",
 	"version": "1.0.0",
-	"description": "The codebase and development environment for the WordPress.org parent theme.",
+	"description": "",
 	"author": "WordPress.org",
 	"license": "GPL-2.0-or-later",
 	"private": true,
 	"dependencies": {},
 	"devDependencies": {
-		"@wordpress/env": "9.4.0"
+		"@wordpress/base-styles": "4.43.0",
+		"@wordpress/browserslist-config": "5.35.0",
+		"@wordpress/scripts": "27.3.0",
+		"autoprefixer": "10.4.18",
+		"chokidar-cli": "^3.0.0",
+		"postcss": "8.4.35",
+		"rtlcss": "^4.0.0",
+		"sass": "1.71.1"
 	},
 	"scripts": {
-		"build:theme": "yarn workspace wporg-parent-2021 build",
-		"start:theme": "yarn workspace wporg-parent-2021 start",
-		"setup:tools": "yarn && composer install && TEXTDOMAIN=wporg composer exec update-configs",
-		"setup:wp": "wp-env run cli bash env/setup.sh",
-		"update:tools": "composer update && TEXTDOMAIN=wporg composer exec update-configs",
-		"wp-env": "wp-env"
+		"build": "node build-styles.js",
+		"start": "chokidar \"sass/**/*.scss\" -c \"node build-styles.js\" --initial",
+		"lint:css": "wp-scripts lint-style sass",
+		"lint:js": "echo \"No JS.\""
 	},
-	"workspaces": [
-		"source/wp-content/themes/wporg-parent-2021"
-	]
+	"browserslist": [
+		"extends @wordpress/browserslist-config"
+	],
+	"stylelint": {
+		"extends": "../../../../.stylelintrc",
+		"rules": {
+			"max-line-length": null,
+			"no-duplicate-selectors": null
+		}
+	}
 }
