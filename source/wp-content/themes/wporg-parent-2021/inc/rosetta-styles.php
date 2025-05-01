@@ -8,6 +8,53 @@ namespace WordPressdotorg\Theme\Parent_2021\Rosetta_Styles;
 defined( 'WPINC' ) || die();
 
 add_filter( 'wp_theme_json_data_user', __NAMESPACE__ . '\inject_i18n_customizations' );
+add_filter( 'wporg_preload_heading_font', __NAMESPACE__ . '\update_preload_heading_font' );
+add_filter( 'wporg_preload_body_font', __NAMESPACE__ . '\update_preload_body_font' );
+
+/**
+ * Update the font to preload for headings.
+ *
+ * This does not impact loading the font, just the `preload` hint.
+ *
+ * @param array $font_pair {
+ *     An array with [$font, $subset].
+ *
+ *     @type string $0 Font name(s).
+ *     @type string $1 Subset(s).
+ * }
+ *
+ * @return string[] Updated (font, subset) pair.
+ */
+function update_preload_heading_font( $font_pair ) {
+	// First check if it should be a different font.
+	if ( 'ja' === get_locale() ) {
+		$font_pair = [ 'Noto Serif JP', 'cjk' ];
+	} else if ( 'ckb' === get_locale() ) {
+		$font_pair = [ 'Noto Kufi', 'arabic' ];
+	}
+	return $font_pair;
+}
+
+/**
+ * Update the font to preload for body text.
+ *
+ * This does not impact loading the font, just the `preload` hint.
+ *
+ * @param array $font_pair {
+ *     An array with [$font, $subset].
+ *
+ *     @type string $0 Font name(s).
+ *     @type string $1 Subset(s).
+ * }
+ *
+ * @return array{string,string} Updated (font, subset) pair.
+ */
+function update_preload_body_font( $font_pair ) {
+	if ( 'ckb' === get_locale() ) {
+		$font_pair = [ 'Noto Kufi', 'arabic' ];
+	}
+	return $font_pair;
+}
 
 /**
  * Inject customizations for Rosetta sites.
