@@ -29,6 +29,8 @@ function update_preload_heading_font( $font_pair ) {
 	// First check if it should be a different font.
 	if ( 'ja' === get_locale() ) {
 		$font_pair = [ 'Noto Serif JP', 'cjk' ];
+	} else if ( 'zh_CN' === get_locale() ) {
+		$font_pair = [ 'Noto Serif SC', 'cjk' ];
 	} else if ( 'ckb' === get_locale() ) {
 		$font_pair = [ 'Noto Kufi', 'arabic' ];
 	}
@@ -197,6 +199,25 @@ function get_locale_settings( $locale ) {
 					],
 				],
 			];
+		case 'zh_CN':
+			return [
+				'custom' => [
+					'heading' => [
+						'typography' => [
+							'fontFamily' => 'var(--wp--preset--font-family--noto-serif-sc)'
+						],
+					],
+				],
+				'typography' => [
+					'fontFamilies' => [
+						[
+							'fontFamily' => '"Noto Serif SC", serif',
+							'slug' => 'noto-serif-sc',
+							'name' => 'Noto Serif SC',
+						],
+					],
+				],
+			];
 	}
 	return false;
 }
@@ -240,6 +261,18 @@ CSS,
 						],
 					],
 				],
+			];
+		case 'zh_CN':
+			return [
+				// Force any inline-styled headings to use Noto Serif SC.
+				'css' => <<<CSS
+* {
+	--wp--preset--font-family--eb-garamond: var(--wp--preset--font-family--noto-serif-sc) !important;
+}
+span.global-footer__code_is_poetry {
+	font-family: var(--wp--preset--font-family--noto-serif-sc) !important;
+}
+CSS,
 			];
 	}
 }
