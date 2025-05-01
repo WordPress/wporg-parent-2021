@@ -128,6 +128,7 @@ function get_locale_settings( $locale ) {
 							],
 						],
 						'typography' => [
+							'fontFamily' => 'var(--wp--preset--font-family--noto-serif-jp)',
 							'text-wrap' => 'unset',
 						],
 					],
