@@ -257,7 +257,6 @@ CSS,
 			];
 		case 'ko_KR':
 			return [
-				// Force any inline-styled headings to use Noto Serif SC.
 				'css' => <<<CSS
 * {
 	--wp--preset--font-family--eb-garamond: var(--wp--preset--font-family--noto-serif-kr) !important;
