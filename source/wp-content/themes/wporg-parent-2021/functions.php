@@ -88,7 +88,8 @@ function enqueue_assets() {
 		/*
 		 * translators: Font subset for your locale. Can be any of cyrillic,
 		 * cyrillic-ext, greek, greek-ext, vietnamese, latin, latin-ext.
-		 * Do not translate into your own language.
+		 * Do not translate into your own language. If you don't use EB Garamond
+		 * for headings, you can ignore this.
 		 */
 		$subsets = _x( 'latin', 'EB Garamond subsets, comma separated', 'wporg' );
 		list( $font, $subsets ) = apply_filters( 'wporg_preload_heading_font', [ 'EB Garamond', $subsets ] );
