@@ -130,7 +130,6 @@ function get_locale_settings( $locale ) {
 							],
 						],
 						'typography' => [
-							'fontFamily' => 'var(--wp--preset--font-family--noto-serif-jp)',
 							'text-wrap' => 'unset',
 						],
 					],
@@ -201,13 +200,6 @@ function get_locale_settings( $locale ) {
 			];
 		case 'zh_CN':
 			return [
-				'custom' => [
-					'heading' => [
-						'typography' => [
-							'fontFamily' => 'var(--wp--preset--font-family--noto-serif-sc)'
-						],
-					],
-				],
 				'typography' => [
 					'fontFamilies' => [
 						[
@@ -237,7 +229,17 @@ function get_locale_styles( $locale ) {
 	switch ( $locale ) {
 		case 'ja':
 			return [
-				'css' => 'body { font-feature-settings: "palt"; }',
+				'css' => <<<CSS
+* {
+	--wp--preset--font-family--eb-garamond: var(--wp--preset--font-family--noto-serif-jp) !important;
+}
+body {
+	font-feature-settings: "palt";
+}
+span.global-footer__code_is_poetry {
+	font-family: var(--wp--preset--font-family--noto-serif-jp) !important;
+}
+CSS,
 			];
 		case 'ckb':
 			return [
