@@ -26,14 +26,11 @@ add_filter( 'wporg_preload_body_font', __NAMESPACE__ . '\update_preload_body_fon
  * @return string[] Updated (font, subset) pair.
  */
 function update_preload_heading_font( $font_pair ) {
-	// First check if it should be a different font.
-	if ( 'ja' === get_locale() ) {
-		$font_pair = [ 'Noto Serif JP', 'cjk' ];
-	} else if ( 'ko_KR' === get_locale() ) {
-		$font_pair = [ 'Noto Serif KR', 'cjk' ];
-	} else if ( 'zh_CN' === get_locale() ) {
-		$font_pair = [ 'Noto Serif SC', 'cjk' ];
-	} else if ( 'ckb' === get_locale() ) {
+	$locale = get_locale();
+	if ( in_array( $locale, [ 'ja', 'ko_KR', 'zh_CN' ] ) ) {
+		// For these locales, we have font subsets which cannot be preloaded.
+		$font_pair = [ false, false ];
+	} else if ( 'ckb' === $locale ) {
 		$font_pair = [ 'Noto Kufi', 'arabic' ];
 	}
 	return $font_pair;
@@ -54,7 +51,11 @@ function update_preload_heading_font( $font_pair ) {
  * @return array{string,string} Updated (font, subset) pair.
  */
 function update_preload_body_font( $font_pair ) {
-	if ( 'ckb' === get_locale() ) {
+	$locale = get_locale();
+	if ( in_array( $locale, [ 'ja', 'ko_KR', 'zh_CN' ] ) ) {
+		// Inter is not supported, no need to preload it.
+		$font_pair = [ false, false ];
+	} else if ( 'ckb' === $locale ) {
 		$font_pair = [ 'Noto Kufi', 'arabic' ];
 	}
 	return $font_pair;
