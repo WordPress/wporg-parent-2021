@@ -99,10 +99,6 @@ function get_locale_settings( $locale ) {
 							'size' => '70px',
 						],
 						[
-							'slug' => 'heading-1',
-							'size' => '60px',
-						],
-						[
 							'slug' => 'heading-2',
 							'size' => '40px',
 						],
