@@ -82,6 +82,19 @@ function enqueue_assets() {
 		'print'
 	);
 	wp_style_add_data( 'wporg-parent-2021-print', 'rtl', 'replace' );
+
+	// Preload the heading font.
+	if ( is_callable( 'global_fonts_preload' ) ) {
+		/*
+		 * translators: Font subset for your locale. Can be any of cyrillic,
+		 * cyrillic-ext, greek, greek-ext, vietnamese, latin, latin-ext.
+		 * Do not translate into your own language. If you don't use EB Garamond
+		 * for headings, you can ignore this.
+		 */
+		$subsets = _x( 'latin', 'EB Garamond subsets, comma separated', 'wporg' );
+		list( $font, $subsets ) = apply_filters( 'wporg_preload_heading_font', [ 'EB Garamond', $subsets ] );
+		global_fonts_preload( $font, $subsets );
+	}
 }
 
 /**

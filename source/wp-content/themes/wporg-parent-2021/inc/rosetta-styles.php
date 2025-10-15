@@ -8,6 +8,58 @@ namespace WordPressdotorg\Theme\Parent_2021\Rosetta_Styles;
 defined( 'WPINC' ) || die();
 
 add_filter( 'wp_theme_json_data_user', __NAMESPACE__ . '\inject_i18n_customizations' );
+add_filter( 'wporg_preload_heading_font', __NAMESPACE__ . '\update_preload_heading_font' );
+add_filter( 'wporg_preload_body_font', __NAMESPACE__ . '\update_preload_body_font' );
+
+/**
+ * Update the font to preload for headings.
+ *
+ * This does not impact loading the font, just the `preload` hint.
+ *
+ * @param array $font_pair {
+ *     An array with [$font, $subset].
+ *
+ *     @type string $0 Font name(s).
+ *     @type string $1 Subset(s).
+ * }
+ *
+ * @return string[] Updated (font, subset) pair.
+ */
+function update_preload_heading_font( $font_pair ) {
+	$locale = get_locale();
+	if ( in_array( $locale, [ 'ja', 'ko_KR', 'zh_CN' ] ) ) {
+		// For these locales, we have font subsets which cannot be preloaded.
+		$font_pair = [ false, false ];
+	} else if ( 'ckb' === $locale ) {
+		$font_pair = [ 'Noto Kufi', 'arabic' ];
+	}
+	return $font_pair;
+}
+
+/**
+ * Update the font to preload for body text.
+ *
+ * This does not impact loading the font, just the `preload` hint.
+ *
+ * @param array $font_pair {
+ *     An array with [$font, $subset].
+ *
+ *     @type string $0 Font name(s).
+ *     @type string $1 Subset(s).
+ * }
+ *
+ * @return array{string,string} Updated (font, subset) pair.
+ */
+function update_preload_body_font( $font_pair ) {
+	$locale = get_locale();
+	if ( in_array( $locale, [ 'ja', 'ko_KR', 'zh_CN' ] ) ) {
+		// Inter is not supported, no need to preload it.
+		$font_pair = [ false, false ];
+	} else if ( 'ckb' === $locale ) {
+		$font_pair = [ 'Noto Kufi', 'arabic' ];
+	}
+	return $font_pair;
+}
 
 /**
  * Inject customizations for Rosetta sites.
@@ -105,6 +157,18 @@ function get_locale_settings( $locale ) {
 					],
 				],
 			];
+		case 'ko_KR':
+			return [
+				'typography' => [
+					'fontFamilies' => [
+						[
+							'fontFamily' => '"Noto Serif KR", serif',
+							'slug' => 'noto-serif-kr',
+							'name' => 'Noto Serif KR',
+						],
+					],
+				],
+			];
 		case 'ckb':
 			return [
 				'custom' => [
@@ -145,6 +209,18 @@ function get_locale_settings( $locale ) {
 					],
 				],
 			];
+		case 'zh_CN':
+			return [
+				'typography' => [
+					'fontFamilies' => [
+						[
+							'fontFamily' => '"Noto Serif SC", serif',
+							'slug' => 'noto-serif-sc',
+							'name' => 'Noto Serif SC',
+						],
+					],
+				],
+			];
 	}
 	return false;
 }
@@ -164,7 +240,28 @@ function get_locale_styles( $locale ) {
 	switch ( $locale ) {
 		case 'ja':
 			return [
-				'css' => 'body { font-feature-settings: "palt"; }',
+				'css' => <<<CSS
+* {
+	--wp--preset--font-family--eb-garamond: var(--wp--preset--font-family--noto-serif-jp) !important;
+}
+body {
+	font-feature-settings: "palt";
+}
+span.global-footer__code_is_poetry {
+	font-family: var(--wp--preset--font-family--noto-serif-jp) !important;
+}
+CSS,
+			];
+		case 'ko_KR':
+			return [
+				'css' => <<<CSS
+* {
+	--wp--preset--font-family--eb-garamond: var(--wp--preset--font-family--noto-serif-kr) !important;
+}
+span.global-footer__code_is_poetry {
+	font-family: var(--wp--preset--font-family--noto-serif-kr) !important;
+}
+CSS,
 			];
 		case 'ckb':
 			return [
@@ -188,6 +285,18 @@ CSS,
 						],
 					],
 				],
+			];
+		case 'zh_CN':
+			return [
+				// Force any inline-styled headings to use Noto Serif SC.
+				'css' => <<<CSS
+* {
+	--wp--preset--font-family--eb-garamond: var(--wp--preset--font-family--noto-serif-sc) !important;
+}
+span.global-footer__code_is_poetry {
+	font-family: var(--wp--preset--font-family--noto-serif-sc) !important;
+}
+CSS,
 			];
 	}
 }
