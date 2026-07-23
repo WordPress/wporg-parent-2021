@@ -124,7 +124,22 @@ function use_wporg_profile_for_author_link( $link, $author_id, $author_nicename 
  * @return string The updated content.
  */
 function add_aria_hidden_to_arrows( $content ) {
-	return preg_replace( '/([←↑→↓↔↕↖↗↘↙])/u', '<span aria-hidden="true" class="wp-exclude-emoji">\1</span>', $content );
+	// Split the content on HTML elements so the span is only ever inserted into
+	// text nodes. Replacing blindly puts the span's quotes inside any attribute
+	// that contains an arrow, which terminates that attribute and dumps the rest
+	// of the tag onto the page as visible text.
+	$textarr = wp_html_split( $content );
+
+	foreach ( $textarr as &$chunk ) {
+		if ( '' === $chunk || '<' === $chunk[0] ) {
+			continue;
+		}
+
+		$chunk = preg_replace( '/([←↑→↓↔↕↖↗↘↙])/u', '<span aria-hidden="true" class="wp-exclude-emoji">\1</span>', $chunk );
+	}
+	unset( $chunk );
+
+	return implode( '', $textarr );
 }
 
 /**
