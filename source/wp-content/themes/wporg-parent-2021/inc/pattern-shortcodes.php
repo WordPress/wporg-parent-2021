@@ -15,25 +15,41 @@ namespace WordPressdotorg\Theme\Parent_2021\Pattern_Shortcodes;
 defined( 'ABSPATH' ) || die();
 
 /**
- * Key set on a `core/pattern` parsed block while its source blocks render.
+ * Key holding the render depth to restore once a block has finished rendering.
  *
- * Pairs each depth increment with its own decrement. Core renders some inner
- * blocks without `render_block_data`, so a pattern reached that way never
- * carries the key and cannot pop a depth it never pushed.
+ * Stashing the depth on the block pairs every change with its own undo. Core
+ * renders some inner blocks without `render_block_data`, so a block reached that
+ * way carries no key and leaves the depth alone.
  */
 const MARKER = 'wporgPatternShortcodes';
 
 /**
- * Track how many `core/pattern` blocks are currently rendering.
+ * Blocks that render block markup of their own, around a shortcode pass.
  *
- * @param int $delta Amount to add to the depth, or 0 to read it.
+ * `core/template-part` expands shortcodes before calling `do_blocks()`;
+ * `core/post-content` leaves them to `the_content` at priority 11, after wpautop
+ * and wptexturize. Expanding below either would be a second pass, over the first
+ * one's output. Only core blocks are listed, so a block outside core that does
+ * the same is not covered.
+ */
+const NESTED_CONTENT_BLOCKS = array(
+	'core/post-content',
+	'core/template-part',
+);
+
+/**
+ * Read the current pattern render depth, or set it.
+ *
+ * @param int|null $set Depth to set, or null to read the current one.
  *
  * @return int The current depth.
  */
-function pattern_render_depth( int $delta = 0 ): int {
+function pattern_render_depth( ?int $set = null ): int {
 	static $depth = 0;
 
-	$depth = max( 0, $depth + $delta );
+	if ( null !== $set ) {
+		$depth = max( 0, $set );
+	}
 
 	return $depth;
 }
@@ -43,24 +59,34 @@ function pattern_render_depth( int $delta = 0 ): int {
  *
  * Source, never rendered output: shortcode syntax survives `esc_html()`, so
  * parsing output would let an escaped post title reintroduce raw markup. The
- * cost is coverage — shortcodes in block attributes, split across blocks, or
- * below a `core/navigation`, `core/widget-group` or `core/gallery` (which core
- * renders without this filter) are left as authored.
+ * cost is coverage — shortcodes in block attributes, or below a
+ * `core/navigation`, `core/widget-group` or `core/gallery` (which core renders
+ * without this filter), are left as authored. So is an enclosing shortcode whose
+ * halves land in different chunks of `innerContent`, which splits at every inner
+ * block rather than only at block boundaries.
  *
  * @param array $parsed_block The block being rendered.
  *
  * @return array The block, with shortcodes in its own markup expanded.
  */
 function do_pattern_source_shortcodes( array $parsed_block ): array {
-	if ( isset( $parsed_block['blockName'] ) && 'core/pattern' === $parsed_block['blockName'] ) {
-		$parsed_block[ MARKER ] = true;
-		pattern_render_depth( 1 );
+	$block_name = isset( $parsed_block['blockName'] ) ? $parsed_block['blockName'] : '';
+
+	if ( 'core/pattern' === $block_name ) {
+		$parsed_block[ MARKER ] = pattern_render_depth();
+		pattern_render_depth( pattern_render_depth() + 1 );
 
 		return $parsed_block;
 	}
 
-	// `the_content` expands shortcodes itself at priority 11; doing it here would run them before wpautop and wptexturize.
-	if ( ! pattern_render_depth() || doing_filter( 'the_content' ) || empty( $parsed_block['innerContent'] ) ) {
+	if ( in_array( $block_name, NESTED_CONTENT_BLOCKS, true ) ) {
+		$parsed_block[ MARKER ] = pattern_render_depth();
+		pattern_render_depth( 0 );
+
+		return $parsed_block;
+	}
+
+	if ( ! pattern_render_depth() || empty( $parsed_block['innerContent'] ) ) {
 		return $parsed_block;
 	}
 
@@ -76,18 +102,22 @@ function do_pattern_source_shortcodes( array $parsed_block ): array {
 add_filter( 'render_block_data', __NAMESPACE__ . '\do_pattern_source_shortcodes' );
 
 /**
- * Note that a `core/pattern` block has finished rendering.
+ * Put the render depth back once a block that changed it has finished.
  *
- * @param string|null $content      The pattern's rendered output.
- * @param array       $parsed_block The pattern block.
+ * @param string|null $content      The block's rendered output.
+ * @param array       $parsed_block The block.
  *
  * @return string|null The content, unchanged.
  */
-function end_pattern_render( ?string $content, array $parsed_block ): ?string {
-	if ( ! empty( $parsed_block[ MARKER ] ) ) {
-		pattern_render_depth( -1 );
+function restore_render_depth( ?string $content, array $parsed_block ): ?string {
+	if ( isset( $parsed_block[ MARKER ] ) ) {
+		pattern_render_depth( (int) $parsed_block[ MARKER ] );
 	}
 
 	return $content;
 }
-add_filter( 'render_block_core/pattern', __NAMESPACE__ . '\end_pattern_render', 10, 2 );
+add_filter( 'render_block_core/pattern', __NAMESPACE__ . '\restore_render_depth', 10, 2 );
+foreach ( NESTED_CONTENT_BLOCKS as $wporg_nested_block ) {
+	add_filter( "render_block_{$wporg_nested_block}", __NAMESPACE__ . '\restore_render_depth', 10, 2 );
+}
+unset( $wporg_nested_block );

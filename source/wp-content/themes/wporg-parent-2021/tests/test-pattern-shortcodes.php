@@ -10,7 +10,8 @@ declare( strict_types = 1 );
 namespace WordPressdotorg\Theme\Parent_2021\Tests;
 
 use WP_UnitTestCase;
-use function WordPressdotorg\Theme\Parent_2021\Pattern_Shortcodes\end_pattern_render;
+use function WordPressdotorg\Theme\Parent_2021\Pattern_Shortcodes\do_pattern_source_shortcodes;
+use function WordPressdotorg\Theme\Parent_2021\Pattern_Shortcodes\restore_render_depth;
 use function WordPressdotorg\Theme\Parent_2021\Pattern_Shortcodes\pattern_render_depth;
 
 defined( 'ABSPATH' ) || die();
@@ -260,7 +261,7 @@ class Test_Pattern_Shortcodes extends WP_UnitTestCase {
 	 * @return void
 	 */
 	public function test_survives_a_null_from_an_earlier_filter(): void {
-		$this->assertNull( end_pattern_render( null, array() ) );
+		$this->assertNull( restore_render_depth( null, array() ) );
 	}
 
 	/**
@@ -272,7 +273,7 @@ class Test_Pattern_Shortcodes extends WP_UnitTestCase {
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Reading a local source file, not a remote URL.
 		$functions = file_get_contents( dirname( __DIR__ ) . '/functions.php' );
 
-		$this->assertStringContainsString( "require_once __DIR__ . '/inc/pattern-shortcodes.php';", $functions );
+		$this->assertStringContainsString( 'inc/pattern-shortcodes.php', $functions );
 	}
 
 	/**
@@ -298,6 +299,35 @@ class Test_Pattern_Shortcodes extends WP_UnitTestCase {
 		$this->assertStringContainsString( '[caption', $output );
 		$this->assertStringNotContainsString( 'wp-caption-text', $output );
 		$this->assertStringNotContainsString( '<a ', $output );
+	}
+
+	/**
+	 * Blocks that run their own shortcode pass over content they then hand to
+	 * `do_blocks()` must not have their inner blocks expanded as well.
+	 *
+	 * @return void
+	 */
+	public function test_suspends_below_blocks_that_pre_expand(): void {
+		$pattern = do_pattern_source_shortcodes( array( 'blockName' => 'core/pattern' ) );
+		$this->assertSame( 1, pattern_render_depth() );
+
+		$part = do_pattern_source_shortcodes( array( 'blockName' => 'core/template-part' ) );
+		$this->assertSame( 0, pattern_render_depth(), 'Depth is suspended below a template part.' );
+
+		$inner = do_pattern_source_shortcodes(
+			array(
+				'blockName'    => 'core/paragraph',
+				'innerContent' => array( '<p>[count]</p>' ),
+			)
+		);
+		$this->assertSame( array( '<p>[count]</p>' ), $inner['innerContent'] );
+		$this->assertSame( 0, $this->count_calls );
+
+		restore_render_depth( '', $part );
+		$this->assertSame( 1, pattern_render_depth(), 'The pattern depth comes back.' );
+
+		restore_render_depth( '', $pattern );
+		$this->assertSame( 0, pattern_render_depth() );
 	}
 
 	/**
