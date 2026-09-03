@@ -132,9 +132,6 @@ function get_locale_settings( $locale ) {
 								],
 							],
 						],
-						'typography' => [
-							'text-wrap' => 'unset',
-						],
 					],
 				],
 				'typography' => [
