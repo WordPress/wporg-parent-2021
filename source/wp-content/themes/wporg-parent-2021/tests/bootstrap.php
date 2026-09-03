@@ -35,7 +35,7 @@ if ( ! $_tests_dir ) {
 }
 
 if ( ! file_exists( $_tests_dir . '/includes/functions.php' ) ) {
-	echo "Could not find $_tests_dir/includes/functions.php, is the wp-env tests environment running?" . PHP_EOL; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+	echo "Could not find the WordPress test suite at $_tests_dir. Point WP_TESTS_DIR at the tests/phpunit directory of a wordpress-develop checkout, as .github/workflows/unit-tests.yml does." . PHP_EOL; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	exit( 1 );
 }
 

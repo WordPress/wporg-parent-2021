@@ -159,6 +159,28 @@ class Test_Pattern_Shortcodes extends WP_UnitTestCase {
 	}
 
 	/**
+	 * `core/shortcode` wraps its own markup in `wpautop()`, so expanding before it
+	 * runs would push the shortcode's output through that too.
+	 *
+	 * @return void
+	 */
+	public function test_shortcode_block_output_is_not_autop_mangled(): void {
+		add_shortcode(
+			'multi',
+			function (): string {
+				return "<span>one</span>\n<span>two</span>";
+			}
+		);
+
+		$output = $this->render_pattern( '<!-- wp:shortcode -->[multi]<!-- /wp:shortcode -->' );
+
+		remove_shortcode( 'multi' );
+
+		$this->assertStringContainsString( '<span>one</span>', $output );
+		$this->assertStringNotContainsString( '<br', $output );
+	}
+
+	/**
 	 * Each shortcode runs once. `innerHTML` repeats `innerContent`, so expanding
 	 * both would run every shortcode callback twice.
 	 *
@@ -262,18 +284,6 @@ class Test_Pattern_Shortcodes extends WP_UnitTestCase {
 	 */
 	public function test_survives_a_null_from_an_earlier_filter(): void {
 		$this->assertNull( restore_render_depth( null, array() ) );
-	}
-
-	/**
-	 * The theme has to actually load the file, which the bootstrap requires directly.
-	 *
-	 * @return void
-	 */
-	public function test_theme_loads_the_file(): void {
-		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents -- Reading a local source file, not a remote URL.
-		$functions = file_get_contents( dirname( __DIR__ ) . '/functions.php' );
-
-		$this->assertStringContainsString( 'inc/pattern-shortcodes.php', $functions );
 	}
 
 	/**

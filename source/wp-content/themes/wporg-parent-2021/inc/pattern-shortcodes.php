@@ -74,7 +74,8 @@ function do_pattern_source_shortcodes( array $parsed_block ): array {
 		return $parsed_block;
 	}
 
-	if ( ! pattern_render_depth() || empty( $parsed_block['innerContent'] ) ) {
+	// `core/shortcode` runs `wpautop()` over its own markup, so it is expanded afterwards instead.
+	if ( 'core/shortcode' === $block_name || ! pattern_render_depth() || empty( $parsed_block['innerContent'] ) ) {
 		return $parsed_block;
 	}
 
@@ -104,6 +105,24 @@ function restore_render_depth( ?string $content, array $parsed_block ): ?string 
 
 	return $content;
 }
+/**
+ * Expand the shortcode a `core/shortcode` block holds, once it has been wrapped.
+ *
+ * The block has no inner blocks, so its output is the pattern's own markup.
+ *
+ * @param string|null $content The block's rendered output.
+ *
+ * @return string|null The output, with its shortcode expanded.
+ */
+function do_shortcode_block( ?string $content ): ?string {
+	if ( ! pattern_render_depth() || null === $content ) {
+		return $content;
+	}
+
+	return do_shortcode( $content );
+}
+add_filter( 'render_block_core/shortcode', __NAMESPACE__ . '\do_shortcode_block' );
+
 add_filter( 'render_block_core/pattern', __NAMESPACE__ . '\restore_render_depth', 10, 2 );
 foreach ( NESTED_CONTENT_BLOCKS as $wporg_nested_block ) {
 	add_filter( "render_block_{$wporg_nested_block}", __NAMESPACE__ . '\restore_render_depth', 10, 2 );
