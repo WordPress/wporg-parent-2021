@@ -1,0 +1,87 @@
+name: Unit Tests
+
+# Run on any changes to the theme or to the files that define the test environment.
+on:
+    pull_request:
+        paths:
+            - source/**
+            - .github/workflows/unit-tests.yml
+            - .github/wp-tests-config.php
+            - phpunit.xml.dist
+            - composer.json
+            - composer.lock
+    push:
+        branches: [trunk]
+        paths:
+            - source/**
+            - .github/workflows/unit-tests.yml
+            - .github/wp-tests-config.php
+            - phpunit.xml.dist
+            - composer.json
+            - composer.lock
+    # Enable manually running action if necessary.
+    workflow_dispatch:
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+    cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+    unit-php:
+        name: PHP
+
+        runs-on: ubuntu-latest
+
+        env:
+            WP_CORE_DIR: /tmp/wordpress
+            WP_TESTS_DIR: /tmp/wordpress-develop/tests/phpunit
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # 2.37.2
+              with:
+                  php-version: "8.4"
+                  coverage: none
+
+            - name: Install Composer dependencies
+              uses: ramsey/composer-install@65e4f84970763564f46a70b8a54b90d033b3bdda # 4.0.0
+
+            - name: Get date
+              id: date
+              run: echo "date=$(date -u +%Y%m%d)" >> "$GITHUB_OUTPUT"
+
+            # The test library must match the core build under test, so both come
+            # from current trunk: the nightly build as the install, and a sparse
+            # checkout of wordpress-develop for the PHPUnit library.
+            - name: Cache WordPress
+              id: wordpress-cache
+              uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+              with:
+                  path: |
+                      /tmp/wordpress
+                      /tmp/wordpress-develop
+                  key: wordpress-nightly-${{ steps.date.outputs.date }}
+
+            - name: Install WordPress
+              if: steps.wordpress-cache.outputs.cache-hit != 'true'
+              run: |
+                  (curl -sSL https://wordpress.org/nightly-builds/wordpress-latest.zip -o /tmp/wordpress.zip && unzip -q /tmp/wordpress.zip -d /tmp) &
+                  core_pid=$!
+                  (git clone --quiet --depth=1 --filter=blob:none --sparse https://github.com/WordPress/wordpress-develop /tmp/wordpress-develop && git -C /tmp/wordpress-develop sparse-checkout set tests/phpunit/includes tests/phpunit/data) &
+                  tests_pid=$!
+                  # Wait on each PID: a bare `wait` returns 0 even when a job failed, which would cache a half-populated /tmp.
+                  wait "$core_pid"
+                  wait "$tests_pid"
+
+            - name: Start database
+              run: |
+                  sudo systemctl start mysql
+                  mysql -uroot -proot -h127.0.0.1 -e "CREATE DATABASE wordpress_test;"
+
+            - name: Run unit tests
+              env:
+                  WP_TESTS_CONFIG_FILE_PATH: ${{ github.workspace }}/.github/wp-tests-config.php
+              run: vendor/bin/phpunit
