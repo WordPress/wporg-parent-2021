@@ -2,8 +2,7 @@
 /**
  * Pattern Shortcodes
  *
- * Expand shortcodes authored into a pattern, without exposing the values that
- * the pattern's blocks render to the shortcode parser.
+ * Expand shortcodes authored into a pattern, never the values its blocks render.
  *
  * @package wporg-parent-2021
  */
@@ -15,22 +14,14 @@ namespace WordPressdotorg\Theme\Parent_2021\Pattern_Shortcodes;
 defined( 'ABSPATH' ) || die();
 
 /**
- * Key holding the render depth to restore once a block has finished rendering.
- *
- * Stashing the depth on the block pairs every change with its own undo. Core
- * renders some inner blocks without `render_block_data`, so a block reached that
- * way carries no key and leaves the depth alone.
+ * Key holding the depth to restore, stashed on the block that changed it.
  */
 const MARKER = 'wporgPatternShortcodes';
 
 /**
- * Blocks that render block markup of their own, around a shortcode pass.
+ * Core blocks that run their own shortcode pass over markup they hand to `do_blocks()`.
  *
- * `core/template-part` expands shortcodes before calling `do_blocks()`;
- * `core/post-content` leaves them to `the_content` at priority 11, after wpautop
- * and wptexturize. Expanding below either would be a second pass, over the first
- * one's output. Only core blocks are listed, so a block outside core that does
- * the same is not covered.
+ * Expanding below one of them would be a second pass, over the first one's output.
  */
 const NESTED_CONTENT_BLOCKS = array(
 	'core/post-content',
@@ -58,12 +49,9 @@ function pattern_render_depth( ?int $set = null ): int {
  * Expand shortcodes in the source markup of the blocks that make up a pattern.
  *
  * Source, never rendered output: shortcode syntax survives `esc_html()`, so
- * parsing output would let an escaped post title reintroduce raw markup. The
- * cost is coverage — shortcodes in block attributes, or below a
- * `core/navigation`, `core/widget-group` or `core/gallery` (which core renders
- * without this filter), are left as authored. So is an enclosing shortcode whose
- * halves land in different chunks of `innerContent`, which splits at every inner
- * block rather than only at block boundaries.
+ * parsing output would let an escaped post title reintroduce raw markup. Left as
+ * authored, then: shortcodes in block attributes, below a `core/navigation`,
+ * `core/widget-group` or `core/gallery`, or split across `innerContent` chunks.
  *
  * @param array $parsed_block The block being rendered.
  *
@@ -90,7 +78,7 @@ function do_pattern_source_shortcodes( array $parsed_block ): array {
 		return $parsed_block;
 	}
 
-	// Only `innerContent` is rendered. `innerHTML` repeats the same text, so expanding it too would run every shortcode twice.
+	// `innerHTML` repeats this text but is never rendered; expanding both would run every shortcode twice.
 	foreach ( $parsed_block['innerContent'] as $index => $chunk ) {
 		if ( is_string( $chunk ) ) {
 			$parsed_block['innerContent'][ $index ] = do_shortcode( $chunk );
