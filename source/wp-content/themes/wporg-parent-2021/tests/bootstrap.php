@@ -21,6 +21,13 @@ if ( file_exists( $_root . '/vendor/autoload.php' ) ) {
 	require_once $_root . '/vendor/autoload.php';
 }
 
+// The WP test suite reads this as a constant, so bridge it from the environment the workflow sets.
+$_config_file = getenv( 'WP_TESTS_CONFIG_FILE_PATH' );
+
+if ( is_string( $_config_file ) && '' !== $_config_file && ! defined( 'WP_TESTS_CONFIG_FILE_PATH' ) ) {
+	define( 'WP_TESTS_CONFIG_FILE_PATH', $_config_file );
+}
+
 $_tests_dir = getenv( 'WP_TESTS_DIR' );
 
 if ( ! $_tests_dir ) {
