@@ -84,8 +84,7 @@ function render_pattern( array $attributes ): string {
 	// A pattern that references itself, directly or through another pattern.
 	if ( isset( $seen_refs[ $slug ] ) ) {
 		return WP_DEBUG && WP_DEBUG_DISPLAY
-			/* translators: %s: a pattern's slug. Shown in the front end in place of a faulty block. */
-			? sprintf( __( 'Rendering halted for the pattern "%s", which references itself.', 'wporg' ), esc_html( $slug ) )
+			? sprintf( 'Rendering halted for the pattern "%s", which references itself.', esc_html( $slug ) )
 			: '';
 	}
 
