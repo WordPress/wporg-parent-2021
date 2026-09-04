@@ -11,8 +11,9 @@ namespace WordPressdotorg\Theme\Parent_2021\Tests;
 
 use WP_UnitTestCase;
 use function WordPressdotorg\Theme\Parent_2021\Pattern_Shortcodes\do_pattern_source_shortcodes;
-use function WordPressdotorg\Theme\Parent_2021\Pattern_Shortcodes\restore_render_depth;
 use function WordPressdotorg\Theme\Parent_2021\Pattern_Shortcodes\pattern_render_depth;
+use function WordPressdotorg\Theme\Parent_2021\Pattern_Shortcodes\restore_render_depth;
+use const WordPressdotorg\Theme\Parent_2021\Pattern_Shortcodes\NESTED_CONTENT_BLOCKS;
 
 defined( 'ABSPATH' ) || die();
 
@@ -347,32 +348,66 @@ class Test_Pattern_Shortcodes extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Every core block that runs a shortcode pass before `do_blocks()` has to be
+	 * listed. The test below iterates the list, so it cannot notice a missing entry.
+	 *
+	 * `core/latest-posts` and `core/template-part` go through
+	 * `_wp_apply_block_content_filters()`, which expands and then parses blocks;
+	 * `core/post-content` leaves its shortcodes to `the_content` at priority 11.
+	 *
+	 * @return void
+	 */
+	public function test_pre_expanding_core_blocks_are_listed(): void {
+		$expected = array(
+			'core/latest-posts',
+			'core/post-content',
+			'core/template-part',
+		);
+
+		foreach ( $expected as $block_name ) {
+			$this->assertContains( $block_name, NESTED_CONTENT_BLOCKS, "{$block_name} runs its own shortcode pass." );
+		}
+	}
+
+	/**
 	 * Blocks that run their own shortcode pass over content they then hand to
 	 * `do_blocks()` must not have their inner blocks expanded as well.
 	 *
 	 * @return void
 	 */
 	public function test_suspends_below_blocks_that_pre_expand(): void {
-		$pattern = do_pattern_source_shortcodes( array( 'blockName' => 'core/pattern' ) );
-		$this->assertSame( 1, pattern_render_depth() );
-
-		$part = do_pattern_source_shortcodes( array( 'blockName' => 'core/template-part' ) );
-		$this->assertSame( 0, pattern_render_depth(), 'Depth is suspended below a template part.' );
-
-		$inner = do_pattern_source_shortcodes(
-			array(
-				'blockName'    => 'core/paragraph',
-				'innerContent' => array( '<p>[count]</p>' ),
-			)
+		// A shortcode whose output is itself shortcode syntax, which a second pass would expand.
+		add_shortcode(
+			'emit',
+			function (): string {
+				return '[count]';
+			}
 		);
-		$this->assertSame( array( '<p>[count]</p>' ), $inner['innerContent'] );
-		$this->assertSame( 0, $this->count_calls );
 
-		restore_render_depth( '', $part );
-		$this->assertSame( 1, pattern_render_depth(), 'The pattern depth comes back.' );
+		foreach ( NESTED_CONTENT_BLOCKS as $block_name ) {
+			$pattern = do_pattern_source_shortcodes( array( 'blockName' => 'core/pattern' ) );
+			$this->assertSame( 1, pattern_render_depth() );
 
-		restore_render_depth( '', $pattern );
-		$this->assertSame( 0, pattern_render_depth() );
+			$nested = do_pattern_source_shortcodes( array( 'blockName' => $block_name ) );
+			$this->assertSame( 0, pattern_render_depth(), "Depth is suspended below {$block_name}." );
+
+			$inner = do_pattern_source_shortcodes(
+				array(
+					'blockName'    => 'core/paragraph',
+					'innerContent' => array( '<p>[count] [emit]</p>' ),
+				)
+			);
+			$this->assertSame( array( '<p>[count] [emit]</p>' ), $inner['innerContent'], "Content below {$block_name} is left alone." );
+			$this->assertSame( 0, $this->count_calls );
+
+			restore_render_depth( '', $nested );
+			$this->assertSame( 1, pattern_render_depth(), 'The pattern depth comes back.' );
+
+			restore_render_depth( '', $pattern );
+			$this->assertSame( 0, pattern_render_depth() );
+		}
+
+		remove_shortcode( 'emit' );
 	}
 
 	/**

@@ -24,6 +24,7 @@ const MARKER = 'wporgPatternShortcodes';
  * Expanding below one of them would be a second pass, over the first one's output.
  */
 const NESTED_CONTENT_BLOCKS = array(
+	'core/latest-posts',
 	'core/post-content',
 	'core/template-part',
 );
