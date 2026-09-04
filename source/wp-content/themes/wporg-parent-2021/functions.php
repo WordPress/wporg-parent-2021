@@ -9,6 +9,7 @@ defined( 'WPINC' ) || die();
 require_once __DIR__ . '/inc/gutenberg-tweaks.php';
 require_once __DIR__ . '/inc/block-styles.php';
 require_once __DIR__ . '/inc/rosetta-styles.php';
+require_once __DIR__ . '/inc/pattern-shortcodes.php';
 
 /**
  * Actions and filters.
@@ -19,14 +20,6 @@ add_filter( 'author_link', __NAMESPACE__ . '\use_wporg_profile_for_author_link',
 add_filter( 'render_block_core/pattern', __NAMESPACE__ . '\add_aria_hidden_to_arrows', 19 );
 add_filter( 'the_content', __NAMESPACE__ . '\add_aria_hidden_to_arrows', 19 );
 add_filter( 'wp_theme_json_data_theme', __NAMESPACE__ . '\merge_parent_child_theme_json' );
-
-// Enable embeds in patterns.
-// See https://github.com/WordPress/gutenberg/issues/46556.
-global $wp_embed;
-add_filter( 'render_block_core/pattern', array( $wp_embed, 'autoembed' ) );
-
-// Render shortcodes in patterns.
-add_filter( 'render_block_core/pattern', 'do_shortcode' );
 
 /**
  * Register theme support.
