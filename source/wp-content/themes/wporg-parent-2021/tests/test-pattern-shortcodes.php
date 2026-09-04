@@ -245,6 +245,41 @@ class Test_Pattern_Shortcodes extends WP_UnitTestCase {
 	}
 
 	/**
+	 * A pattern reached through post content still expands its own shortcodes here,
+	 * at `do_blocks()`, exactly as the previous output-level pass did. Deferring
+	 * them to `the_content`'s pass at priority 11 would hand a pattern's rendered
+	 * output — post titles included — back to the shortcode parser.
+	 *
+	 * @return void
+	 */
+	public function test_pattern_inside_post_content_still_expands(): void {
+		add_shortcode(
+			'fmt',
+			function (): string {
+				return 'A "quoted" phrase';
+			}
+		);
+
+		$slug               = 'test/pattern-in-content';
+		$this->registered[] = $slug;
+		register_block_pattern(
+			$slug,
+			array(
+				'title'   => 'In content',
+				'content' => '<!-- wp:paragraph --><p>[fmt]</p><!-- /wp:paragraph -->',
+			)
+		);
+
+		$output = apply_filters( 'the_content', sprintf( '<!-- wp:pattern {"slug":"%s"} /-->', $slug ) );
+
+		remove_shortcode( 'fmt' );
+
+		$this->assertStringNotContainsString( '[fmt]', $output );
+		// Expanded before wptexturize, which is where the previous pass ran too.
+		$this->assertStringContainsString( '&#8220;quoted&#8221;', $output );
+	}
+
+	/**
 	 * Nesting `core/post-content` in a pattern must not change when its shortcodes
 	 * run. Expanding them at `do_blocks` rather than leaving them to `the_content`
 	 * would push their output through wpautop and wptexturize as well.
