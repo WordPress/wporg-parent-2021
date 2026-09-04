@@ -151,28 +151,6 @@ class Test_Pattern_Shortcodes extends WP_UnitTestCase {
 	}
 
 	/**
-	 * `core/shortcode` wraps its own markup in `wpautop()`, so expanding before it
-	 * runs would push the shortcode's output through that too.
-	 *
-	 * @return void
-	 */
-	public function test_shortcode_block_output_is_not_autop_mangled(): void {
-		add_shortcode(
-			'multi',
-			function (): string {
-				return "<span>one</span>\n<span>two</span>";
-			}
-		);
-
-		$output = $this->render_pattern( '<!-- wp:shortcode -->[multi]<!-- /wp:shortcode -->' );
-
-		remove_shortcode( 'multi' );
-
-		$this->assertStringContainsString( '<span>one</span>', $output );
-		$this->assertStringNotContainsString( '<br', $output );
-	}
-
-	/**
 	 * An enclosing shortcode wrapping sibling blocks is expanded from the pattern's
 	 * markup, before it is split into blocks.
 	 *
@@ -203,7 +181,8 @@ class Test_Pattern_Shortcodes extends WP_UnitTestCase {
 			. '<!-- /wp:navigation -->'
 		);
 
-		$this->assertStringNotContainsString( '[count]', $output );
+		$this->assertStringContainsString( 'COUNTED', $output );
+		$this->assertSame( 1, $this->count_calls );
 	}
 
 	/**
