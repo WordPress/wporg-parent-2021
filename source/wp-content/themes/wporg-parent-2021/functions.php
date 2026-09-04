@@ -9,6 +9,7 @@ defined( 'WPINC' ) || die();
 require_once __DIR__ . '/inc/gutenberg-tweaks.php';
 require_once __DIR__ . '/inc/block-styles.php';
 require_once __DIR__ . '/inc/rosetta-styles.php';
+require_once __DIR__ . '/inc/pattern-shortcodes.php';
 
 /**
  * Actions and filters.
@@ -19,80 +20,6 @@ add_filter( 'author_link', __NAMESPACE__ . '\use_wporg_profile_for_author_link',
 add_filter( 'render_block_core/pattern', __NAMESPACE__ . '\add_aria_hidden_to_arrows', 19 );
 add_filter( 'the_content', __NAMESPACE__ . '\add_aria_hidden_to_arrows', 19 );
 add_filter( 'wp_theme_json_data_theme', __NAMESPACE__ . '\merge_parent_child_theme_json' );
-
-// Render shortcodes in patterns, from the pattern's own markup.
-add_filter( 'register_block_type_args', __NAMESPACE__ . '\use_shortcode_aware_pattern_renderer', 10, 2 );
-
-/**
- * Point `core/pattern` at a renderer that expands shortcodes before its blocks render.
- *
- * @param array  $args       Arguments the block type is being registered with.
- * @param string $block_type Block type name, including its namespace.
- *
- * @return array
- */
-function use_shortcode_aware_pattern_renderer( $args, $block_type ) {
-	if ( 'core/pattern' === $block_type ) {
-		$args['render_callback'] = __NAMESPACE__ . '\render_pattern';
-	}
-
-	return $args;
-}
-
-/**
- * Render a pattern, expanding its shortcodes from its own markup.
- *
- * Mirrors core's `render_block_core_pattern()`, with `do_shortcode()` applied to the
- * pattern before its blocks are rendered rather than to what they rendered. A pattern's
- * markup is theme-authored, so its shortcodes are meant to run; the post data its blocks
- * pull in -- a title, an author name, an excerpt -- is not, and never reaches the parser
- * this way.
- *
- * @global WP_Embed $wp_embed
- *
- * @param array $attributes Block attributes.
- *
- * @return string The rendered pattern.
- */
-function render_pattern( $attributes ) {
-	static $seen_refs = array();
-
-	if ( empty( $attributes['slug'] ) ) {
-		return '';
-	}
-
-	$slug     = $attributes['slug'];
-	$registry = \WP_Block_Patterns_Registry::get_instance();
-
-	if ( ! $registry->is_registered( $slug ) ) {
-		return '';
-	}
-
-	// A pattern that references itself, directly or through another pattern.
-	if ( isset( $seen_refs[ $slug ] ) ) {
-		$is_debug = WP_DEBUG && WP_DEBUG_DISPLAY;
-
-		return $is_debug ?
-			// translators: Visible only in the front end, this warning takes the place of a faulty block. %s represents a pattern's slug.
-			sprintf( __( '[block rendering halted for pattern "%s"]', 'wporg' ), $slug ) :
-			'';
-	}
-
-	$pattern = $registry->get_registered( $slug );
-
-	$seen_refs[ $slug ] = true;
-
-	$content = do_shortcode( $pattern['content'] );
-	$content = do_blocks( $content );
-
-	// Embeds in patterns, where core runs them. See https://github.com/WordPress/gutenberg/issues/46556.
-	global $wp_embed;
-	$content = $wp_embed->autoembed( $content );
-
-	unset( $seen_refs[ $slug ] );
-
-	return $content;
-}
 
 /**
  * Register theme support.

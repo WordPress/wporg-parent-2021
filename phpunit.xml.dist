@@ -1,0 +1,23 @@
+<phpunit
+	bootstrap="source/wp-content/themes/wporg-parent-2021/tests/bootstrap.php"
+	backupGlobals="false"
+	colors="true"
+	convertErrorsToExceptions="true"
+	convertNoticesToExceptions="true"
+	convertWarningsToExceptions="true"
+	>
+
+	<testsuites>
+		<testsuite name="WordPress.org Parent Theme">
+			<directory prefix="test-" suffix=".php">
+				./source/wp-content/themes/wporg-parent-2021/tests/
+			</directory>
+		</testsuite>
+	</testsuites>
+
+	<coverage>
+		<include>
+			<directory suffix=".php">./source/wp-content/themes/wporg-parent-2021/inc</directory>
+		</include>
+	</coverage>
+</phpunit>
