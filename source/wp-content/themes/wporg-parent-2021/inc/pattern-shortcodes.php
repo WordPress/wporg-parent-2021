@@ -33,11 +33,9 @@ add_filter( 'register_block_type_args', __NAMESPACE__ . '\use_shortcode_aware_re
 /**
  * Render a pattern, expanding the shortcodes in its own markup.
  *
- * Mirrors core's `render_block_core_pattern()` with `do_shortcode()` moved ahead of
- * `do_blocks()`. A pattern's markup is authored, so its shortcodes are meant to run;
- * the post data its blocks pull in — a title, an excerpt, an author name — is not,
- * and never reaches the parser this way. A `core/shortcode` block is expanded before
- * it wraps its own markup in `wpautop()`, so multi-line inline output gains `<br />`.
+ * Replaces core's `render_block_core_pattern()`, so changes there need mirroring
+ * here. A `core/shortcode` block expands before its own `wpautop()` runs, which
+ * adds `<br />` to multi-line inline output.
  *
  * @global \WP_Embed $wp_embed
  *
