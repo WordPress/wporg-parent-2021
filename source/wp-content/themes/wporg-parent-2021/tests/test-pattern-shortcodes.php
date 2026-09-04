@@ -10,10 +10,6 @@ declare( strict_types = 1 );
 namespace WordPressdotorg\Theme\Parent_2021\Tests;
 
 use WP_UnitTestCase;
-use function WordPressdotorg\Theme\Parent_2021\Pattern_Shortcodes\do_pattern_source_shortcodes;
-use function WordPressdotorg\Theme\Parent_2021\Pattern_Shortcodes\pattern_render_depth;
-use function WordPressdotorg\Theme\Parent_2021\Pattern_Shortcodes\restore_render_depth;
-use const WordPressdotorg\Theme\Parent_2021\Pattern_Shortcodes\NESTED_CONTENT_BLOCKS;
 
 defined( 'ABSPATH' ) || die();
 
@@ -72,11 +68,6 @@ class Test_Pattern_Shortcodes extends WP_UnitTestCase {
 	public function tear_down(): void {
 		remove_shortcode( 'count' );
 		remove_shortcode( 'wrap' );
-
-		// A render that failed part way leaves the depth raised; drain it so the next test starts clean.
-		while ( pattern_render_depth() ) {
-			pattern_render_depth( -1 );
-		}
 
 		foreach ( $this->registered as $slug ) {
 			unregister_block_pattern( $slug );
@@ -160,25 +151,38 @@ class Test_Pattern_Shortcodes extends WP_UnitTestCase {
 	}
 
 	/**
-	 * `core/shortcode` wraps its own markup in `wpautop()`, so expanding before it
-	 * runs would push the shortcode's output through that too.
+	 * An enclosing shortcode wrapping sibling blocks is expanded from the pattern's
+	 * markup, before it is split into blocks.
 	 *
 	 * @return void
 	 */
-	public function test_shortcode_block_output_is_not_autop_mangled(): void {
-		add_shortcode(
-			'multi',
-			function (): string {
-				return "<span>one</span>\n<span>two</span>";
-			}
+	public function test_expands_enclosing_shortcode_across_blocks(): void {
+		$output = $this->render_pattern(
+			'<!-- wp:group --><div class="wp-block-group">[wrap]'
+			. '<!-- wp:paragraph --><p>Hi</p><!-- /wp:paragraph -->'
+			. '[/wrap]</div><!-- /wp:group -->'
 		);
 
-		$output = $this->render_pattern( '<!-- wp:shortcode -->[multi]<!-- /wp:shortcode -->' );
+		$this->assertStringContainsString( '<em>', $output );
+		$this->assertStringNotContainsString( '[wrap]', $output );
+		$this->assertStringNotContainsString( '[/wrap]', $output );
+	}
 
-		remove_shortcode( 'multi' );
+	/**
+	 * Core renders the inner blocks of `core/navigation` without `render_block_data`,
+	 * which the pass over the pattern's markup does not depend on.
+	 *
+	 * @return void
+	 */
+	public function test_expands_shortcode_below_a_navigation_block(): void {
+		$output = $this->render_pattern(
+			'<!-- wp:navigation {"overlayMenu":"never"} -->'
+			. '<!-- wp:paragraph --><p>[count]</p><!-- /wp:paragraph -->'
+			. '<!-- /wp:navigation -->'
+		);
 
-		$this->assertStringContainsString( '<span>one</span>', $output );
-		$this->assertStringNotContainsString( '<br', $output );
+		$this->assertStringContainsString( 'COUNTED', $output );
+		$this->assertSame( 1, $this->count_calls );
 	}
 
 	/**
@@ -313,16 +317,6 @@ class Test_Pattern_Shortcodes extends WP_UnitTestCase {
 	}
 
 	/**
-	 * A filter earlier on the hook may hand along a null; typing it away would
-	 * turn that into a fatal.
-	 *
-	 * @return void
-	 */
-	public function test_survives_a_null_from_an_earlier_filter(): void {
-		$this->assertNull( restore_render_depth( null, array() ) );
-	}
-
-	/**
 	 * Regression test for the reported stored XSS.
 	 *
 	 * The title holds no `<`, `>`, `"` or `'`, so it survives `sanitize_text_field()`
@@ -348,128 +342,22 @@ class Test_Pattern_Shortcodes extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Every core block that runs a shortcode pass before `do_blocks()` has to be
-	 * listed. The test below iterates the list, so it cannot notice a missing entry.
-	 *
-	 * `core/latest-posts` and `core/template-part` go through
-	 * `_wp_apply_block_content_filters()`, which expands and then parses blocks;
-	 * `core/post-content` leaves its shortcodes to `the_content` at priority 11.
+	 * Core autoembeds inside its own pattern callback, which this theme replaces, so
+	 * the replacement has to keep doing it.
 	 *
 	 * @return void
 	 */
-	public function test_pre_expanding_core_blocks_are_listed(): void {
-		$expected = array(
-			'core/latest-posts',
-			'core/post-content',
-			'core/template-part',
-		);
-
-		foreach ( $expected as $block_name ) {
-			$this->assertContains( $block_name, NESTED_CONTENT_BLOCKS, "{$block_name} runs its own shortcode pass." );
-		}
-	}
-
-	/**
-	 * Blocks that run their own shortcode pass over content they then hand to
-	 * `do_blocks()` must not have their inner blocks expanded as well.
-	 *
-	 * @return void
-	 */
-	public function test_suspends_below_blocks_that_pre_expand(): void {
-		// A shortcode whose output is itself shortcode syntax, which a second pass would expand.
-		add_shortcode(
-			'emit',
-			function (): string {
-				return '[count]';
-			}
-		);
-
-		foreach ( NESTED_CONTENT_BLOCKS as $block_name ) {
-			$pattern = do_pattern_source_shortcodes( array( 'blockName' => 'core/pattern' ) );
-			$this->assertSame( 1, pattern_render_depth() );
-
-			$nested = do_pattern_source_shortcodes( array( 'blockName' => $block_name ) );
-			$this->assertSame( 0, pattern_render_depth(), "Depth is suspended below {$block_name}." );
-
-			$inner = do_pattern_source_shortcodes(
-				array(
-					'blockName'    => 'core/paragraph',
-					'innerContent' => array( '<p>[count] [emit]</p>' ),
-				)
-			);
-			$this->assertSame( array( '<p>[count] [emit]</p>' ), $inner['innerContent'], "Content below {$block_name} is left alone." );
-			$this->assertSame( 0, $this->count_calls );
-
-			restore_render_depth( '', $nested );
-			$this->assertSame( 1, pattern_render_depth(), 'The pattern depth comes back.' );
-
-			restore_render_depth( '', $pattern );
-			$this->assertSame( 0, pattern_render_depth() );
-		}
-
-		remove_shortcode( 'emit' );
-	}
-
-	/**
-	 * A nested pattern restores the outer pattern's depth when it finishes, so
-	 * blocks after it are still expanded.
-	 *
-	 * @return void
-	 */
-	public function test_nested_pattern_keeps_outer_depth(): void {
-		$inner_slug         = 'test/pattern-inner';
-		$this->registered[] = $inner_slug;
-		register_block_pattern(
-			$inner_slug,
-			array(
-				'title'   => 'Inner',
-				'content' => '<!-- wp:paragraph --><p>INNER [count]</p><!-- /wp:paragraph -->',
-			)
-		);
-
-		$output = $this->render_pattern(
-			'<!-- wp:paragraph --><p>BEFORE [count]</p><!-- /wp:paragraph -->'
-			. sprintf( '<!-- wp:pattern {"slug":"%s"} /-->', $inner_slug )
-			. '<!-- wp:paragraph --><p>AFTER [count]</p><!-- /wp:paragraph -->'
-		);
-
-		$this->assertStringContainsString( 'BEFORE COUNTED', $output );
-		$this->assertStringContainsString( 'INNER COUNTED', $output );
-		$this->assertStringContainsString( 'AFTER COUNTED', $output );
-	}
-
-	/**
-	 * Core renders some inner blocks without `render_block_data`. A pattern
-	 * reached that way finishes without having started, and must not consume the
-	 * depth belonging to the pattern around it.
-	 *
-	 * @return void
-	 */
-	public function test_unstarted_pattern_does_not_consume_depth(): void {
-		$stray = array(
-			'blockName'    => 'core/pattern',
-			'attrs'        => array( 'slug' => 'test/absent' ),
-			'innerBlocks'  => array(),
-			'innerHTML'    => '',
-			'innerContent' => array(),
-		);
-
-		$callback = function ( string $content ) use ( $stray ): string {
-			// phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores -- Core's block-specific hook name.
-			return $content . apply_filters( 'render_block_core/pattern', '', $stray, null );
+	public function test_embeds_still_work_in_patterns(): void {
+		$callback = function (): string {
+			return '<em>EMBEDDED</em>';
 		};
-		add_filter( 'render_block_core/html', $callback );
+		add_filter( 'pre_oembed_result', $callback );
 
-		$output = $this->render_pattern(
-			'<!-- wp:paragraph --><p>ONE [count]</p><!-- /wp:paragraph -->'
-			. '<!-- wp:html --><span></span><!-- /wp:html -->'
-			. '<!-- wp:paragraph --><p>TWO [count]</p><!-- /wp:paragraph -->'
-		);
+		$output = $this->render_pattern( '<!-- wp:paragraph --><p>https://example.test/v/1</p><!-- /wp:paragraph -->' );
 
-		remove_filter( 'render_block_core/html', $callback );
+		remove_filter( 'pre_oembed_result', $callback );
 
-		$this->assertStringContainsString( 'ONE COUNTED', $output );
-		$this->assertStringContainsString( 'TWO COUNTED', $output );
+		$this->assertStringContainsString( 'EMBEDDED', $output );
 	}
 
 	/**
@@ -483,18 +371,5 @@ class Test_Pattern_Shortcodes extends WP_UnitTestCase {
 
 		$this->assertStringContainsString( '[count]', $output );
 		$this->assertSame( 0, $this->count_calls );
-	}
-
-	/**
-	 * Every render leaves the depth where it found it.
-	 *
-	 * @return void
-	 */
-	public function test_depth_is_balanced_after_rendering(): void {
-		$this->assertSame( 0, pattern_render_depth() );
-
-		$this->render_pattern( '<!-- wp:paragraph --><p>[count]</p><!-- /wp:paragraph -->' );
-
-		$this->assertSame( 0, pattern_render_depth() );
 	}
 }

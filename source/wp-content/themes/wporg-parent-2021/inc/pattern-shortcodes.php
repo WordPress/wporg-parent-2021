@@ -14,118 +14,68 @@ namespace WordPressdotorg\Theme\Parent_2021\Pattern_Shortcodes;
 defined( 'ABSPATH' ) || die();
 
 /**
- * Key holding the depth to restore, stashed on the block that changed it.
- */
-const MARKER = 'wporgPatternShortcodes';
-
-/**
- * Core blocks that run their own shortcode pass over markup they hand to `do_blocks()`.
+ * Point `core/pattern` at a renderer that expands shortcodes before its blocks render.
  *
- * Expanding below one of them would be a second pass, over the first one's output.
- */
-const NESTED_CONTENT_BLOCKS = array(
-	'core/latest-posts',
-	'core/post-content',
-	'core/template-part',
-);
-
-/**
- * Read the current pattern render depth, or set it.
+ * @param array  $args       Arguments the block type is being registered with.
+ * @param string $block_type Block type name, including its namespace.
  *
- * @param int|null $set Depth to set, or null to read the current one.
- *
- * @return int The current depth.
+ * @return array The arguments, pointed at this theme's renderer for `core/pattern`.
  */
-function pattern_render_depth( ?int $set = null ): int {
-	static $depth = 0;
-
-	if ( null !== $set ) {
-		$depth = max( 0, $set );
+function use_shortcode_aware_renderer( array $args, string $block_type ): array {
+	if ( 'core/pattern' === $block_type ) {
+		$args['render_callback'] = __NAMESPACE__ . '\render_pattern';
 	}
 
-	return $depth;
+	return $args;
 }
+add_filter( 'register_block_type_args', __NAMESPACE__ . '\use_shortcode_aware_renderer', 10, 2 );
 
 /**
- * Expand shortcodes in the source markup of the blocks that make up a pattern.
+ * Render a pattern, expanding the shortcodes in its own markup.
  *
- * Source, never rendered output: shortcode syntax survives `esc_html()`, so
- * parsing output would let an escaped post title reintroduce raw markup. Block
- * attributes and anything below `core/navigation`, `core/widget-group` or
- * `core/gallery` are not reached; an enclosing shortcode spanning blocks breaks.
+ * Replaces core's `render_block_core_pattern()`, so changes there need mirroring
+ * here. A `core/shortcode` block expands before its own `wpautop()` runs, which
+ * adds `<br />` to multi-line inline output.
  *
- * @param array $parsed_block The block being rendered.
+ * @global \WP_Embed $wp_embed
  *
- * @return array The block, with shortcodes in its own markup expanded.
+ * @param array $attributes Block attributes.
+ *
+ * @return string The rendered pattern.
  */
-function do_pattern_source_shortcodes( array $parsed_block ): array {
-	$block_name = isset( $parsed_block['blockName'] ) ? $parsed_block['blockName'] : '';
+function render_pattern( array $attributes ): string {
+	static $seen_refs = array();
 
-	if ( 'core/pattern' === $block_name ) {
-		$parsed_block[ MARKER ] = pattern_render_depth();
-		pattern_render_depth( pattern_render_depth() + 1 );
-
-		return $parsed_block;
+	if ( empty( $attributes['slug'] ) ) {
+		return '';
 	}
 
-	if ( in_array( $block_name, NESTED_CONTENT_BLOCKS, true ) ) {
-		$parsed_block[ MARKER ] = pattern_render_depth();
-		pattern_render_depth( 0 );
+	$slug     = $attributes['slug'];
+	$registry = \WP_Block_Patterns_Registry::get_instance();
 
-		return $parsed_block;
+	if ( ! $registry->is_registered( $slug ) ) {
+		return '';
 	}
 
-	// `core/shortcode` runs `wpautop()` over its own markup, so it is expanded afterwards instead.
-	if ( 'core/shortcode' === $block_name || ! pattern_render_depth() || empty( $parsed_block['innerContent'] ) ) {
-		return $parsed_block;
+	// A pattern that references itself, directly or through another pattern.
+	if ( isset( $seen_refs[ $slug ] ) ) {
+		return WP_DEBUG && WP_DEBUG_DISPLAY
+			? sprintf( 'Rendering halted for the pattern "%s", which references itself.', esc_html( $slug ) )
+			: '';
 	}
 
-	// `innerHTML` repeats this text but is never rendered; expanding both would run every shortcode twice.
-	foreach ( $parsed_block['innerContent'] as $index => $chunk ) {
-		if ( is_string( $chunk ) ) {
-			$parsed_block['innerContent'][ $index ] = do_shortcode( $chunk );
-		}
-	}
+	$pattern            = $registry->get_registered( $slug );
+	$seen_refs[ $slug ] = true;
 
-	return $parsed_block;
-}
-add_filter( 'render_block_data', __NAMESPACE__ . '\do_pattern_source_shortcodes' );
+	try {
+		$content = do_blocks( do_shortcode( (string) $pattern['content'] ) );
 
-/**
- * Put the render depth back once a block that changed it has finished.
- *
- * @param string|null $content      The block's rendered output.
- * @param array       $parsed_block The block.
- *
- * @return string|null The content, unchanged.
- */
-function restore_render_depth( ?string $content, array $parsed_block ): ?string {
-	if ( isset( $parsed_block[ MARKER ] ) ) {
-		pattern_render_depth( (int) $parsed_block[ MARKER ] );
+		// Core autoembeds inside its own pattern callback, which this replaces.
+		global $wp_embed;
+		$content = $wp_embed->autoembed( $content );
+	} finally {
+		unset( $seen_refs[ $slug ] );
 	}
 
 	return $content;
 }
-/**
- * Expand the shortcode a `core/shortcode` block holds, once it has been wrapped.
- *
- * The block has no inner blocks, so its output is the pattern's own markup.
- *
- * @param string|null $content The block's rendered output.
- *
- * @return string|null The output, with its shortcode expanded.
- */
-function do_shortcode_block( ?string $content ): ?string {
-	if ( ! pattern_render_depth() || null === $content ) {
-		return $content;
-	}
-
-	return do_shortcode( $content );
-}
-add_filter( 'render_block_core/shortcode', __NAMESPACE__ . '\do_shortcode_block' );
-
-add_filter( 'render_block_core/pattern', __NAMESPACE__ . '\restore_render_depth', 10, 2 );
-foreach ( NESTED_CONTENT_BLOCKS as $wporg_nested_block ) {
-	add_filter( "render_block_{$wporg_nested_block}", __NAMESPACE__ . '\restore_render_depth', 10, 2 );
-}
-unset( $wporg_nested_block );
