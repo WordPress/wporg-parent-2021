@@ -160,6 +160,27 @@ class Test_Pattern_Shortcodes extends WP_UnitTestCase {
 	}
 
 	/**
+	 * An enclosing shortcode wrapping sibling blocks has its halves in different
+	 * `innerContent` chunks. Expanding a chunk alone would run the opening tag as
+	 * a self-closing one and leave the closing tag on the page, so the block is
+	 * left as authored instead.
+	 *
+	 * @return void
+	 */
+	public function test_leaves_a_shortcode_split_across_chunks_alone(): void {
+		$output = $this->render_pattern(
+			'<!-- wp:group --><div class="wp-block-group">[wrap]'
+			. '<!-- wp:paragraph --><p>Hi</p><!-- /wp:paragraph -->'
+			. '[/wrap]</div><!-- /wp:group -->'
+		);
+
+		$this->assertStringContainsString( '[wrap]', $output );
+		$this->assertStringContainsString( '[/wrap]', $output );
+		$this->assertStringNotContainsString( '<em>', $output );
+		$this->assertStringContainsString( 'Hi', $output );
+	}
+
+	/**
 	 * `core/shortcode` wraps its own markup in `wpautop()`, so expanding before it
 	 * runs would push the shortcode's output through that too.
 	 *

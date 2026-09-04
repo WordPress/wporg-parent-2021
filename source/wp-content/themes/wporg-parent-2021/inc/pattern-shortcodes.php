@@ -47,12 +47,40 @@ function pattern_render_depth( ?int $set = null ): int {
 }
 
 /**
+ * Whether an enclosing shortcode spans more than one of these chunks.
+ *
+ * `innerContent` splits at every inner block, so an enclosing shortcode wrapping
+ * them has its halves in different chunks. Expanding one in isolation would run
+ * the opening tag as though it were self-closing, handing the callback an empty
+ * `$content` and leaving the closing tag on the page.
+ *
+ * @param array $chunks The block's `innerContent`.
+ *
+ * @return bool Whether a registered shortcode is closed in a chunk that does not open it.
+ */
+function has_split_shortcode( array $chunks ): bool {
+	foreach ( $chunks as $chunk ) {
+		if ( ! is_string( $chunk ) || ! preg_match_all( '#\[/([a-zA-Z0-9_-]+)\]#', $chunk, $matches ) ) {
+			continue;
+		}
+
+		foreach ( $matches[1] as $tag ) {
+			if ( shortcode_exists( $tag ) && ! preg_match( '#\[' . preg_quote( $tag, '#' ) . '[\s\]/]#', $chunk ) ) {
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+/**
  * Expand shortcodes in the source markup of the blocks that make up a pattern.
  *
  * Source, never rendered output: shortcode syntax survives `esc_html()`, so
  * parsing output would let an escaped post title reintroduce raw markup. Left as
  * authored, then: shortcodes in block attributes, below a `core/navigation`,
- * `core/widget-group` or `core/gallery`, or split across `innerContent` chunks.
+ * `core/widget-group` or `core/gallery`.
  *
  * @param array $parsed_block The block being rendered.
  *
@@ -77,6 +105,10 @@ function do_pattern_source_shortcodes( array $parsed_block ): array {
 
 	// `core/shortcode` runs `wpautop()` over its own markup, so it is expanded afterwards instead.
 	if ( 'core/shortcode' === $block_name || ! pattern_render_depth() || empty( $parsed_block['innerContent'] ) ) {
+		return $parsed_block;
+	}
+
+	if ( has_split_shortcode( $parsed_block['innerContent'] ) ) {
 		return $parsed_block;
 	}
 
