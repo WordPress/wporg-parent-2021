@@ -136,7 +136,7 @@ textarea {
 	padding-block: var(--wp--custom--form--padding--block);
 
 	&:focus {
-		border-color: var(--custom--form--color--border);
+		border-color: var(--wp--custom--form--active--color--border);
 	}
 }
 
