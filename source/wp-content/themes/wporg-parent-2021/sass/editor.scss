@@ -20,6 +20,11 @@
 	justify-content: stretch;
 }
 
+// Override the browser native styling to match the frontend.
+mark.has-inline-color {
+	background-color: transparent;
+}
+
 // Overwrite a style from wp4.css.
 h3 a {
 	font-weight: revert; // stylelint-disable-line font-weight-notation

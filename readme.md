@@ -107,7 +107,7 @@ These colors map to the values used in Figma.
 | Dark Blueberry | `dark-blueberry` | #1d35b4 |
 | Deep Blueberry | `deep-blueberry` | #213fd4 |
 | Blueberry      | `blueberry-1`    | #3858e9 |
-| Blueberry 2    | `blueberry-2`    | #7b90ff |
+| Blueberry 2    | `blueberry-2`    | #9fb1ff |
 | Blueberry 3    | `blueberry-3`    | #c7d1ff |
 | Blueberry 4    | `blueberry-4`    | #eff2ff |
 | Pomegrade      | `pomegrade-1`    | #e26f56 |

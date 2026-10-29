@@ -8,6 +8,8 @@ defined( 'WPINC' ) || die();
 
 require_once __DIR__ . '/inc/gutenberg-tweaks.php';
 require_once __DIR__ . '/inc/block-styles.php';
+require_once __DIR__ . '/inc/rosetta-styles.php';
+require_once __DIR__ . '/inc/pattern-shortcodes.php';
 
 /**
  * Actions and filters.
@@ -17,17 +19,7 @@ add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\enqueue_assets' );
 add_filter( 'author_link', __NAMESPACE__ . '\use_wporg_profile_for_author_link', 10, 3 );
 add_filter( 'render_block_core/pattern', __NAMESPACE__ . '\add_aria_hidden_to_arrows', 19 );
 add_filter( 'the_content', __NAMESPACE__ . '\add_aria_hidden_to_arrows', 19 );
-add_filter( 'render_block_core/pattern', __NAMESPACE__ . '\prevent_arrow_emoji', 20 );
-add_filter( 'the_content', __NAMESPACE__ . '\prevent_arrow_emoji', 20 );
 add_filter( 'wp_theme_json_data_theme', __NAMESPACE__ . '\merge_parent_child_theme_json' );
-
-// Enable embeds in patterns.
-// See https://github.com/WordPress/gutenberg/issues/46556.
-global $wp_embed;
-add_filter( 'render_block_core/pattern', array( $wp_embed, 'autoembed' ) );
-
-// Render shortcodes in patterns.
-add_filter( 'render_block_core/pattern', 'do_shortcode' );
 
 /**
  * Register theme support.
@@ -55,10 +47,6 @@ function theme_support() {
 	// Experimental support for adding blocks inside nav menus
 	add_theme_support( 'block-nav-menus' );
 
-	// Remove the default margin-top added when the admin bar is used, this is
-	// handled by the theme, in `_site-header.scss`.
-	add_theme_support( 'admin-bar', array( 'callback' => '__return_false' ) );
-
 	register_block_pattern_category(
 		'wporg',
 		array(
@@ -78,6 +66,28 @@ function enqueue_assets() {
 		filemtime( __DIR__ . '/build/style.css' )
 	);
 	wp_style_add_data( 'wporg-parent-2021-style', 'rtl', 'replace' );
+
+	wp_enqueue_style(
+		'wporg-parent-2021-print',
+		get_template_directory_uri() . '/build/print.css',
+		array( 'wporg-parent-2021-style' ),
+		filemtime( __DIR__ . '/build/print.css' ),
+		'print'
+	);
+	wp_style_add_data( 'wporg-parent-2021-print', 'rtl', 'replace' );
+
+	// Preload the heading font.
+	if ( is_callable( 'global_fonts_preload' ) ) {
+		/*
+		 * translators: Font subset for your locale. Can be any of cyrillic,
+		 * cyrillic-ext, greek, greek-ext, vietnamese, latin, latin-ext.
+		 * Do not translate into your own language. If you don't use EB Garamond
+		 * for headings, you can ignore this.
+		 */
+		$subsets = _x( 'latin', 'EB Garamond subsets, comma separated', 'wporg' );
+		list( $font, $subsets ) = apply_filters( 'wporg_preload_heading_font', [ 'EB Garamond', $subsets ] );
+		global_fonts_preload( $font, $subsets );
+	}
 }
 
 /**
@@ -107,21 +117,34 @@ function use_wporg_profile_for_author_link( $link, $author_id, $author_nicename 
  * @return string The updated content.
  */
 function add_aria_hidden_to_arrows( $content ) {
-	return preg_replace( '/([←↑→↓↔↕↖↗↘↙])/u', '<span aria-hidden="true">\1</span>', $content );
-}
+	// Only replace within text nodes, so the span's quotes can't corrupt attributes that contain an arrow.
+	$textarr = wp_html_split( $content );
 
-/**
- * Add the variation-selector unicode character to any arrow. This will force
- * the twemoji script to skip these characters, leaving them as text.
- *
- * Can be removed once the `wp-exclude-emoji` issue is fixed.
- * See https://core.trac.wordpress.org/ticket/52219.
- *
- * @param string $content Content of the current post.
- * @return string The updated content.
- */
-function prevent_arrow_emoji( $content ) {
-	return preg_replace( '/([←↑→↓↔↕↖↗↘↙])/u', '\1&#65038;', $content );
+	// Don't inject markup into elements whose contents aren't parsed as HTML.
+	$tags_to_ignore       = 'code|pre|style|script|textarea';
+	$ignore_block_element = '';
+
+	foreach ( $textarr as &$chunk ) {
+		if ( '' === $chunk ) {
+			continue;
+		}
+
+		if ( '<' === $chunk[0] ) {
+			if ( '' === $ignore_block_element && preg_match( '/^<(' . $tags_to_ignore . ')(?=[\s\/>])/', $chunk, $matches ) ) {
+				$ignore_block_element = $matches[1];
+			} elseif ( '</' . $ignore_block_element . '>' === $chunk ) {
+				$ignore_block_element = '';
+			}
+			continue;
+		}
+
+		if ( '' === $ignore_block_element ) {
+			$chunk = preg_replace( '/([←↑→↓↔↕↖↗↘↙])/u', '<span aria-hidden="true" class="wp-exclude-emoji">\1</span>', $chunk );
+		}
+	}
+	unset( $chunk );
+
+	return implode( '', $textarr );
 }
 
 /**

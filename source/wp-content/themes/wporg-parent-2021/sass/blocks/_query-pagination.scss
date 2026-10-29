@@ -36,7 +36,7 @@
 		> * {
 			display: block;
 			padding: calc((7 / 16) * 1em) 0;
-			width: 1.875em;
+			min-width: 1.875em;
 
 			+ * {
 				margin-left: 0.5em;

@@ -30,7 +30,7 @@ function setup_block_styles() {
 		'core/group',
 		array(
 			'name'         => 'two-column-display',
-			'label'        => __( 'Shifted Content', 'wporg' ),
+			'label'        => _x( 'Shifted Content', 'block style name', 'wporg' ),
 			'style_handle' => STYLE_HANDLE,
 		)
 	);
@@ -39,7 +39,7 @@ function setup_block_styles() {
 		'core/post-content',
 		array(
 			'name'         => 'two-column-display',
-			'label'        => __( 'Shifted Content', 'wporg' ),
+			'label'        => _x( 'Shifted Content', 'block style name', 'wporg' ),
 			'style_handle' => STYLE_HANDLE,
 		)
 	);
@@ -48,7 +48,7 @@ function setup_block_styles() {
 		'core/columns',
 		array(
 			'name'         => 'two-column-display',
-			'label'        => __( 'Left Heading', 'wporg' ),
+			'label'        => _x( 'Left Heading', 'block style name', 'wporg' ),
 			'style_handle' => STYLE_HANDLE,
 		)
 	);
@@ -57,7 +57,7 @@ function setup_block_styles() {
 		'core/group',
 		array(
 			'name'         => 'four-columns',
-			'label'        => __( 'Four Columns', 'wporg' ),
+			'label'        => _x( 'Four Columns', 'block style name', 'wporg' ),
 			'style_handle' => STYLE_HANDLE,
 		)
 	);
@@ -66,7 +66,7 @@ function setup_block_styles() {
 		'core/button',
 		array(
 			'name'         => 'fill-on-dark',
-			'label'        => __( 'Fill on dark', 'wporg' ),
+			'label'        => _x( 'Fill on dark', 'block style name', 'wporg' ),
 		)
 	);
 
@@ -74,7 +74,7 @@ function setup_block_styles() {
 		'core/button',
 		array(
 			'name'         => 'outline-on-dark',
-			'label'        => __( 'Outline on dark', 'wporg' ),
+			'label'        => _x( 'Outline on dark', 'block style name', 'wporg' ),
 		)
 	);
 
@@ -82,7 +82,7 @@ function setup_block_styles() {
 		'core/button',
 		array(
 			'name'         => 'text',
-			'label'        => __( 'Text', 'wporg' ),
+			'label'        => _x( 'Text', 'block style name', 'wporg' ),
 		)
 	);
 
@@ -90,7 +90,7 @@ function setup_block_styles() {
 		'core/button',
 		array(
 			'name'         => 'toggle',
-			'label'        => __( 'Toggle', 'wporg' ),
+			'label'        => _x( 'Toggle', 'block style name', 'wporg' ),
 		)
 	);
 
@@ -98,7 +98,7 @@ function setup_block_styles() {
 		'core/list',
 		array(
 			'name'         => 'features',
-			'label'        => __( 'Features', 'wporg' ),
+			'label'        => _x( 'Features', 'block style name', 'wporg' ),
 			'style_handle' => STYLE_HANDLE,
 		)
 	);
@@ -107,7 +107,7 @@ function setup_block_styles() {
 		'core/list',
 		array(
 			'name'         => 'links-list',
-			'label'        => __( 'Links', 'wporg' ),
+			'label'        => _x( 'Links', 'block style name', 'wporg' ),
 		)
 	);
 
@@ -115,7 +115,7 @@ function setup_block_styles() {
 		'core/paragraph',
 		array(
 			'name'         => 'serif',
-			'label'        => __( 'Serif', 'wporg' ),
+			'label'        => _x( 'Serif', 'block style name', 'wporg' ),
 			'style_handle' => STYLE_HANDLE,
 		)
 	);
@@ -124,7 +124,7 @@ function setup_block_styles() {
 		'core/paragraph',
 		array(
 			'name'         => 'short-text',
-			'label'        => __( 'Short text', 'wporg' ),
+			'label'        => _x( 'Short text', 'block style name', 'wporg' ),
 			'style_handle' => STYLE_HANDLE,
 		)
 	);
@@ -133,7 +133,7 @@ function setup_block_styles() {
 		'core/heading',
 		array(
 			'name'         => 'with-arrow',
-			'label'        => __( 'Link & Arrow', 'wporg' ),
+			'label'        => _x( 'Link & Arrow', 'block style name', 'wporg' ),
 			'style_handle' => STYLE_HANDLE,
 		)
 	);
@@ -142,7 +142,7 @@ function setup_block_styles() {
 		'core/navigation',
 		array(
 			'name'         => 'dots',
-			'label'        => __( 'Dots', 'wporg' ),
+			'label'        => _x( 'Dots', 'block style name', 'wporg' ),
 			'style_handle' => STYLE_HANDLE,
 		)
 	);
@@ -151,7 +151,7 @@ function setup_block_styles() {
 		'core/group',
 		array(
 			'name'         => 'brush-stroke',
-			'label'        => __( 'Brush Stroke', 'wporg' ),
+			'label'        => _x( 'Brush Stroke', 'block style name', 'wporg' ),
 			'style_handle' => STYLE_HANDLE,
 		)
 	);
@@ -160,7 +160,7 @@ function setup_block_styles() {
 		'core/list',
 		array(
 			'name'         => 'list-long-items',
-			'label'        => __( 'Long items', 'wporg' ),
+			'label'        => _x( 'Long items', 'block style name', 'wporg' ),
 			'style_handle' => STYLE_HANDLE,
 		)
 	);
@@ -169,7 +169,7 @@ function setup_block_styles() {
 		'core/navigation',
 		array(
 			'name'         => 'dropdown-on-mobile',
-			'label'        => __( 'Dropdown on Mobile', 'wporg' ),
+			'label'        => _x( 'Dropdown on Mobile', 'block style name', 'wporg' ),
 			'style_handle' => STYLE_HANDLE,
 		)
 	);
@@ -178,7 +178,7 @@ function setup_block_styles() {
 		'core/search',
 		array(
 			'name'         => 'on-dark',
-			'label'        => __( 'On dark', 'wporg' ),
+			'label'        => _x( 'On dark', 'block style name', 'wporg' ),
 			'style_handle' => STYLE_HANDLE,
 		)
 	);
@@ -187,7 +187,7 @@ function setup_block_styles() {
 		'core/group',
 		array(
 			'name'         => 'cards-grid',
-			'label'        => __( 'Cards Grid', 'wporg' ),
+			'label'        => _x( 'Cards Grid', 'block style name', 'wporg' ),
 		)
 	);
 
@@ -195,7 +195,43 @@ function setup_block_styles() {
 		'core/table',
 		array(
 			'name'         => 'borderless',
-			'label'        => __( 'Borderless', 'wporg' ),
+			'label'        => _x( 'Borderless', 'block style name', 'wporg' ),
+		)
+	);
+
+	register_block_style(
+		'core/navigation',
+		array(
+			'name'         => 'button-list',
+			'label'        => _x( 'Buttons', 'block style name', 'wporg' ),
+			'style_handle' => STYLE_HANDLE,
+		)
+	);
+
+	register_block_style(
+		'core/spacer',
+		array(
+			'name'         => 'dots-background',
+			'label'        => _x( 'Dots', 'block style name', 'wporg' ),
+			'style_handle' => STYLE_HANDLE,
+		)
+	);
+
+	register_block_style(
+		'core/spacer',
+		array(
+			'name'         => 'blue-dots-background',
+			'label'        => _x( 'Dots (blue)', 'block style name', 'wporg' ),
+			'style_handle' => STYLE_HANDLE,
+		)
+	);
+
+	register_block_style(
+		'core/spacer',
+		array(
+			'name'         => 'dark-dots-background',
+			'label'        => _x( 'Dots (dark)', 'block style name', 'wporg' ),
+			'style_handle' => STYLE_HANDLE,
 		)
 	);
 }

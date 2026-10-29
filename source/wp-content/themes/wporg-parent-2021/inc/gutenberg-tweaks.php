@@ -18,7 +18,9 @@ add_filter( 'get_the_archive_title_prefix', __NAMESPACE__ . '\modify_archive_tit
 add_filter( 'render_block_data', __NAMESPACE__ . '\custom_query_block_attributes' );
 add_action( 'parse_query', __NAMESPACE__ . '\compat_workaround_core_55100' );
 add_filter( 'render_block_core/pattern', __NAMESPACE__ . '\convert_inline_style_to_rtl', 20 );
+add_filter( 'render_block_data', __NAMESPACE__ . '\flip_layout_alignment_rtl' );
 add_filter( 'render_block_core/query-title', __NAMESPACE__ . '\render_index_title', 10, 2 );
+add_filter( 'render_block_core/post-author-name', __NAMESPACE__ . '\render_author_prefix', 10, 2 );
 
 /**
  * Blank out the archive title prefix sometimes.
@@ -127,6 +129,33 @@ function convert_inline_style_to_rtl( $content ) {
 }
 
 /**
+ * Flip layout alignment (right/left) when using an RTL display.
+ *
+ * @param array $parsed_block The block being rendered.
+ *
+ * @return array
+ */
+function flip_layout_alignment_rtl( $parsed_block ) {
+	if ( ! is_rtl() ) {
+		return $parsed_block;
+	}
+
+	if (
+		isset( $parsed_block['attrs']['layout']['justifyContent'] ) &&
+		isset( $parsed_block['attrs']['layout']['type'] ) &&
+		'flex' !== $parsed_block['attrs']['layout']['type']
+	) {
+		if ( 'left' === $parsed_block['attrs']['layout']['justifyContent'] ) {
+			$parsed_block['attrs']['layout']['justifyContent'] = 'right';
+		} else if ( 'right' === $parsed_block['attrs']['layout']['justifyContent'] ) {
+			$parsed_block['attrs']['layout']['justifyContent'] = 'left';
+		}
+	}
+
+	return $parsed_block;
+}
+
+/**
  * Replace the empty header when "type" is our custom "index".
  *
  * @param string   $content Content of the current post.
@@ -137,6 +166,21 @@ function render_index_title( $content, $block ) {
 	if ( isset( $block['attrs']['type'] ) && 'index' === $block['attrs']['type'] ) {
 		// Replace `></h` to capture empty tags of all heading levels.
 		return str_replace( '></h', '>' . __( 'All posts', 'wporg' ) . '</h', $content );
+	}
+	return $content;
+}
+
+/**
+ * Add the "by" string to the post author block in an i18n-friendly way.
+ *
+ * @param string   $content Content of the current block.
+ * @param WP_Block $block
+ * @return string The updated content.
+ */
+function render_author_prefix( $content, $block ) {
+	if ( preg_match( '#(<div[^>]*>)(.*)(</div>)#', $content, $matches ) ) {
+		// translators: %s is the author name.
+		$content = $matches[1] . sprintf( __( 'By %s', 'wporg' ), $matches[2] ) . $matches[3];
 	}
 	return $content;
 }

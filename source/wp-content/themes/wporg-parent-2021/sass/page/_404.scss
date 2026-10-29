@@ -4,15 +4,7 @@ body.error404 {
 	background-color: var(--wp--preset--color--charcoal-2);
 
 	.site-content-container {
-
-		/*
-		 * Prevent "oops" from creating a horizontal scroll.
-		 * In some iOS versions, these rules also have to be applied to <html>, but that would bleed over to other
-		 * pages. It's better to just let there be a scroll, since it's not a commonly used page.
-		 */
-		position: relative; // needed for overflow to work
-		overflow: hidden;
-
+		position: relative;
 		z-index: 0;
 
 		@include break-small() {
@@ -28,16 +20,24 @@ body.error404 {
 		}
 
 		.wporg-parent-oops-container {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100vw;
+			height: 100vh;
+			overflow: hidden;
+			z-index: -1;
+
 			> p {
 				display: none;
 			}
 
 			&::after {
 				content: "Oops!";
-				color: inherit;
 				display: block;
 				z-index: -1;
-				position: absolute;
+				position: relative;
+				width: 120vw;
 				top: 22px;
 				left: -4.9vw;
 				font-family: var(--wp--preset--font-family--eb-garamond);
@@ -108,5 +108,10 @@ body.error404 {
 				fill: currentColor;
 			}
 		}
+	}
+
+	.wp-block-wporg-global-footer {
+		background: unset;
+		z-index: 1;
 	}
 }

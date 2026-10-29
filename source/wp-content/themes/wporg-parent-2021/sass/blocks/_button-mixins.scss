@@ -4,6 +4,7 @@
 	@include button-typography-styles;
 	@include button-color-styles;
 	border-radius: var(--wp--custom--button--border--radius);
+	cursor: pointer;
 }
 
 @mixin button-color-styles {
@@ -120,6 +121,7 @@
 	--wp--custom--button--spacing--padding--right: var(--wp--custom--button--small--spacing--padding--right);
 
 	--wp--custom--button--typography--font-size: var(--wp--custom--button--small--typography--font-size);
+	--wp--custom--button--typography--line-height: 1.714;
 }
 
 @mixin button-toggle-styles {
