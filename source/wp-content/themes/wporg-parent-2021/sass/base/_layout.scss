@@ -17,6 +17,24 @@
 	}
 }
 
+/*rtl:begin:ignore*/
+
+// Core floats left & right aligned blocks against the edge of a constrained container, outside
+// of the centered content column, so the content that follows can't wrap around them.
+// Offset them by the space next to the content column to keep them inside of it.
+// The float direction doesn't change in RTL, so neither should the offset.
+.wp-site-blocks .is-layout-constrained {
+	> .alignleft:not(.has-three-columns) {
+		margin-left: max(0px, (100% - var(--wp--style--global--content-size)) / 2);
+	}
+
+	> .alignright {
+		margin-right: max(0px, (100% - var(--wp--style--global--content-size)) / 2);
+	}
+}
+
+/*rtl:end:ignore*/
+
 // Configures a 3 column layout where `wporg/sidebar-container` blocks sit either side of the main content.
 // Examples: Developer Resources, Documentation.
 .has-three-columns {
