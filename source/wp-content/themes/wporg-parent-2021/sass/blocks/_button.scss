@@ -159,7 +159,7 @@
 
 	// Block style for navigation, but uses button style mixins.
 	&.is-style-button-list {
-		gap: 0;
+		gap: 6px;
 		overflow-x: auto;
 		white-space: nowrap;
 
