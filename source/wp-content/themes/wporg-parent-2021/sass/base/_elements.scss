@@ -86,12 +86,17 @@ figure[class*="wp-block-"],
 				height: auto;
 			}
 
+			&:has(figcaption)::before {
+				display: none;
+			}
+
 			figcaption,
 			.wp-element-caption {
 				position: static;
 				margin: calc(var(--wp--style--block-gap) / 2) 0 0;
 				padding: 0;
 				background: transparent;
+				text-shadow: none;
 				color: var(--wp--preset--color--charcoal-4);
 				font-size: var(--wp--custom--gallery--caption--font-size);
 				line-height: 1.6;
