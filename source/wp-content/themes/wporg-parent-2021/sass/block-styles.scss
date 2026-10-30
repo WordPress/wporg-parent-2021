@@ -122,7 +122,7 @@
 }
 
 .is-style-features {
-	--wporg--style--feature--offset: 0.2em;
+	--wporg--style--feature--offset: 0.15em;
 	--wporg--style--feature--li-height: 1.1;
 	padding: 0;
 	list-style: none;
@@ -131,7 +131,6 @@
 	line-height: var(--wporg--style--feature--li-height);
 
 	> li {
-		overflow: hidden;
 		box-sizing: border-box;
 		height: calc(var(--wporg--style--feature--li-height) * 1em);
 		padding-top: var(--wporg--style--feature--offset);
