@@ -17,6 +17,21 @@
 	}
 }
 
+/*rtl:begin:ignore*/
+
+// Core floats aligned blocks at the container edge, move them to the content column so text wraps around them.
+.wp-site-blocks .is-layout-constrained {
+	> .alignleft:not(.has-three-columns) {
+		margin-left: max(0px, (100% - var(--wp--style--global--content-size)) / 2);
+	}
+
+	> .alignright {
+		margin-right: max(0px, (100% - var(--wp--style--global--content-size)) / 2);
+	}
+}
+
+/*rtl:end:ignore*/
+
 // Configures a 3 column layout where `wporg/sidebar-container` blocks sit either side of the main content.
 // Examples: Developer Resources, Documentation.
 .has-three-columns {
