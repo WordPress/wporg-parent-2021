@@ -107,13 +107,10 @@ function use_wporg_profile_for_author_link( $link, $author_id, $author_nicename 
 }
 
 /**
- * Wrap the arrow emoji in an aria-hidden span tag, to prevent screen readers
- * from trying to read them.
+ * Wrap arrow characters in an aria-hidden span tag to prevent screen readers
+ * from announcing them.
  *
- * This runs just before `prevent_arrow_emoji`, so that the variation-selector
- * can be added inside the span.
- *
- * @param string $content Content of the current post.
+ * @param string $content Content of the post or block.
  * @return string The updated content.
  */
 function add_aria_hidden_to_arrows( $content ) {
@@ -121,20 +118,21 @@ function add_aria_hidden_to_arrows( $content ) {
 		return $content;
 	}
 
-	$pattern = '/<(?:code|pre|style|script|textarea)\b[^>]*>.*?<\/(?:code|pre|style|script|textarea)>|<[^>]+>|([←↑→↓↔↕↖↗↘↙])/uis';
+	$pattern = '/<!--.*?-->|<(code|pre|style|script|textarea|svg)\b[^>]*?(?<!\/)>.*?<\/\1\s*>|<span\b[^>]*\bwp-exclude-emoji\b[^>]*>[^<]*<\/span>|<[^>]+>|(?P<arrow>[←↑→↓↔↕↖↗↘↙][\x{FE0E}\x{FE0F}]?)/uis';
 
-	return preg_replace_callback(
+	$result = preg_replace_callback(
 		$pattern,
 		function ( $matches ) {
-			// Wurde ein Pfeil außerhalb von Tags gematcht?
-			if ( ! empty( $matches[1] ) ) {
-				return '<span aria-hidden="true" class="wp-exclude-emoji">' . $matches[1] . '</span>';
+			if ( ! empty( $matches['arrow'] ) ) {
+				return '<span aria-hidden="true" class="wp-exclude-emoji">' . $matches['arrow'] . '</span>';
 			}
 
 			return $matches[0];
 		},
 		$content
 	);
+
+	return null !== $result ? $result : $content;
 }
 
 /**
