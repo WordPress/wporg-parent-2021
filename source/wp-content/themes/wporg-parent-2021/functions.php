@@ -241,7 +241,8 @@ function merge_parent_child_theme_json( $theme_json ) {
  *               missing a slug.
  */
 function _merge_by_slug( ...$arrays ) {
-	$combined = array_merge( ...$arrays );
+	$valid_arrays = array_filter( $arrays, 'is_array' );
+	$combined     = array_merge( ...$valid_arrays );
 	$result   = [];
 
 	foreach ( $combined as $value ) {
