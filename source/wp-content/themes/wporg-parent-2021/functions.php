@@ -117,34 +117,24 @@ function use_wporg_profile_for_author_link( $link, $author_id, $author_nicename 
  * @return string The updated content.
  */
 function add_aria_hidden_to_arrows( $content ) {
-	// Only replace within text nodes, so the span's quotes can't corrupt attributes that contain an arrow.
-	$textarr = wp_html_split( $content );
-
-	// Don't inject markup into elements whose contents aren't parsed as HTML.
-	$tags_to_ignore       = 'code|pre|style|script|textarea';
-	$ignore_block_element = '';
-
-	foreach ( $textarr as &$chunk ) {
-		if ( '' === $chunk ) {
-			continue;
-		}
-
-		if ( '<' === $chunk[0] ) {
-			if ( '' === $ignore_block_element && preg_match( '/^<(' . $tags_to_ignore . ')(?=[\s\/>])/', $chunk, $matches ) ) {
-				$ignore_block_element = $matches[1];
-			} elseif ( '</' . $ignore_block_element . '>' === $chunk ) {
-				$ignore_block_element = '';
-			}
-			continue;
-		}
-
-		if ( '' === $ignore_block_element ) {
-			$chunk = preg_replace( '/([←↑→↓↔↕↖↗↘↙])/u', '<span aria-hidden="true" class="wp-exclude-emoji">\1</span>', $chunk );
-		}
+	if ( ! is_string( $content ) || '' === $content || ! preg_match( '/[←↑→↓↔↕↖↗↘↙]/u', $content ) ) {
+		return $content;
 	}
-	unset( $chunk );
 
-	return implode( '', $textarr );
+	$pattern = '/<(?:code|pre|style|script|textarea)\b[^>]*>.*?<\/(?:code|pre|style|script|textarea)>|<[^>]+>|([←↑→↓↔↕↖↗↘↙])/uis';
+
+	return preg_replace_callback(
+		$pattern,
+		function ( $matches ) {
+			// Wurde ein Pfeil außerhalb von Tags gematcht?
+			if ( ! empty( $matches[1] ) ) {
+				return '<span aria-hidden="true" class="wp-exclude-emoji">' . $matches[1] . '</span>';
+			}
+
+			return $matches[0];
+		},
+		$content
+	);
 }
 
 /**
