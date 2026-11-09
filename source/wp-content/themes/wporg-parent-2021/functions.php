@@ -118,7 +118,7 @@ function add_aria_hidden_to_arrows( $content ) {
 		return $content;
 	}
 
-	$pattern = '/<!--.*?-->|<(code|pre|style|script|textarea|svg)\b[^>]*?(?<!\/)>.*?<\/\1\s*>|<span\b[^>]*\bwp-exclude-emoji\b[^>]*>[^<]*<\/span>|<[^>]+>|(?P<arrow>[←↑→↓↔↕↖↗↘↙][\x{FE0E}\x{FE0F}]?)/uis';
+	$pattern = '/<!--.*?-->|<(code|pre|style|script|textarea|svg)\b[^>]*+(?<!\/)>.*?<\/\1\s*>|<span\b[^>]*\bwp-exclude-emoji\b[^>]*>[^<]*<\/span>|<[^>]+>|(?<arrow>[←↑→↓↔↕↖↗↘↙][\x{FE0E}\x{FE0F}]?)/uis';
 
 	$result = preg_replace_callback(
 		$pattern,
