@@ -107,21 +107,23 @@ function use_wporg_profile_for_author_link( $link, $author_id, $author_nicename 
 }
 
 /**
- * Wrap the arrow emoji in an aria-hidden span tag, to prevent screen readers
- * from trying to read them.
+ * Wrap arrow characters in an aria-hidden span tag to prevent screen readers
+ * from announcing them.
  *
- * This runs just before `prevent_arrow_emoji`, so that the variation-selector
- * can be added inside the span.
- *
- * @param string $content Content of the current post.
+ * @param string $content Content of the post or block.
  * @return string The updated content.
  */
 function add_aria_hidden_to_arrows( $content ) {
+	// Most content has no arrows, so skip splitting it into tokens.
+	if ( ! preg_match( '/[←↑→↓↔↕↖↗↘↙]/u', $content ) ) {
+		return $content;
+	}
+
 	// Only replace within text nodes, so the span's quotes can't corrupt attributes that contain an arrow.
 	$textarr = wp_html_split( $content );
 
-	// Don't inject markup into elements whose contents aren't parsed as HTML.
-	$tags_to_ignore       = 'code|pre|style|script|textarea';
+	// Don't inject markup where a span would be literal text or invalid content.
+	$tags_to_ignore       = 'code|pre|style|script|textarea|select|svg';
 	$ignore_block_element = '';
 
 	foreach ( $textarr as &$chunk ) {

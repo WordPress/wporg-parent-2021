@@ -45,14 +45,15 @@ require_once $_tests_dir . '/includes/functions.php';
 /**
  * Load the parts of the theme under test.
  *
- * The theme itself is not activated: these files register their own hooks and
- * depend only on core, so loading them directly keeps the suite independent of
- * the built assets and of the wporg mu-plugins.
+ * The theme itself is not activated: its functions file registers its own hooks,
+ * so loading it directly keeps the suite independent of the built assets.
  *
  * @return void
  */
 function _manually_load_theme(): void {
-	require dirname( __DIR__ ) . '/inc/pattern-shortcodes.php';
+	// The theme's setup calls into the global fonts mu-plugin, which Composer installs.
+	require dirname( __DIR__, 3 ) . '/mu-plugins/wporg-mu-plugins/mu-plugins/global-fonts/index.php';
+	require dirname( __DIR__ ) . '/functions.php';
 }
 tests_add_filter( 'muplugins_loaded', '_manually_load_theme' );
 

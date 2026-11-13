@@ -1,4 +1,4 @@
-<?php // phpcs:disable WordPress.Files.FileName.InvalidClassFileName -- PHPUnit discovers these files by their `test-` prefix.
+<?php
 /**
  * Tests for expanding shortcodes authored into a pattern.
  *
@@ -9,15 +9,13 @@ declare( strict_types = 1 );
 
 namespace WordPressdotorg\Theme\Parent_2021\Tests;
 
-use WP_UnitTestCase;
-
 defined( 'ABSPATH' ) || die();
 
 /**
  * Cover the boundary between a pattern's own source markup, whose shortcodes
  * are expanded, and the values its blocks render, whose shortcodes are not.
  */
-class Test_Pattern_Shortcodes extends WP_UnitTestCase {
+class Test_Pattern_Shortcodes extends \WP_UnitTestCase {
 
 	/**
 	 * How many times the `[count]` shortcode has run in the current test.
