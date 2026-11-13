@@ -52,6 +52,10 @@ class Test_Arrows extends \WP_UnitTestCase {
 				'<pre>a → b</pre><p>→</p>',
 				'<pre>a → b</pre><p>' . $wrapped . '</p>',
 			),
+			'arrow in select and svg'                  => array(
+				'<select><option>→</option></select><svg><text>→</text></svg><p>→</p>',
+				'<select><option>→</option></select><svg><text>→</text></svg><p>' . $wrapped . '</p>',
+			),
 			'arrow after an unclosed code'             => array(
 				'<code>→',
 				'<code>→',

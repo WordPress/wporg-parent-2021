@@ -122,8 +122,8 @@ function add_aria_hidden_to_arrows( $content ) {
 	// Only replace within text nodes, so the span's quotes can't corrupt attributes that contain an arrow.
 	$textarr = wp_html_split( $content );
 
-	// Don't inject markup into elements whose contents aren't parsed as HTML.
-	$tags_to_ignore       = 'code|pre|style|script|textarea';
+	// Don't inject markup where a span would be literal text or invalid content.
+	$tags_to_ignore       = 'code|pre|style|script|textarea|select|svg';
 	$ignore_block_element = '';
 
 	foreach ( $textarr as &$chunk ) {
