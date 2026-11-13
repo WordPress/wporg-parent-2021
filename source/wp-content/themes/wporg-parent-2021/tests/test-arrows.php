@@ -1,4 +1,4 @@
-<?php // phpcs:disable WordPress.Files.FileName.InvalidClassFileName -- PHPUnit discovers these files by their `test-` prefix.
+<?php
 /**
  * Tests for hiding arrow characters from screen readers.
  *
@@ -9,8 +9,6 @@ declare( strict_types = 1 );
 
 namespace WordPressdotorg\Theme\Parent_2021\Tests;
 
-use WP_UnitTestCase;
-
 use function WordPressdotorg\Theme\Parent_2021\add_aria_hidden_to_arrows;
 
 defined( 'ABSPATH' ) || die();
@@ -18,7 +16,7 @@ defined( 'ABSPATH' ) || die();
 /**
  * Cover which arrows get wrapped: those in text nodes, never those in markup.
  */
-class Test_Arrows extends WP_UnitTestCase {
+class Test_Arrows extends \WP_UnitTestCase {
 
 	/**
 	 * Wrap arrows in text, and leave tags and unparsed elements byte-for-byte intact.
