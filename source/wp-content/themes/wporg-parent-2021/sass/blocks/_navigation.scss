@@ -6,7 +6,7 @@
 		text-underline-offset: 0.15em;
 
 		&:hover,
-		&:focus {
+		&:focus-visible {
 			text-decoration-line: underline;
 		}
 	}
