@@ -114,34 +114,39 @@ function use_wporg_profile_for_author_link( $link, $author_id, $author_nicename 
  * @return string The updated content.
  */
 function add_aria_hidden_to_arrows( $content ) {
-	if ( ! is_string( $content ) || '' === $content || ! preg_match( '/[←↑→↓↔↕↖↗↘↙]/u', $content ) ) {
+	// Most content has no arrows, so skip splitting it into tokens.
+	if ( ! preg_match( '/[←↑→↓↔↕↖↗↘↙]/u', $content ) ) {
 		return $content;
 	}
 
-	$pattern = '/
-		<!--.*?-->
-		|<(code|pre|style|script|textarea|select)(?=[\s\/>])[^>]*>.*?<\/\1\s*>
-		|<svg(?=[\s\/>])[^>]*\/>
-		|<svg(?=[\s\/>])[^>]*>.*?<\/svg\s*>
-		|<span\b[^>]*?class=["\'][^"\']*\bwp-exclude-emoji\b
-		 [^"\']*["\'][^>]*>[^<]*<\/span>
-		|<(?=[a-zA-Z\/!])(?:[^>"']++|"[^"]*+"|\'[^\']*+\')+>
-		|(?<arrow>[←↑→↓↔↕↖↗↘↙][\x{FE0E}\x{FE0F}]?)
-	/uisx';
+	// Only replace within text nodes, so the span's quotes can't corrupt attributes that contain an arrow.
+	$textarr = wp_html_split( $content );
 
-	$result = preg_replace_callback(
-		$pattern,
-		function ( $matches ) {
-			if ( ! empty( $matches['arrow'] ) ) {
-				return '<span aria-hidden="true" class="wp-exclude-emoji">' . $matches['arrow'] . '</span>';
+	// Don't inject markup into elements whose contents aren't parsed as HTML.
+	$tags_to_ignore       = 'code|pre|style|script|textarea';
+	$ignore_block_element = '';
+
+	foreach ( $textarr as &$chunk ) {
+		if ( '' === $chunk ) {
+			continue;
+		}
+
+		if ( '<' === $chunk[0] ) {
+			if ( '' === $ignore_block_element && preg_match( '/^<(' . $tags_to_ignore . ')(?=[\s\/>])/', $chunk, $matches ) ) {
+				$ignore_block_element = $matches[1];
+			} elseif ( '</' . $ignore_block_element . '>' === $chunk ) {
+				$ignore_block_element = '';
 			}
+			continue;
+		}
 
-			return $matches[0];
-		},
-		$content
-	);
+		if ( '' === $ignore_block_element ) {
+			$chunk = preg_replace( '/([←↑→↓↔↕↖↗↘↙])/u', '<span aria-hidden="true" class="wp-exclude-emoji">\1</span>', $chunk );
+		}
+	}
+	unset( $chunk );
 
-	return null !== $result ? $result : $content;
+	return implode( '', $textarr );
 }
 
 /**
