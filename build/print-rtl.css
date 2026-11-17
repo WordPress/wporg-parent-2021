@@ -1,0 +1,142 @@
+@page {
+  margin-top: 1.5cm;
+  margin-bottom: 1.5cm;
+}
+html {
+  scroll-padding-top: 0;
+  /* stylelint-disable-next-line length-zero-no-unit */
+  --wp-admin--admin-bar--height: 0px;
+}
+
+:root :where(body) {
+  --wp--preset--font-size--extra-small: 12px;
+  --wp--preset--font-size--small: 12px;
+  --wp--preset--font-size--normal: 13px;
+  --wp--preset--font-size--medium: 14px;
+  --wp--preset--font-size--large: 16px;
+  --wp--preset--font-size--extra-large: 20px;
+  --wp--preset--font-size--huge: 26px;
+  --wp--preset--font-size--heading-6: 16px;
+  --wp--preset--font-size--heading-5: 20px;
+  --wp--preset--font-size--heading-4: 24px;
+  --wp--preset--font-size--heading-3: 28px;
+  --wp--preset--font-size--heading-2: 32px;
+  --wp--preset--font-size--heading-1: 36px;
+  --wp--preset--font-size--heading-cta: 40px;
+  --wp--preset--spacing--10: 10px;
+  --wp--preset--spacing--20: 15px;
+  --wp--preset--spacing--30: 20px;
+  --wp--preset--spacing--40: 25px;
+  --wp--preset--spacing--50: 30px;
+  --wp--preset--spacing--60: 35px;
+  --wp--preset--spacing--70: 40px;
+  --wp--preset--spacing--80: 45px;
+  --wp--preset--spacing--90: 50px;
+  --wp--preset--spacing--edge-space: 20px;
+  --wp--custom--layout--content-size: 100%;
+  --wp--style--global--content-size: 100%;
+}
+
+.global-header,
+.wp-block-wporg-local-navigation-bar .wp-block-navigation,
+.wp-block-search,
+.wp-block-wporg-chapter-list,
+.is-link-to-top,
+.wp-block-post-comments-form,
+.wp-block-wporg-code-reference-comment-form,
+.wp-code-block-button-container .wp-block-button,
+.global-footer {
+  display: none !important;
+}
+
+.wporg__hide-on-print {
+  display: none !important;
+}
+
+.wp-block-wporg-local-navigation-bar.wp-block-wporg-local-navigation-bar {
+  position: initial !important;
+  justify-content: flex-start !important;
+  border-bottom: 1px solid var(--wp--preset--color--light-grey-1) !important;
+}
+.wp-block-wporg-local-navigation-bar.wp-block-wporg-local-navigation-bar .global-header__wporg-logo-mark {
+  -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+  position: initial !important;
+  display: block !important;
+  width: 30px;
+  height: 30px;
+  /* stylelint-disable-next-line function-url-quotes */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' role='img' width='28' height='28' viewBox='0 0 28 28'%3E%3Ctitle%3EWordPress.org%3C/title%3E%3Cpath fill='currentColor' d='M13.6052 0.923525C16.1432 0.923525 18.6137 1.67953 20.7062 3.09703C22.7447 4.47403 24.3512 6.41803 25.3097 8.68603C26.9837 12.6415 26.5382 17.164 24.1352 20.7145C22.7582 22.753 20.8142 24.3595 18.5462 25.318C14.5907 26.992 10.0682 26.5465 6.51772 24.1435C4.47922 22.7665 2.87272 20.8225 1.91422 18.5545C0.240225 14.599 0.685725 10.0765 3.08872 6.52603C4.46572 4.48753 6.40973 2.88103 8.67772 1.92253C10.2302 1.26103 11.9177 0.923525 13.6052 0.923525ZM13.6052 0.113525C6.15322 0.113525 0.105225 6.16153 0.105225 13.6135C0.105225 21.0655 6.15322 27.1135 13.6052 27.1135C21.0572 27.1135 27.1052 21.0655 27.1052 13.6135C27.1052 6.16153 21.0572 0.113525 13.6052 0.113525Z' /%3E%3Cpath fill='currentColor' d='M2.36011 13.6133C2.36011 17.9198 4.81711 21.8618 8.70511 23.7383L3.33211 9.03684C2.68411 10.4813 2.36011 12.0338 2.36011 13.6133ZM21.2061 13.0463C21.2061 11.6558 20.7066 10.6973 20.2746 9.94134C19.8426 9.18534 19.1676 8.22684 19.1676 7.30884C19.1676 6.39084 19.9506 5.31084 21.0576 5.31084H21.2061C16.6296 1.11234 9.51511 1.42284 5.31661 6.01284C4.91161 6.45834 4.53361 6.93084 4.20961 7.43034H4.93861C6.11311 7.43034 7.93561 7.28184 7.93561 7.28184C8.54311 7.24134 8.61061 8.13234 8.00311 8.21334C8.00311 8.21334 7.39561 8.28084 6.72061 8.32134L10.8111 20.5118L13.2681 13.1273L11.5131 8.32134C10.9056 8.28084 10.3386 8.21334 10.3386 8.21334C9.73111 8.17284 9.79861 7.25484 10.4061 7.28184C10.4061 7.28184 12.2691 7.43034 13.3626 7.43034C14.4561 7.43034 16.3596 7.28184 16.3596 7.28184C16.9671 7.24134 17.0346 8.13234 16.4271 8.21334C16.4271 8.21334 15.8196 8.28084 15.1446 8.32134L19.2081 20.4173L20.3691 16.7453C20.8821 15.1388 21.1926 14.0048 21.1926 13.0328L21.2061 13.0463ZM13.7946 14.5853L10.4196 24.3998C12.6876 25.0613 15.1041 25.0073 17.3316 24.2243L17.2506 24.0758L13.7946 14.5853ZM23.4741 8.21334C23.5281 8.59134 23.5551 8.98284 23.5551 9.37434C23.5551 10.5218 23.3391 11.8043 22.7046 13.3973L19.2621 23.3333C24.5271 20.2688 26.4036 13.5593 23.4741 8.21334Z' /%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 30px 30px;
+}
+.wp-block-wporg-local-navigation-bar.wp-block-wporg-local-navigation-bar .global-header__wporg-logo-mark svg {
+  display: none;
+}
+.wp-block-wporg-local-navigation-bar.wp-block-wporg-local-navigation-bar .global-header__wporg-logo-mark,
+.wp-block-wporg-local-navigation-bar.wp-block-wporg-local-navigation-bar .wporg-local-navigation-bar__fade-in-scroll,
+.wp-block-wporg-local-navigation-bar.wp-block-wporg-local-navigation-bar .wporg-local-navigation-bar__show-on-scroll {
+  opacity: 1;
+  top: 0;
+  visibility: visible;
+}
+
+main .wp-block-wporg-sidebar-container:not(#override) {
+  position: relative !important;
+  inset: auto !important;
+  margin-block: 0 !important;
+  height: auto !important;
+  padding: 0 !important;
+}
+
+.has-three-columns {
+  width: 100%;
+  display: block !important;
+}
+
+.wp-block-group:not(.alignfull).has-background,
+.wp-block-wporg-notice,
+p.has-background {
+  border: 1px solid currentColor;
+}
+
+.has-white-color {
+  color: var(--wp--preset--color--charcoal-4) !important;
+}
+.has-white-color a:where(:not(.wp-element-button)) {
+  color: var(--wp--preset--color--charcoal-4) !important;
+}
+
+[class*=wp-block]:not(.is-style-outline) .wp-block-button__link {
+  color: var(--wp--preset--color--blueberry-1);
+  background-color: transparent;
+  border: 1px solid var(--wp--preset--color--blueberry-1);
+}
+
+.wp-block-video {
+  display: none !important;
+}
+
+.wp-block-group:has(> .wp-block-video:only-child) {
+  display: none !important;
+}
+
+.wp-block-gallery img:not([style*="height:"]),
+.wp-block-image img:not([style*="height:"]) {
+  max-width: 67%;
+}
+
+.wporg-about-stats-section {
+  break-inside: avoid;
+  -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+}
+
+.wporg-table-of-contents__list {
+  display: block !important;
+}
+
+.wporg-developer-code-block .wp-block-code {
+  height: auto !important;
+}
