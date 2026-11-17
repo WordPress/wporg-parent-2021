@@ -171,63 +171,48 @@ function merge_parent_child_theme_json( $theme_json ) {
 		return $theme_json;
 	}
 
-	// Build a new theme.json object.
-	$new_data = array(
-		'version' => 2,
-	);
-
 	$child_theme = $theme_json->get_data();
 
-	if ( ! empty( $child_theme['settings'] ) ) {
-		$parent_theme_json_file = get_template_directory() . '/theme.json';
-		$parent_theme_json_data = wp_json_file_decode( $parent_theme_json_file, array( 'associative' => true ) );
-		if ( class_exists( 'WP_Theme_JSON_Gutenberg' ) ) {
-			$parent_theme           = new \WP_Theme_JSON_Gutenberg( $parent_theme_json_data );
-		} else {
-			$parent_theme           = new \WP_Theme_JSON( $parent_theme_json_data );
-		}
-
-		// Get base theme.json settings.
-		$parent_settings = $parent_theme->get_settings();
-		$child_settings  = $child_theme['settings'];
-
-		// Define the array values here, so they can be updated if the theme.json schema changes.
-		$color_keys = [ 'duotone', 'gradient', 'palette' ];
-		$typog_keys = [ 'fontFamilies', 'fontSizes' ];
-		$space_keys = [ 'spacingSizes' ];
-
-		foreach ( $color_keys as $key ) {
-			if ( ! empty( $child_settings['color'][ $key ]['theme'] ) ) {
-				$child_settings['color'][ $key ]['theme'] = _merge_by_slug(
-					$parent_settings['color'][ $key ]['theme'],
-					$child_settings['color'][ $key ]['theme']
-				);
-
-			}
-		}
-
-		foreach ( $typog_keys as $key ) {
-			if ( ! empty( $child_settings['typography'][ $key ]['theme'] ) ) {
-				$child_settings['typography'][ $key ]['theme'] = _merge_by_slug(
-					$parent_settings['typography'][ $key ]['theme'],
-					$child_settings['typography'][ $key ]['theme']
-				);
-			}
-		}
-
-		foreach ( $space_keys as $key ) {
-			if ( ! empty( $child_settings['spacing'][ $key ]['theme'] ) ) {
-				$child_settings['spacing'][ $key ]['theme'] = _merge_by_slug(
-					$parent_settings['spacing'][ $key ]['theme'],
-					$child_settings['spacing'][ $key ]['theme']
-				);
-			}
-		}
-
-		$new_data['settings'] = $child_settings;
+	if ( empty( $child_theme['settings'] ) ) {
+		return $theme_json;
 	}
 
-	return $theme_json->update_with( $new_data );
+	static $cached_parent_settings = null;
+
+	if ( null === $cached_parent_settings ) {
+		$parent_json_data = wp_json_file_decode( get_template_directory() . '/theme.json', [ 'associative' => true ] ) ?: [];
+		$parent_theme     = class_exists( 'WP_Theme_JSON_Gutenberg' )
+			? new \WP_Theme_JSON_Gutenberg( $parent_json_data )
+			: new \WP_Theme_JSON( $parent_json_data );
+
+		$cached_parent_settings = $parent_theme->get_settings();
+	}
+
+	$child_settings = $child_theme['settings'];
+
+	$sections = [
+		'color'      => [ 'duotone', 'gradient', 'palette' ],
+		'typography' => [ 'fontFamilies', 'fontSizes' ],
+		'spacing'    => [ 'spacingSizes' ],
+	];
+
+	foreach ( $sections as $section => $keys ) {
+		foreach ( $keys as $key ) {
+			if ( ! empty( $child_settings[ $section ][ $key ]['theme'] ) ) {
+				$child_settings[ $section ][ $key ]['theme'] = _merge_by_slug(
+					$cached_parent_settings[ $section ][ $key ]['theme'] ?? [],
+					$child_settings[ $section ][ $key ]['theme']
+				);
+			}
+		}
+	}
+
+	return $theme_json->update_with(
+		[
+			'version'  => $child_theme['version'] ?? 2,
+			'settings' => $child_settings,
+		]
+	);
 }
 
 /**
