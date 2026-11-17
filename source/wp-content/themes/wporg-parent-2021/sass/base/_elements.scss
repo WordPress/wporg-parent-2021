@@ -134,12 +134,17 @@ textarea {
 	line-height: var(--wp--custom--form--typography--line-height);
 	padding-inline: var(--wp--custom--form--padding--inline);
 
-	// Include the border in the padding, like buttons do, so fields and buttons are the same height.
+	// Fold the border into the padding so fields are the same height as small buttons.
 	padding-block: calc(var(--wp--custom--form--padding--block) - var(--wp--custom--form--border--width));
 
 	&:focus {
 		border-color: var(--wp--custom--form--active--color--border);
 	}
+}
+
+// Search inputs are mostly borderless, so keep their full padding.
+input.wp-block-search__input {
+	padding-block: var(--wp--custom--form--padding--block);
 }
 
 select {
