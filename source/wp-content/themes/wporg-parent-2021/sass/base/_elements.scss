@@ -133,16 +133,52 @@ textarea {
 	font-size: var(--wp--custom--form--typography--font-size);
 	line-height: var(--wp--custom--form--typography--line-height);
 	padding-inline: var(--wp--custom--form--padding--inline);
-	padding-block: var(--wp--custom--form--padding--block);
+
+	// Fold the border into the padding so fields are the same height as small buttons.
+	padding-block: calc(var(--wp--custom--form--padding--block) - var(--wp--custom--form--border--width));
 
 	&:focus {
 		border-color: var(--wp--custom--form--active--color--border);
 	}
 }
 
-select {
+// Search inputs are mostly borderless, so keep their full padding.
+input.wp-block-search__input {
+	padding-block: var(--wp--custom--form--padding--block);
+}
+
+// Selects match the fields above. `:where()` keeps child themes' own select styles in charge.
+:where(select) {
+	background-color: var(--wp--custom--form--color--background);
+	border: var(--wp--custom--form--border--width) var(--wp--custom--form--border--style) var(--wp--custom--form--border--color);
+	border-radius: var(--wp--custom--form--border--radius);
+	box-shadow: var(--wp--custom--form--color--box-shadow);
 	font-family: inherit;
-	font-size: 100%;
+	font-size: var(--wp--custom--form--typography--font-size);
+	line-height: var(--wp--custom--form--typography--line-height);
+	max-width: 100%;
+	padding-inline: var(--wp--custom--form--padding--inline);
+	padding-block: calc(var(--wp--custom--form--padding--block) - var(--wp--custom--form--border--width));
+}
+
+:where(select:focus) {
+	border-color: var(--wp--custom--form--active--color--border);
+}
+
+// Replace the native arrow, which ignores the field styles, with the theme's chevron.
+:where(select:not([multiple])) {
+	appearance: none;
+	background-image: url(../images/down-chevron-dark.svg);
+	background-position: right var(--wp--custom--form--padding--inline) center;
+	background-repeat: no-repeat;
+	padding-inline-end: calc(var(--wp--custom--form--padding--inline) * 2 + 12px);
+
+	// The fixed-color chevron can vanish in high contrast themes; use the native arrow there.
+	@media (forced-colors: active) {
+		appearance: auto;
+		background-image: none;
+		padding-inline-end: var(--wp--custom--form--padding--inline);
+	}
 }
 
 textarea {
@@ -163,6 +199,11 @@ input[type="checkbox"] + label {
 	&.contact-form .contact-form__select-wrapper::after {
 		inset-block-start: calc(50% - 2px);
 		inset-inline-end: 20px;
+	}
+
+	// Jetpack draws its own chevron.
+	&.contact-form .contact-form__select-wrapper select {
+		background-image: none;
 	}
 
 	&.contact-form label {
