@@ -172,6 +172,13 @@ input.wp-block-search__input {
 	background-position: right var(--wp--custom--form--padding--inline) center;
 	background-repeat: no-repeat;
 	padding-inline-end: calc(var(--wp--custom--form--padding--inline) * 2 + 12px);
+
+	// The fixed-color chevron can vanish in high contrast themes; use the native arrow there.
+	@media (forced-colors: active) {
+		appearance: auto;
+		background-image: none;
+		padding-inline-end: var(--wp--custom--form--padding--inline);
+	}
 }
 
 textarea {
